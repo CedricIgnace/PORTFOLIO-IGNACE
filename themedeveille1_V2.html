@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'IA et les Composants Électroniques – Veille</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-deep:        #0a0e1a;
+      --bg-card:        rgba(18, 24, 42, 0.72);
+      --accent:         #6f9ecd;
+      --accent-light:   #9dc4e8;
+      --accent-glow:    rgba(111, 158, 205, 0.22);
+      --text-primary:   #eef1f7;
+      --text-muted:     #7a84a0;
+      --border:         rgba(111, 158, 205, 0.18);
+      --radius:         16px;
+      --font-head:      'Playfair Display', Georgia, serif;
+      --font-body:      'DM Sans', system-ui, sans-serif;
+      /* veille-specific tints */
+      --accent2:        #5bbcaa;
+      --accent2-glow:   rgba(91, 188, 170, 0.2);
+      --accent-warn:    #e8a04e;
+      --accent-warn-glow: rgba(232,160,78,.2);
+      --accent-bad:     #d96b6b;
+      --accent-bad-glow: rgba(217,107,107,.2);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── BLOBS ── */
+    .bg-blob { position:fixed; border-radius:50%; filter:blur(130px); opacity:.32; pointer-events:none; z-index:0; }
+    .bg-blob--1 { width:580px; height:580px; background:#1e3a5f; top:-160px; left:-200px; }
+    .bg-blob--2 { width:480px; height:480px; background:#164e63; bottom:-90px; right:-180px; }
+    .bg-blob--3 { width:320px; height:320px; background:#1a3048; top:45%; left:55%; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,14,26,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 22px 28px;
+      text-align: center;
+    }
+    header h1 {
+      font-family: var(--font-head);
+      font-size: 1.7rem;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    header p {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--accent); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--accent-light); }
+
+    /* ── LAYOUT ── */
+    .page-content { position:relative; z-index:1; max-width:1040px; margin:0 auto; padding:48px 24px 90px; }
+
+    /* ── SECTION CARDS ── */
+    .section-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 38px 36px;
+      margin-bottom: 30px;
+      opacity: 0; transform: translateY(26px);
+      animation: fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    .section-card:nth-child(1){animation-delay:.06s}
+    .section-card:nth-child(2){animation-delay:.13s}
+    .section-card:nth-child(3){animation-delay:.20s}
+    .section-card:nth-child(4){animation-delay:.27s}
+    .section-card:nth-child(5){animation-delay:.34s}
+    .section-card:nth-child(6){animation-delay:.41s}
+    .section-card:nth-child(7){animation-delay:.48s}
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+    /* ── TITLES ── */
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 1.62rem;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 13px;
+    }
+    .accent-bar {
+      display:inline-block; width:4px; height:24px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
+      border-radius:2px;
+    }
+    .section-sub { color: var(--text-muted); font-size:0.85rem; margin-bottom:24px; padding-left:17px; }
+
+    /* ── INTRO HIGHLIGHT ── */
+    .intro-box {
+      background: rgba(111,158,205,.08);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      color: #b8c8dc;
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+    .intro-box strong { color: var(--accent-light); }
+
+    /* ── STATS ROW ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .stat-box {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 16px;
+      text-align: center;
+      transition: all .27s;
+    }
+    .stat-box:hover {
+      border-color: var(--accent);
+      background: rgba(111,158,205,.08);
+      transform: translateY(-3px);
+    }
+    .stat-box .number {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      color: var(--accent-light);
+      line-height: 1.1;
+    }
+    .stat-box .label {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ── MODULE CARDS ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .module-card {
+      background: rgba(255,255,255,.035);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 18px;
+      transition: all .27s cubic-bezier(.22,1,.36,1);
+    }
+    .module-card:hover {
+      background: rgba(111,158,205,.08);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .module-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .module-card h3 { font-size: 1rem; color: var(--text-primary); margin-bottom: 8px; }
+    .module-card p { color: #9da8be; font-size: 0.87rem; line-height:1.5; }
+    .module-card ul {
+      list-style: none; padding: 0;
+    }
+    .module-card ul li {
+      color: #9da8be; font-size: 0.85rem;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .module-card ul li:last-child { border-bottom: none; }
+    .module-card ul li::before {
+      content: '›'; color: var(--accent); margin-right: 8px; font-weight: 600;
+    }
+
+    /* ── TECH LIST (horizontal pills) ── */
+    .tech-list { list-style: none; padding: 0; }
+    .tech-list li {
+      background: rgba(255,255,255,.035);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 10px;
+      color: #9da8be; font-size: 0.9rem;
+      transition: border-color .25s;
+    }
+    .tech-list li:hover { border-color: var(--accent); }
+    .tech-list li strong { color: var(--accent-light); }
+
+    /* ── DUAL CARD (pros / cons) ── */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .dual-card {
+      border-radius: 14px;
+      padding: 22px 18px;
+    }
+    .dual-card--good {
+      background: rgba(91,188,170,.08);
+      border: 1px solid rgba(91,188,170,.25);
+    }
+    .dual-card--good:hover { border-color: var(--accent2); }
+    .dual-card--bad {
+      background: rgba(217,107,107,.08);
+      border: 1px solid rgba(217,107,107,.25);
+    }
+    .dual-card--bad:hover { border-color: var(--accent-bad); }
+    .dual-card h3 {
+      font-size: 1rem; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .dual-card--good h3 { color: var(--accent2); }
+    .dual-card--bad h3  { color: var(--accent-bad); }
+    .dual-card ul { list-style: none; padding: 0; }
+    .dual-card ul li {
+      font-size: 0.85rem; color: #9da8be;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .dual-card ul li:last-child { border-bottom: none; }
+    .dual-card--good ul li::before { content:'✓ '; color: var(--accent2); font-weight:700; }
+    .dual-card--bad  ul li::before { content:'✕ '; color: var(--accent-bad); font-weight:700; }
+
+    /* ── RAM IMAGES ROW ── */
+    .ram-row {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center; margin: 20px 0;
+    }
+    .ram-row img {
+      width: 200px; height: 160px; object-fit: contain;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    /* ── ECO BOX ── */
+    .eco-box {
+      background: rgba(91,188,170,.07);
+      border: 1px solid rgba(91,188,170,.22);
+      border-radius: 14px;
+      padding: 22px 22px;
+      margin-top: 22px;
+    }
+    .eco-box h3 { color: var(--accent2); font-size: 1rem; margin-bottom: 8px; }
+    .eco-box p { color: #9da8be; font-size: 0.88rem; }
+    .eco-box strong { color: var(--accent2); }
+
+    /* ── SOURCES ── */
+    .sources-list { list-style: none; padding: 0; }
+    .sources-list li {
+      font-size: 0.87rem; color: #9da8be;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .sources-list li:last-child { border-bottom: none; }
+    .sources-list a {
+      color: var(--accent); text-decoration: none;
+      transition: color .2s;
+    }
+    .sources-list a:hover { color: var(--accent-light); }
+    .sources-list .src-label {
+      color: var(--text-muted); font-size:0.76rem;
+      text-transform:uppercase; letter-spacing:.6px;
+      margin-bottom:2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index:1;
+      text-align: center; padding: 24px;
+      color: var(--text-muted); font-size: 0.77rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { color: var(--accent-light); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:620px) {
+      .section-card { padding:24px 18px; }
+      .dual-grid { grid-template-columns: 1fr; }
+      header h1 { font-size:1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-blob bg-blob--1"></div>
+  <div class="bg-blob bg-blob--2"></div>
+  <div class="bg-blob bg-blob--3"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="CedricProjetsio.html#themedeveille" class="back-link">← Retour au portfolio</a>
+    <h1>🤖 L'IA au Service des Composants Électroniques</h1>
+    <p>Veille Technologique – 2025</p>
+  </header>
+
+  <div class="page-content">
+
+    <!-- 1 INTRO + STATS -->
+    <section class="section-card">
+      <div class="intro-box">
+        <strong>L'intelligence artificielle révolutionne l'industrie électronique</strong> en transformant chaque étape de la conception, fabrication et maintenance des composants. Cette technologie ne se contente pas d'automatiser — elle repense entièrement les processus pour offrir des performances inégalées.
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="number">6h</div>
+          <div class="label">au lieu de plusieurs semaines pour concevoir un microprocesseur</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">20%</div>
+          <div class="label">du marché mondial de l'IA embarquée visé par la France</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">2,5 Md€</div>
+          <div class="label">investis dans l'IA via France 2030</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 DOMAINES D'APPLICATION -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Domaines d'Application</h2>
+      <p class="section-sub">Comment l'IA intervient dans le cycle de vie des composants</p>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="icon">🔬</div>
+          <h3>Conception Intelligente</h3>
+          <ul>
+            <li>Génération automatique de plans de masse</li>
+            <li>Optimisation topologique des circuits</li>
+            <li>Algorithmes génétiques – milliers de configs</li>
+            <li>Réduction du temps de conception de 70 %</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="icon">⚙️</div>
+          <h3>Fabrication Optimisée</h3>
+          <ul>
+            <li>Contrôle qualité en temps réel par vision IA</li>
+            <li>Détection automatique des défauts microscopiques</li>
+            <li>Ajustements instantanés sur la chaîne</li>
+            <li>Personnalisation à grande échelle</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="icon">🔧</div>
+          <h3>Maintenance Prédictive</h3>
+          <ul>
+            <li>Anticipation des défaillances potentielles</li>
+            <li>Surveillance en temps réel des performances</li>
+            <li>Réduction des arrêts non planifiés</li>
+            <li>Optimisation de la durée de vie</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 TECHNOLOGIES CLÉS -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Technologies Clés</h2>
+      <p class="section-sub">Les briques techniques qui propulsent l'évolution</p>
+      <ul class="tech-list">
+        <li><strong>Machine Learning &amp; Deep Learning</strong> — Apprentissage automatique pour optimiser la conception et détecter les anomalies avec une précision surhumaine.</li>
+        <li><strong>IA Embarquée</strong> — Intelligence intégrée directement dans les composants pour un traitement local, une latence minimale et une protection de la vie privée.</li>
+        <li><strong>IA Frugale</strong> — Systèmes économes en énergie et en données pour réduire l'empreinte carbone et démocratiser l'accès à l'IA.</li>
+      </ul>
+    </section>
+
+    <!-- 4 AVANTAGES CONCRETS -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Avantages Concrets</h2>
+      <p class="section-sub">Impacts mesurables sur l'industrie</p>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="icon">⚡</div>
+          <h3>Performance</h3>
+          <ul>
+            <li>Microprocesseurs plus rapides et efficaces</li>
+            <li>Consommation énergétique réduite</li>
+            <li>Miniaturisation accrue des composants</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="icon">💰</div>
+          <h3>Coûts</h3>
+          <ul>
+            <li>Réduction drastique du temps de développement</li>
+            <li>Diminution du gaspillage de matériaux</li>
+            <li>Moins d'erreurs coûteuses en production</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="icon">🚀</div>
+          <h3>Innovation</h3>
+          <ul>
+            <li>Solutions impossibles pour l'humain</li>
+            <li>Designs optimisés au-delà des capacités humaines</li>
+            <li>Accélération de la R&amp;D</li>
+          </ul>
+        </div>
+      </div>
+      <div class="eco-box">
+        <h3>🌱 Vers une Électronique Durable</h3>
+        <p>L'IA contribue également aux objectifs environnementaux en optimisant l'utilisation des ressources, en réduisant les déchets de production et en développant des systèmes plus économes en énergie. Les stratégies nationales visent à promouvoir une <strong>IA frugale et responsable</strong> pour une industrie électronique plus durable.</p>
+      </div>
+    </section>
+
+    <!-- 5 INCONVÉNIENTS + RAM -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Les Inconvénients</h2>
+      <p class="section-sub">La face cachée de la croissance de l'IA</p>
+      <div class="intro-box" style="border-color:var(--accent-warn); background:rgba(232,160,78,.07);">
+        <strong style="color:var(--accent-warn)">⚠️ Crise dans le milieu de la tech</strong><br><br>
+        Dû à sa demande en croissance continue, nous connaissons une crise dans le milieu de la tech.<br>
+        📈 des prix &nbsp;·&nbsp; 📉 de l'offre.
+      </div>
+
+      <h3 style="color:var(--text-primary); font-size:1.05rem; margin-bottom:14px;">Sa mémoire vive rien que pour elle — la RAM HBM</h3>
+      <p style="color:var(--text-muted); font-size:0.86rem; margin-bottom:16px;">La <strong style="color:var(--accent-light)">HBM (High Bandwidth Memory)</strong> — Mémoire à bande passante élevée</p>
+
+      <div class="ram-row">
+        <img src="DDR5.png"  alt="DDR5">
+        <img src="GDDR7.png" alt="GDDR7">
+        <img src="LPDDR.png" alt="LPDDR">
+      </div>
+
+      <h3 style="color:var(--text-primary); font-size:1.05rem; margin:24px 0 14px;">Récapitulatif de la RAM HBM</h3>
+      <div class="dual-grid">
+        <div class="dual-card dual-card--good">
+          <h3>✓ Avantages</h3>
+          <ul>
+            <li>Bande passante énorme</li>
+            <li>Très faible latence</li>
+            <li>Consommation énergétique réduite</li>
+            <li>Gain de place (mémoire compacte)</li>
+          </ul>
+        </div>
+        <div class="dual-card dual-card--bad">
+          <h3>✕ Inconvénients</h3>
+          <ul>
+            <li>Très coûteuse</li>
+            <li>Fabrication complexe</li>
+            <li>Capacité totale limitée</li>
+            <li>Difficile à réparer / remplacer</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 SOURCES -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Sources</h2>
+      <p class="section-sub">Références vidéo utilisées</p>
+      <ul class="sources-list">
+        <li>
+          <div class="src-label">YouTube – Salut les Noobs</div>
+          <a href="https://www.youtube.com/watch?v=3nHXy_F8DiQ" target="_blank">https://www.youtube.com/watch?v=3nHXy_F8DiQ</a>
+        </li>
+        <li>
+          <div class="src-label">YouTube – Hugo décrypte</div>
+          <a href="https://youtu.be/9YPf9tNyDTM" target="_blank">https://youtu.be/9YPf9tNyDTM</a>
+        </li>
+        <li>
+          <div class="src-label">YouTube – Les Échos</div>
+          <a href="https://www.youtube.com/watch?v=Y364uDSJMhI" target="_blank">https://www.youtube.com/watch?v=Y364uDSJMhI</a>
+        </li>
+      </ul>
+    </section>
+
+  </div><!-- end page-content -->
+
+  <footer>
+    Veille Technologique – 2025 &nbsp;·&nbsp; <a href="CedricProjetsio.html">← Retour au portfolio</a>
+  </footer>
+</body>
+</html>

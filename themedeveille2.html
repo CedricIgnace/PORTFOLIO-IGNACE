@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Ransomwares et leurs Évolutions 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+
+    :root {
+      --bg-deep:        #0a0e1a;
+      --bg-card:        rgba(18, 24, 42, 0.72);
+      --accent:         #6f9ecd;
+      --accent-light:   #9dc4e8;
+      --accent-glow:    rgba(111, 158, 205, 0.22);
+      --text-primary:   #eef1f7;
+      --text-muted:     #7a84a0;
+      --border:         rgba(111, 158, 205, 0.18);
+      --radius:         16px;
+      --font-head:      'Playfair Display', Georgia, serif;
+      --font-body:      'DM Sans', system-ui, sans-serif;
+      /* threat accents */
+      --threat:         #d96b6b;
+      --threat-glow:    rgba(217,107,107,.18);
+      --threat-border:  rgba(217,107,107,.28);
+      --safe:           #5bbcaa;
+      --safe-glow:      rgba(91,188,170,.18);
+      --warn:           #e8a04e;
+      --warn-glow:      rgba(232,160,78,.18);
+    }
+
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── BLOBS ── */
+    .bg-blob { position:fixed; border-radius:50%; filter:blur(130px); opacity:.3; pointer-events:none; z-index:0; }
+    .bg-blob--1 { width:580px; height:580px; background:#2a1a1a; top:-160px; left:-200px; }
+    .bg-blob--2 { width:480px; height:480px; background:#164e63; bottom:-90px; right:-180px; }
+    .bg-blob--3 { width:320px; height:320px; background:#1a2830; top:45%; left:55%; }
+
+    /* ── HEADER ── */
+    header {
+      position:sticky; top:0; z-index:100;
+      background:rgba(10,14,26,0.72);
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      padding:22px 28px; text-align:center;
+    }
+    header h1 {
+      font-family:var(--font-head);
+      font-size:1.7rem;
+      color:var(--text-primary);
+      margin-bottom:4px;
+    }
+    header p { color:var(--text-muted); font-size:0.82rem; letter-spacing:.6px; text-transform:uppercase; }
+    .back-link {
+      display:inline-flex; align-items:center; gap:6px;
+      color:var(--accent); text-decoration:none;
+      font-size:0.82rem; font-weight:500;
+      margin-bottom:10px; transition:color .2s;
+    }
+    .back-link:hover { color:var(--accent-light); }
+
+    /* ── LAYOUT ── */
+    .page-content { position:relative; z-index:1; max-width:1040px; margin:0 auto; padding:48px 24px 90px; }
+
+    /* ── SECTION CARDS ── */
+    .section-card {
+      background:var(--bg-card);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:38px 36px;
+      margin-bottom:30px;
+      opacity:0; transform:translateY(26px);
+      animation:fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    .section-card:nth-child(1){animation-delay:.06s}
+    .section-card:nth-child(2){animation-delay:.13s}
+    .section-card:nth-child(3){animation-delay:.20s}
+    .section-card:nth-child(4){animation-delay:.27s}
+    .section-card:nth-child(5){animation-delay:.34s}
+    .section-card:nth-child(6){animation-delay:.41s}
+    .section-card:nth-child(7){animation-delay:.48s}
+    .section-card:nth-child(8){animation-delay:.55s}
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+    /* ── TITLES ── */
+    .section-title {
+      font-family:var(--font-head);
+      font-size:1.62rem;
+      color:var(--text-primary);
+      margin-bottom:6px;
+      display:flex; align-items:center; gap:13px;
+    }
+    .accent-bar {
+      display:inline-block; width:4px; height:24px;
+      background:linear-gradient(180deg, var(--accent), var(--accent-light));
+      border-radius:2px;
+    }
+    /* threat variant bar */
+    .accent-bar--threat {
+      background:linear-gradient(180deg, var(--threat), #f09090);
+    }
+    .section-sub { color:var(--text-muted); font-size:0.85rem; margin-bottom:24px; padding-left:17px; }
+
+    /* ── INTRO BOX ── */
+    .intro-box {
+      background:rgba(111,158,205,.08);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:22px 24px;
+      color:#b8c8dc; font-size:0.95rem;
+      margin-bottom:28px;
+    }
+    .intro-box strong { color:var(--accent-light); }
+    .intro-box--threat {
+      background:rgba(217,107,107,.08);
+      border-color:var(--threat-border);
+    }
+    .intro-box--threat strong { color:#f09090; }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:14px;
+    }
+    .stat-box {
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:22px 16px; text-align:center;
+      transition:all .27s;
+    }
+    .stat-box:hover {
+      border-color:var(--threat);
+      background:var(--threat-glow);
+      transform:translateY(-3px);
+    }
+    .stat-box .number {
+      font-family:var(--font-head);
+      font-size:2rem;
+      color:var(--threat);
+      line-height:1.1;
+    }
+    .stat-box .label { color:var(--text-muted); font-size:0.78rem; margin-top:6px; line-height:1.4; }
+
+    /* ── MODULE CARDS ── */
+    .modules-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+      gap:14px;
+    }
+    .module-card {
+      background:rgba(255,255,255,.035);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:22px 18px;
+      transition:all .27s cubic-bezier(.22,1,.36,1);
+    }
+    .module-card:hover {
+      background:rgba(111,158,205,.08);
+      border-color:var(--accent);
+      transform:translateY(-4px);
+      box-shadow:0 8px 24px var(--accent-glow);
+    }
+    /* threat card hover */
+    .module-card--threat:hover {
+      background:var(--threat-glow);
+      border-color:var(--threat);
+      box-shadow:0 8px 24px var(--threat-glow);
+    }
+    .module-card .icon { font-size:1.8rem; margin-bottom:8px; }
+    .module-card h3 { font-size:1rem; color:var(--text-primary); margin-bottom:8px; }
+    .module-card p { color:#9da8be; font-size:0.87rem; line-height:1.5; }
+    .module-card ul { list-style:none; padding:0; }
+    .module-card ul li {
+      color:#9da8be; font-size:0.84rem;
+      padding:4px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .module-card ul li:last-child { border-bottom:none; }
+    .module-card ul li::before { content:'›'; color:var(--accent); margin-right:8px; font-weight:600; }
+    .module-card--threat ul li::before { color:var(--threat); }
+
+    /* ── ALERT BOX ── */
+    .alert-box {
+      background:rgba(232,160,78,.08);
+      border:1px solid rgba(232,160,78,.28);
+      border-radius:14px;
+      padding:20px 22px;
+      margin-bottom:22px;
+    }
+    .alert-box h3 { color:var(--warn); font-size:1rem; margin-bottom:10px; }
+    .alert-box p { color:#b8c8dc; font-size:0.9rem; line-height:1.6; }
+    .alert-box strong { color:var(--warn); }
+
+    /* ── TECH LIST ── */
+    .tech-list { list-style:none; padding:0; }
+    .tech-list li {
+      background:rgba(255,255,255,.035);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:18px 20px; margin-bottom:10px;
+      color:#9da8be; font-size:0.9rem;
+      transition:border-color .25s;
+    }
+    .tech-list li:hover { border-color:var(--accent); }
+    .tech-list li strong { color:var(--accent-light); }
+
+    /* ── GROUP CARDS (special flavour) ── */
+    .group-card {
+      background:rgba(255,255,255,.035);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:22px 18px;
+      transition:all .27s;
+    }
+    .group-card:hover {
+      background:var(--threat-glow);
+      border-color:var(--threat);
+      transform:translateY(-4px);
+      box-shadow:0 8px 24px var(--threat-glow);
+    }
+    .group-card .icon { font-size:1.8rem; margin-bottom:8px; }
+    .group-card h3 { font-size:1rem; color:var(--threat); margin-bottom:8px; }
+    .group-card ul { list-style:none; padding:0; }
+    .group-card ul li {
+      color:#9da8be; font-size:0.84rem;
+      padding:4px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .group-card ul li:last-child { border-bottom:none; }
+    .group-card ul li::before { content:'›'; color:var(--threat); margin-right:8px; font-weight:600; }
+
+    /* ── DEFENSE CARDS ── */
+    .def-card {
+      background:rgba(91,188,170,.06);
+      border:1px solid rgba(91,188,170,.22);
+      border-radius:14px;
+      padding:22px 18px;
+      transition:all .27s;
+    }
+    .def-card:hover {
+      border-color:var(--safe);
+      background:var(--safe-glow);
+      transform:translateY(-4px);
+    }
+    .def-card .icon { font-size:1.8rem; margin-bottom:8px; }
+    .def-card h3 { font-size:1rem; color:var(--safe); margin-bottom:8px; }
+    .def-card ul { list-style:none; padding:0; }
+    .def-card ul li {
+      color:#9da8be; font-size:0.84rem;
+      padding:4px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .def-card ul li:last-child { border-bottom:none; }
+    .def-card ul li::before { content:'›'; color:var(--safe); margin-right:8px; font-weight:600; }
+
+    /* ── SOURCES ── */
+    .sources-list { list-style:none; padding:0; }
+    .sources-list li {
+      font-size:0.87rem; color:#9da8be;
+      padding:8px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .sources-list li:last-child { border-bottom:none; }
+    .sources-list li::before { content:'📄 '; }
+
+    /* ── FOOTER ── */
+    footer {
+      position:relative; z-index:1;
+      text-align:center; padding:24px;
+      color:var(--text-muted); font-size:0.77rem;
+      border-top:1px solid var(--border);
+    }
+    footer a { color:var(--accent); text-decoration:none; }
+    footer a:hover { color:var(--accent-light); }
+
+    @media (max-width:620px) {
+      .section-card { padding:24px 18px; }
+      header h1 { font-size:1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-blob bg-blob--1"></div>
+  <div class="bg-blob bg-blob--2"></div>
+  <div class="bg-blob bg-blob--3"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="CedricProjetsio.html#themedeveille" class="back-link">← Retour au portfolio</a>
+    <h1>🦠 Les Ransomwares et leurs Évolutions</h1>
+    <p>Veille Technologique – Novembre 2025</p>
+  </header>
+
+  <div class="page-content">
+
+    <!-- 1 INTRO + STATS -->
+    <section class="section-card">
+      <div class="intro-box intro-box--threat">
+        <strong>En 2025, les ransomwares atteignent un niveau de sophistication jamais vu</strong>
+        grâce à l'intégration massive de l'IA, la fragmentation du paysage RaaS et l'émergence d'attaques
+        sans chiffrement. Le nombre d'attaques explose tandis que les montants de rançon baissent dans certains secteurs.
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="number">+149%</div>
+          <div class="label">attaques aux États-Unis (début 2025 – Cyble)</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">−91%</div>
+          <div class="label">montant médian des rançons dans la santé (Sophos 2025)</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">63%</div>
+          <div class="label">des victimes manquent de compétences / ressources (Sophos)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 ÉVOLUTIONS MAJEURES -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar accent-bar--threat"></span>Évolutions Majeures 2025</h2>
+      <p class="section-sub">Les 4 tendances qui redéfinissent le paysage des ransomwares</p>
+      <div class="modules-grid">
+        <div class="module-card module-card--threat">
+          <div class="icon">🤖</div>
+          <h3>IA Massive</h3>
+          <ul>
+            <li>Développement ultra-rapide de malwares</li>
+            <li>Ingénierie sociale automatisée</li>
+            <li>Attaques ciblées et personnalisées</li>
+            <li>FunkSec et Black Basta en tête</li>
+          </ul>
+        </div>
+        <div class="module-card module-card--threat">
+          <div class="icon">📂</div>
+          <h3>Extorsion Sans Chiffrement</h3>
+          <ul>
+            <li>Vol de données sensibles uniquement</li>
+            <li>Menace de publication publique</li>
+            <li>En très forte hausse (Unit 42, Dragos)</li>
+            <li>Contournement des sauvegardes</li>
+          </ul>
+        </div>
+        <div class="module-card module-card--threat">
+          <div class="icon">🔀</div>
+          <h3>Fragmentation RaaS</h3>
+          <ul>
+            <li>Chute des gros acteurs historiques</li>
+            <li>Multiplication de petits groupes</li>
+            <li>Opérations plus volatiles et agressives</li>
+            <li>Adaptation rapide aux défenses</li>
+          </ul>
+        </div>
+        <div class="module-card module-card--threat">
+          <div class="icon">🇷🇺</div>
+          <h3>Qilin – Quasi-Étatique</h3>
+          <ul>
+            <li>Sophistication extrême des méthodes</li>
+            <li>Alignement géopolitique évident</li>
+            <li>Cibles stratégiques et sensibles</li>
+            <li>Ressources quasi-illimitées</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 CAUSES RACINES -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar accent-bar--threat"></span>Causes Racines les Plus Fréquentes</h2>
+      <p class="section-sub">Points d'entrée les plus exploités par les attaquants</p>
+      <div class="alert-box">
+        <h3>⚠️ Points d'Entrée Critiques</h3>
+        <p>
+          <strong>1. Exploitation de vulnérabilités</strong> → 32 à 63 % des cas<br>
+          <strong>2. Identifiants compromis</strong> → 23 % des attaques<br>
+          <strong>3. Manque de compétences / ressources</strong> → 63 % des victimes
+        </p>
+      </div>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="icon">🔓</div>
+          <h3>Vulnérabilités</h3>
+          <p>Failles non patchées dans les systèmes, applications obsolètes et configurations par défaut non sécurisées.</p>
+        </div>
+        <div class="module-card">
+          <div class="icon">🔑</div>
+          <h3>Identifiants Faibles</h3>
+          <p>Mots de passe compromis, réutilisation d'identifiants et absence d'authentification multi-facteurs.</p>
+        </div>
+        <div class="module-card">
+          <div class="icon">👥</div>
+          <h3>Facteur Humain</h3>
+          <p>Manque de formation en cybersécurité, équipes sous-dimensionnées et budgets insuffisants.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 GROUPES ACTIFS -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar accent-bar--threat"></span>Groupes les Plus Actifs 2025</h2>
+      <p class="section-sub">Les acteurs qui dominent la scène ransomware</p>
+      <div class="modules-grid">
+        <div class="group-card">
+          <div class="icon">👑</div>
+          <h3>Qilin</h3>
+          <ul>
+            <li>Quasi-étatique, très sophistiqué</li>
+            <li>Cibles stratégiques et gouvernementales</li>
+            <li>Techniques d'évasion avancées</li>
+          </ul>
+        </div>
+        <div class="group-card">
+          <div class="icon">⚡</div>
+          <h3>FunkSec</h3>
+          <ul>
+            <li>Ransomware full-IA</li>
+            <li>Attaques de masse automatisées</li>
+            <li>Développement ultra-rapide</li>
+          </ul>
+        </div>
+        <div class="group-card">
+          <div class="icon">🆘</div>
+          <h3>Black Basta</h3>
+          <ul>
+            <li>Toujours actif malgré les fuites</li>
+            <li>Utilisation intensive de l'IA</li>
+            <li>Double extorsion systématique</li>
+          </ul>
+        </div>
+        <div class="group-card">
+          <div class="icon">👁️</div>
+          <h3>Akira</h3>
+          <ul>
+            <li>Utilise les webcams pour bypass EDR</li>
+            <li>Techniques non conventionnelles</li>
+            <li>Exploitation de l'IoT</li>
+          </ul>
+        </div>
+        <div class="group-card">
+          <div class="icon">🔐</div>
+          <h3>LockBit</h3>
+          <ul>
+            <li>Résiste aux actions policières</li>
+            <li>Infrastructure distribuée</li>
+            <li>Réseau d'affiliés mondial</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 TENDANCES FIN 2025 / 2026 -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Tendances Fin 2025 / 2026</h2>
+      <p class="section-sub">Ce qui attend les entreprises dans les prochains mois</p>
+      <ul class="tech-list">
+        <li><strong>Attaques Hybrides IA + Géopolitiques</strong> — Convergence entre cybercriminalité et cyberguerre avec des acteurs étatiques soutenant des groupes criminels pour des objectifs stratégiques.</li>
+        <li><strong>Extorsion Multi-Vecteurs</strong> — Combinaison de DDoS, fuite de données, pression réglementaire et menaces physiques pour maximiser les chances de paiement.</li>
+        <li><strong>Vulnérabilités Non Conventionnelles</strong> — Exploitation de webcams, dispositifs IoT, systèmes de contrôle industriel et équipements connectés négligés.</li>
+        <li><strong>Collaboration Accrue</strong> — Marchés chinois anonymes, forums darknet et plateformes RaaS facilitant le partage d'outils et de techniques entre groupes.</li>
+      </ul>
+    </section>
+
+    <!-- 6 PROTECTION & PRÉVENTION -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Protection et Prévention</h2>
+      <p class="section-sub">Les bonnes pratiques pour se défendre</p>
+      <div class="modules-grid">
+        <div class="def-card">
+          <div class="icon">🛡️</div>
+          <h3>Défense en Profondeur</h3>
+          <ul>
+            <li>Segmentation réseau stricte</li>
+            <li>Authentification multi-facteurs obligatoire</li>
+            <li>EDR / XDR nouvelle génération</li>
+            <li>Surveillance continue 24 / 7</li>
+          </ul>
+        </div>
+        <div class="def-card">
+          <div class="icon">💾</div>
+          <h3>Sauvegardes Robustes</h3>
+          <ul>
+            <li>Règle 3-2-1 strictement appliquée</li>
+            <li>Sauvegardes hors ligne et immuables</li>
+            <li>Tests de restauration réguliers</li>
+            <li>Chiffrement des backups</li>
+          </ul>
+        </div>
+        <div class="def-card">
+          <div class="icon">📚</div>
+          <h3>Formation Continue</h3>
+          <ul>
+            <li>Sensibilisation régulière des équipes</li>
+            <li>Simulations d'attaques phishing</li>
+            <li>Exercices de gestion de crise</li>
+            <li>Culture de sécurité renforcée</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 SOURCES -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Sources Principales</h2>
+      <p class="section-sub">Rapports et études utilisés</p>
+      <ul class="sources-list">
+        <li>Sophos State of Ransomware 2025</li>
+        <li>CrowdStrike 2025 Threat Reports</li>
+        <li>Kaspersky Security Bulletin 2025</li>
+        <li>Dragos Q1 / Q2 2025 Reports</li>
+        <li>Unit 42 Ransomware Threat Report</li>
+        <li>Veeam Ransomware Trends Report</li>
+        <li>Rapid7 Vulnerability Intelligence</li>
+        <li>BlackFog State of Ransomware</li>
+      </ul>
+    </section>
+
+  </div><!-- end page-content -->
+
+  <footer>
+    Veille Technologique – Novembre 2025 &nbsp;·&nbsp; <a href="CedricProjetsio.html">← Retour au portfolio</a>
+  </footer>
+</body>
+</html>

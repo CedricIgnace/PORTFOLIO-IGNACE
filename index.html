@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cédric – BTS SIO Projets</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-deep:        #0a0e1a;
+      --bg-card:        rgba(18, 24, 42, 0.72);
+      --accent:         #6f9ecd;
+      --accent-light:   #9dc4e8;
+      --accent-glow:    rgba(111, 158, 205, 0.22);
+      --text-primary:   #eef1f7;
+      --text-muted:     #7a84a0;
+      --border:         rgba(111, 158, 205, 0.18);
+      --radius:         16px;
+      --font-head:      'Playfair Display', Georgia, serif;
+      --font-body:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── AMBIENT BLOBS ── */
+    .bg-blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(130px); opacity: .32;
+      pointer-events: none; z-index: 0;
+    }
+    .bg-blob--1 { width: 580px; height: 580px; background:#1e3a5f; top:-160px; left:-200px; }
+    .bg-blob--2 { width: 480px; height: 480px; background:#164e63; bottom:-90px; right:-180px; }
+    .bg-blob--3 { width: 320px; height: 320px; background:#1a3048; top:45%; left:55%; }
+
+    /* ── STICKY HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 14, 26, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex; align-items: center;
+      justify-content: center; gap: 30px;
+      flex-wrap: wrap;
+    }
+    .header-brand {
+      display: flex; align-items: center; gap: 13px;
+      text-decoration: none;
+    }
+    .header-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+    .header-brand h1 {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--text-primary);
+    }
+
+    nav ul { list-style: none; display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.84rem; font-weight: 500;
+      padding: 5px 14px; border-radius: 20px;
+      border: 1px solid transparent;
+      transition: all .24s;
+    }
+    nav a:hover {
+      color: var(--accent-light);
+      border-color: var(--border);
+      background: var(--accent-glow);
+    }
+
+    /* ── PAGE BODY ── */
+    .page-content {
+      position: relative; z-index: 1;
+      max-width: 1040px; margin: 0 auto;
+      padding: 52px 24px 90px;
+    }
+
+    /* ── GLASS SECTION CARDS ── */
+    .section-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 38px;
+      margin-bottom: 32px;
+      opacity: 0; transform: translateY(26px);
+      animation: fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    .section-card:nth-child(1){animation-delay:.06s}
+    .section-card:nth-child(2){animation-delay:.13s}
+    .section-card:nth-child(3){animation-delay:.20s}
+    .section-card:nth-child(4){animation-delay:.27s}
+    .section-card:nth-child(5){animation-delay:.34s}
+    .section-card:nth-child(6){animation-delay:.41s}
+    .section-card:nth-child(7){animation-delay:.48s}
+    .section-card:nth-child(8){animation-delay:.55s}
+
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+    /* ── TITLES ── */
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 1.72rem;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 13px;
+    }
+    .accent-bar {
+      display: inline-block; width: 4px; height: 24px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
+      border-radius: 2px;
+    }
+    .section-sub {
+      color: var(--text-muted); font-size: 0.87rem;
+      margin-bottom: 26px; padding-left: 17px;
+    }
+
+    /* ── PRESENTATION ── */
+    .intro-text { color: #adb5cc; font-size: 0.97rem; max-width: 680px; }
+    .intro-text strong { color: var(--accent-light); font-weight: 600; }
+
+    /* ── CONTENT ROW (image + text) ── */
+    .content-row {
+      display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap;
+    }
+    .content-row img {
+      max-width: 190px; width: 100%; height: auto;
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      padding: 12px; flex-shrink: 0;
+    }
+    .content-row p { color: #9da8be; font-size: 0.92rem; }
+
+    /* ── MODULE CARDS ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .module-card {
+      background: rgba(255,255,255,.035);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 16px;
+      text-align: center;
+      transition: all .27s cubic-bezier(.22,1,.36,1);
+    }
+    .module-card:hover {
+      background: rgba(111,158,205,.08);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .module-card .icon { font-size: 1.9rem; margin-bottom: 7px; }
+    .module-card h3 { font-size: 0.97rem; color: var(--text-primary); margin-bottom: 3px; }
+    .module-card p { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 11px; }
+
+    /* ── PILL BUTTON ── */
+    .pill-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 17px;
+      background: linear-gradient(135deg, var(--accent), #4a7fa5);
+      color: #fff; font-size: 0.81rem; font-weight: 600;
+      border-radius: 20px; text-decoration: none;
+      transition: all .24s; letter-spacing: .3px;
+    }
+    .pill-btn:hover {
+      filter: brightness(1.18);
+      box-shadow: 0 4px 16px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* ── ANSSI ── */
+    .anssi-row { display: flex; justify-content: center; }
+
+    /* ── PROJETS ── */
+    .projet-item {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 22px;
+      margin-bottom: 16px;
+      transition: border-color .28s;
+    }
+    .projet-item:hover { border-color: var(--accent); }
+    .projet-item h3 {
+      font-family: var(--font-head);
+      font-size: 1.08rem;
+      color: var(--accent-light);
+      margin-bottom: 5px;
+    }
+    .projet-item p { color: #9da8be; font-size: 0.89rem; margin-bottom: 8px; }
+    .projet-item img {
+      max-width: 100%; height: auto; border-radius: 10px;
+      background: rgba(255,255,255,.04); margin-top: 4px;
+    }
+
+    /* ── TDB ── */
+    .tdb-wrap {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border); margin-top: 14px;
+    }
+    .tdb-wrap iframe { display: block; width: 100%; height: 500px; border: none; }
+
+    /* ── VEILLE ── */
+    .veille-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .veille-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 20px; text-align: center;
+      transition: all .27s;
+    }
+    .veille-card:hover {
+      border-color: var(--accent);
+      background: rgba(111,158,205,.07);
+      transform: translateY(-3px);
+    }
+    .veille-card img {
+      max-width: 110px; height: auto; border-radius: 10px;
+      margin: 0 auto; display: block;
+    }
+    .veille-card h3 { color: var(--text-primary); margin: 11px 0 5px; font-size: 0.97rem; }
+    .veille-card p { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 13px; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+    }
+    .contact-item {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 17px;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
+      transition: border-color .24s;
+    }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-item .c-icon { font-size: 1.35rem; flex-shrink: 0; }
+    .contact-item .c-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: .9px; }
+    .contact-item .c-value { color: var(--text-primary); font-size: 0.88rem; margin-top: 2px; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 26px;
+      color: var(--text-muted); font-size: 0.77rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 620px) {
+      .section-card { padding: 24px 18px; }
+      .content-row img { max-width: 130px; }
+      .header-brand h1 { font-size: 1.15rem; }
+      nav a { font-size: 0.77rem; padding: 4px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-blob bg-blob--1"></div>
+  <div class="bg-blob bg-blob--2"></div>
+  <div class="bg-blob bg-blob--3"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#presentation" class="header-brand">
+      <img src="ChillGuy.jfif" alt="Photo de profil" class="header-avatar">
+      <h1>Cédric – BTS SIO</h1>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#presentation">Présentation</a></li>
+        <li><a href="#BoetStopson">Groupe BOËT</a></li>
+        <li><a href="#HyperV">Hyper-V</a></li>
+        <li><a href="#certification">Certification</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#tdb">Tableau de bord</a></li>
+        <li><a href="#themedeveille">Veille</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="page-content">
+
+    <!-- 1 PRÉSENTATION -->
+    <section class="section-card" id="presentation">
+      <h2 class="section-title"><span class="accent-bar"></span>Présentation</h2>
+      <p class="section-sub">À propos de moi</p>
+      <p class="intro-text">
+        Je m'appelle <strong>Cédric</strong> et je suis étudiant en <strong>BTS SIO</strong> (Services Informatiques aux Organisations).
+        Passionné par l'informatique, je développe des projets dans les domaines de la programmation,
+        de l'administration systèmes et réseaux, et de la gestion de bases de données.
+      </p>
+    </section>
+
+    <!-- 2 BOËT -->
+    <section class="section-card" id="BoetStopson">
+      <h2 class="section-title"><span class="accent-bar"></span>Groupe BOËT</h2>
+      <p class="section-sub">Entreprise de stage</p>
+      <div class="content-row">
+        <img src="logo.png" alt="Logo Groupe Boët">
+        <p>
+          Groupe Boët, expert français en maîtrise des émissions (bruit, vibrations, pollution, énergie), fondé en 1872,
+          est une PME de 100 salariés basée à Tourcoing (23 rue d'Amsterdam, 59200).
+          Spécialisé dans la conception, fabrication et installation de solutions acoustiques
+          pour énergie, industrie, bâtiment et médical.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 HYPER-V -->
+    <section class="section-card" id="HyperV">
+      <h2 class="section-title"><span class="accent-bar"></span>Hyper-V</h2>
+      <p class="section-sub">Technologie de virtualisation</p>
+      <div class="content-row">
+        <img src="Hyper-V_Logo.png" alt="Logo Hyper-V">
+        <p>
+          <strong style="color:var(--accent-light)">Architecture</strong> — Hyperviseur de type 1, accès direct au matériel avec Dynamic Memory.<br><br>
+          <strong style="color:var(--accent-light)">Points forts</strong> — Performance &middot; Sécurité (isolation, VM blindées, TPM virtuel) &middot;
+          Intégration Microsoft (Azure, Active Directory) &middot;
+          Flexibilité (réplication, snapshots, multi-OS) &middot;
+          Économique (inclus dans Windows).
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 CERTIFICATIONS -->
+    <section class="section-card" id="certification">
+      <h2 class="section-title"><span class="accent-bar"></span>Modules CNIL</h2>
+      <p class="section-sub">Attestations de formation RGPD</p>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="icon">💻</div><h3>Module 1</h3>
+          <p>Le RGPD et ses notions clés</p>
+          <a href="Dossier%20attestation%20SIO/Attestation%20module%201.pdf" target="_blank" class="pill-btn">📄 Voir PDF</a>
+        </div>
+        <div class="module-card">
+          <div class="icon">⚙️</div><h3>Module 2</h3>
+          <p>Les principes de la protection des données</p>
+          <a href="Dossier%20attestation%20SIO/Attestation%20module%202.pdf" target="_blank" class="pill-btn">📄 Voir PDF</a>
+        </div>
+        <div class="module-card">
+          <div class="icon">🔑</div><h3>Module 3</h3>
+          <p>La responsabilité des acteurs</p>
+          <a href="Dossier%20attestation%20SIO/Attestation%20module%203.pdf" target="_blank" class="pill-btn">📄 Voir PDF</a>
+        </div>
+        <div class="module-card">
+          <div class="icon">🖥️</div><h3>Module 4</h3>
+          <p>Le DPO et les outils de la conformité</p>
+          <a href="Dossier%20attestation%20SIO/Attestation%20module%204.pdf" target="_blank" class="pill-btn">📄 Voir PDF</a>
+        </div>
+        <div class="module-card">
+          <div class="icon">🌍</div><h3>Module 5</h3>
+          <p>Les collectivités territoriales</p>
+          <a href="Dossier%20attestation%20SIO/Attestation%20module%205.pdf" target="_blank" class="pill-btn">📄 Voir PDF</a>
+        </div>
+        <div class="module-card">
+          <div class="icon">📱</div><h3>Module 6</h3>
+          <p>Travail et données personnelles</p>
+          <a href="Dossier%20attestation%20SIO/Attestation%20module%206.pdf" target="_blank" class="pill-btn">📄 Voir PDF</a>
+        </div>
+      </div>
+
+      <h2 class="section-title" style="margin-top:36px"><span class="accent-bar"></span>ANSSI</h2>
+      <p class="section-sub">Certification cybersécurité</p>
+      <div class="anssi-row">
+        <div class="module-card" style="max-width:270px;width:100%">
+          <div class="icon">🎖</div><h3>Certification ANSSI</h3>
+          <p>Les 4 modules</p>
+          <a href="Dossier%20attestation%20SIO/ANSSI.pdf" target="_blank" class="pill-btn">📄 Voir PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 PROJETS -->
+    <section class="section-card" id="projets">
+      <h2 class="section-title"><span class="accent-bar"></span>Mes Projets</h2>
+      <p class="section-sub">Réalisations en stage &amp; école</p>
+
+      <div class="projet-item">
+        <h3>Projet 1 – Développement WINDEV</h3>
+        <p>WINDEV est un logiciel de développement d'applications cross-plateformes. Voici quelques développements apportés à l'entreprise avec plusieurs parties de BoetStopson.</p>
+        <img src="Windevblanc.png" alt="Logo Windev">
+      </div>
+      <div class="projet-item">
+        <h3>Projet 2 – Outil de test de phishing</h3>
+        <p>Mise en place d'un outil de test de phishing au sein de la société.</p>
+        <img src="Phishing Boet Sans Nom.png" alt="Phishing Boet">
+        <p style="margin-top:12px">Liste des niveaux</p>
+        <img src="Top1CyberSecu.png" alt="Niveaux cybersécurité">
+      </div>
+      <div class="projet-item">
+        <h3>Projet 3 – Modification de composants</h3>
+        <p>Modification de composants d'ordinateurs fixes et portables.</p>
+        <img src="FakeChangementAlim.jpg" alt="Changement alimentation">
+      </div>
+      <div class="projet-item">
+        <h3>Projet 4 – Nouveaux copieurs &amp; GPO</h3>
+        <p>Mise en place de nouveaux copieurs et mise en place d'une GPO pour le driver.</p>
+        <img src="copieur.png" alt="Copieur">
+      </div>
+    </section>
+
+    <!-- 6 TDB -->
+    <section class="section-card" id="tdb">
+      <h2 class="section-title"><span class="accent-bar"></span>Tableau de bord</h2>
+      <p class="section-sub">Données en direct</p>
+      <a href="https://docs.google.com/spreadsheets/d/1Sol8Hkmyxn5ctNqYCZEJaohOaYKepkvS/edit?gid=1913138838#gid=1913138838/pubhtml?widget=true&amp;headers=false" target="_blank" class="pill-btn">📂 Ouvrir le fichier</a>
+      <div class="tdb-wrap">
+        <iframe src="https://docs.google.com/spreadsheets/d/1Sol8Hkmyxn5ctNqYCZEJaohOaYKepkvS/edit?gid=1913138838#gid=1913138838/pubhtml?widget=true&amp;headers=false" title="Tableau de bord"></iframe>
+      </div>
+    </section>
+
+    <!-- 7 VEILLE -->
+    <section class="section-card" id="themedeveille">
+      <h2 class="section-title"><span class="accent-bar"></span>Thèmes de veille</h2>
+      <p class="section-sub">Sujets de recherche technologique</p>
+      <div class="veille-grid">
+        <div class="veille-card">
+          <img src="chip.png" alt="Composants électroniques">
+          <h3>Thème 1</h3>
+          <p>Les nouveautés des composants électroniques</p>
+          <a href="themedeveille1_V2.html" class="pill-btn">📖 Lire</a>
+        </div>
+        <div class="veille-card">
+          <img src="venom.png" alt="Ransomwares">
+          <h3>Thème 2</h3>
+          <p>Les ransomwares et leurs évolutions</p>
+          <a href="themedeveille2.html" class="pill-btn">📖 Lire</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 CONTACT -->
+    <section class="section-card" id="contact">
+      <h2 class="section-title"><span class="accent-bar"></span>Contact</h2>
+      <p class="section-sub">Prise de contact</p>
+      <div class="contact-grid">
+        <a href="mailto:cedric.ignace19@gmail.com" class="contact-item">
+          <span class="c-icon">📧</span>
+          <div><div class="c-label">Email</div><div class="c-value">cedric.ignace19@gmail.com</div></div>
+        </a>
+        <div class="contact-item">
+          <span class="c-icon">📍</span>
+          <div><div class="c-label">Adresse</div><div class="c-value">128 rue de la louvière, 59800 LILLE</div></div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">📱</span>
+          <div><div class="c-label">Téléphone</div><div class="c-value">06 43 57 01 18</div></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>© 2025 Cédric – BTS SIO Projets · Tous droits réservés</footer>
+</body>
+</html>

@@ -1,0 +1,116 @@
+
+:root{
+  --bg: #0b1220;
+  --panel: #0f1724;
+  --card: #ffffff;
+  --muted: #94a3b8;
+  --text: #e6eef6;
+  --accent: #22c1d6; /* teal */
+  --accent-2: #8b5cf6; /* violet */
+  --success: #48bb78;
+  --danger: #ef4444;
+  --glass: rgba(255,255,255,0.04);
+  --radius: 12px;
+  --max-width: 1100px;
+  --ff: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --transition: 200ms ease;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:var(--ff);background:
+  radial-gradient(800px 400px at 10% 10%, rgba(139,92,246,0.04), transparent 12%),
+  linear-gradient(180deg,var(--bg),#071021);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* Layout & container */
+.container{max-width:var(--max-width);margin:0 auto;padding:0 16px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:20px 16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.03)}
+header img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.06)}
+header h1{font-size:1.4rem;margin:0;color:var(--accent);flex:1}
+header p{margin:0;color:var(--muted)}
+nav{width:100%;margin-top:6px}
+nav ul{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:8px 0 0;list-style:none}
+nav a{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid transparent;font-weight:500}
+nav a:hover, nav a:focus{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.03);outline:none;box-shadow:0 4px 18px rgba(2,6,23,0.5)}
+
+/* Sections */
+section{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);border-radius:var(--radius);padding:22px;margin:22px auto;max-width:var(--max-width)}
+h2{font-size:1.2rem;margin:0 0 12px;color:var(--accent-2);padding-left:10px;border-left:4px solid var(--accent);display:inline-block}
+
+/* Intro / panels */
+.intro-text{background:linear-gradient(180deg, rgba(34,193,214,0.04), rgba(139,92,246,0.02));padding:14px;border-radius:10px;color:var(--text);line-height:1.5}
+.highlight-section{padding:16px;border-radius:10px;background:linear-gradient(90deg, rgba(139,92,246,0.04), rgba(34,193,214,0.02));border:1px solid rgba(255,255,255,0.03)}
+
+/* Grids */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.stat-box{background:var(--panel);padding:16px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.03);transition:transform var(--transition),box-shadow var(--transition)}
+.stat-box:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(2,6,23,0.55)}
+.number{font-size:1.8rem;font-weight:700;color:var(--accent)}
+.label{font-size:0.9rem;color:var(--muted);margin-top:6px}
+
+/* Modules / cards */
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:12px}
+.module-card{background:var(--card);color:#071022;padding:16px;border-radius:12px;border:1px solid rgba(2,6,23,0.06);box-shadow:0 8px 24px rgba(2,6,23,0.18);transition:transform var(--transition),box-shadow var(--transition);overflow:hidden}
+.module-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.24)}
+.module-card .icon{font-size:1.6rem}
+.module-card h3{margin:10px 0 6px;font-size:1.05rem}
+.module-card p, .module-card ul{color:#16313f;font-size:0.95rem}
+.module-card ul{padding-left:18px;margin:8px 0}
+.module-card ul li{margin:6px 0;position:relative;padding-left:12px}
+.module-card ul li::before{content:'•';position:absolute;left:0;color:var(--accent-2);font-weight:700}
+
+/* Lists / tech */
+.tech-list{list-style:none;padding:0;margin:0}
+.tech-list li{background:var(--glass);padding:12px;margin:10px 0;border-left:4px solid var(--accent);border-radius:8px;color:var(--text)}
+.tech-list li strong{color:var(--accent)}
+
+/* Eco / alert / sources */
+.eco-section{background:linear-gradient(90deg, rgba(72,187,120,0.06), rgba(34,193,214,0.02));padding:14px;border-left:5px solid var(--success);border-radius:10px;color:var(--text)}
+.alert-section{background:linear-gradient(90deg, rgba(239,68,68,0.06), rgba(34,193,214,0.01));padding:14px;border-left:5px solid var(--danger);border-radius:10px;color:var(--text)}
+.sources-section{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px}
+
+/* Images / media */
+.taille-unique{display:inline-block;max-width:180px;height:auto;border-radius:8px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 6px 18px rgba(2,6,23,0.4);margin:8px 8px 0 0}
+img{max-width:100%;height:auto;display:block}
+
+/* Buttons / links */
+a{text-decoration:none;color:var(--accent);transition:color var(--transition)}
+a:hover{color:var(--accent-2)}
+.pdf-btn, .bouton{display:inline-block;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061022;font-weight:600;border:1px solid rgba(0,0,0,0.08);text-decoration:none}
+.pdf-btn:hover, .bouton:hover{opacity:0.95;transform:translateY(-2px)}
+
+/* Projects list */
+.projets-list{list-style:none;padding:0;margin:0}
+.projets-list li{margin:14px 0;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+
+/* Iframe responsiveness */
+.responsive-iframe{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px}
+.responsive-iframe iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* Footer */
+footer{padding:18px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:18px}
+
+/* Accessibility */
+:focus{outline:none;box-shadow:0 0 0 4px rgba(139,92,246,0.12);border-radius:6px}
+
+/* Small screens */
+@media (max-width:900px){
+  header{padding:14px}
+  header h1{font-size:1.1rem}
+  nav ul{gap:6px}
+  .taille-unique{max-width:140px}
+  section{margin:14px;padding:16px}
+}
+@media (max-width:600px){
+  nav ul{flex-direction:column}
+  header img{width:48px;height:48px}
+  .modules-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+}
+
+/* Print */
+@media print{
+  body{background:white;color:black}
+  header, footer, nav{background:transparent;color:black;box-shadow:none}
+  section{page-break-inside:avoid;border:1px solid #ccc}
+  a::after{content:" (" attr(href) ")";}
+}
