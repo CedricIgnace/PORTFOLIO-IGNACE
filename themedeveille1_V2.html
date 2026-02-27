@@ -3,328 +3,408 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>L'IA et les Composants Électroniques – Veille</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <title>L'IA et les Composants Électroniques | Cédric BTS SIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-deep:        #0a0e1a;
-      --bg-card:        rgba(18, 24, 42, 0.72);
-      --accent:         #6f9ecd;
-      --accent-light:   #9dc4e8;
-      --accent-glow:    rgba(111, 158, 205, 0.22);
-      --text-primary:   #eef1f7;
-      --text-muted:     #7a84a0;
-      --border:         rgba(111, 158, 205, 0.18);
-      --radius:         16px;
-      --font-head:      'Playfair Display', Georgia, serif;
-      --font-body:      'DM Sans', system-ui, sans-serif;
-      /* veille-specific tints */
-      --accent2:        #5bbcaa;
-      --accent2-glow:   rgba(91, 188, 170, 0.2);
-      --accent-warn:    #e8a04e;
-      --accent-warn-glow: rgba(232,160,78,.2);
-      --accent-bad:     #d96b6b;
-      --accent-bad-glow: rgba(217,107,107,.2);
+      --bg-base:        #f4f6fb;
+      --bg-card:        rgba(255, 255, 255, 0.85);
+      --accent:         #3b82c4;
+      --accent-light:   #5da0e0;
+      --accent-soft:    #dbeafe;
+      --accent-glow:    rgba(59, 130, 196, 0.15);
+      --safe:           #16a34a;
+      --safe-soft:      #dcfce7;
+      --warn:           #d97706;
+      --warn-soft:      #fef3c7;
+      --danger:         #dc2626;
+      --danger-soft:    #fee2e2;
+      --danger-mid:     #ef4444;
+      --text-primary:   #1a2340;
+      --text-secondary: #3d4f6e;
+      --text-muted:     #7a8fb0;
+      --border-card:    rgba(200, 215, 235, 0.7);
+      --shadow-sm:      0 2px 12px rgba(30, 60, 120, 0.07);
+      --shadow-md:      0 6px 28px rgba(30, 60, 120, 0.11);
+      --shadow-hover:   0 12px 40px rgba(59, 130, 196, 0.18);
+      --radius:         18px;
+      --font-head:      'Lora', Georgia, serif;
+      --font-body:      'Outfit', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
-      background-color: var(--bg-deep);
+      background-color: var(--bg-base);
       color: var(--text-primary);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ── BLOBS ── */
-    .bg-blob { position:fixed; border-radius:50%; filter:blur(130px); opacity:.32; pointer-events:none; z-index:0; }
-    .bg-blob--1 { width:580px; height:580px; background:#1e3a5f; top:-160px; left:-200px; }
-    .bg-blob--2 { width:480px; height:480px; background:#164e63; bottom:-90px; right:-180px; }
-    .bg-blob--3 { width:320px; height:320px; background:#1a3048; top:45%; left:55%; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 700px 500px at 10% 0%, rgba(190, 220, 255, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 400px at 90% 80%, rgba(210, 235, 255, 0.38) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .bg-shape { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; opacity: .55; }
+    .bg-shape--1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(147,200,255,0.22), transparent 70%);
+      top: -120px; left: -150px;
+    }
+    .bg-shape--2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(179,220,255,0.18), transparent 70%);
+      bottom: -80px; right: -120px;
+    }
 
     /* ── HEADER ── */
     header {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(10,14,26,0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 22px 28px;
-      text-align: center;
+      background: rgba(244, 246, 251, 0.82);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border-card);
+      box-shadow: 0 1px 18px rgba(30, 60, 120, 0.07);
+      padding: 14px 28px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+      flex-wrap: wrap;
     }
-    header h1 {
-      font-family: var(--font-head);
-      font-size: 1.7rem;
-      color: var(--text-primary);
-      margin-bottom: 4px;
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 16px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 0.82rem; font-weight: 600;
+      border-radius: 20px; text-decoration: none;
+      border: 1px solid rgba(59,130,196,0.2);
+      transition: all .22s;
     }
-    header p {
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      letter-spacing: .6px;
-      text-transform: uppercase;
+    .back-btn:hover { background: var(--accent); color: #fff; }
+    .header-title { font-family: var(--font-head); font-size: 1.15rem; color: var(--text-primary); }
+    .header-badge {
+      background: linear-gradient(135deg, var(--accent), #2a6eb0);
+      color: #fff; font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px; letter-spacing: .4px;
     }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      color: var(--accent); text-decoration: none;
-      font-size: 0.82rem; font-weight: 500;
-      margin-bottom: 10px;
-      transition: color .2s;
-    }
-    .back-link:hover { color: var(--accent-light); }
 
-    /* ── LAYOUT ── */
-    .page-content { position:relative; z-index:1; max-width:1040px; margin:0 auto; padding:48px 24px 90px; }
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      max-width: 1040px; margin: 0 auto;
+      padding: 52px 24px 0;
+    }
+    .hero-inner {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1a4a7a 100%);
+      border-radius: 24px;
+      padding: 52px 48px;
+      display: flex; align-items: center; gap: 40px;
+      flex-wrap: wrap;
+      box-shadow: 0 20px 60px rgba(15, 30, 70, 0.45);
+      overflow: hidden; position: relative;
+    }
+    .hero-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 400px 300px at 80% 50%, rgba(59,130,196,0.3), transparent),
+        radial-gradient(ellipse 200px 200px at 10% 80%, rgba(93,160,224,0.15), transparent);
+      pointer-events: none;
+    }
+    /* Circuit board pattern subtil */
+    .hero-inner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        90deg, transparent, transparent 40px,
+        rgba(59,130,196,0.04) 40px, rgba(59,130,196,0.04) 41px
+      ),
+      repeating-linear-gradient(
+        0deg, transparent, transparent 40px,
+        rgba(59,130,196,0.04) 40px, rgba(59,130,196,0.04) 41px
+      );
+      pointer-events: none;
+    }
+    .hero-icon {
+      font-size: 5rem; flex-shrink: 0;
+      filter: drop-shadow(0 4px 20px rgba(59,130,196,0.7));
+      position: relative; z-index: 1;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-text h1 { font-family: var(--font-head); font-size: 2rem; color: #fff; margin-bottom: 8px; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-text p { color: rgba(255,255,255,0.68); font-size: 0.95rem; max-width: 520px; margin-bottom: 20px; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(93,160,224,0.35);
+      color: rgba(200,225,255,0.9);
+      font-size: 0.75rem; font-weight: 500;
+      padding: 4px 12px; border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
 
-    /* ── SECTION CARDS ── */
+    /* ── PAGE CONTENT ── */
+    .page-content {
+      position: relative; z-index: 1;
+      max-width: 1040px; margin: 0 auto;
+      padding: 28px 24px 90px;
+    }
+
     .section-card {
       background: var(--bg-card);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border-card);
       border-radius: var(--radius);
-      padding: 38px 36px;
-      margin-bottom: 30px;
-      opacity: 0; transform: translateY(26px);
+      padding: 42px 40px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      opacity: 0; transform: translateY(24px);
       animation: fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
+      transition: box-shadow .28s, border-color .28s;
     }
-    .section-card:nth-child(1){animation-delay:.06s}
-    .section-card:nth-child(2){animation-delay:.13s}
-    .section-card:nth-child(3){animation-delay:.20s}
-    .section-card:nth-child(4){animation-delay:.27s}
-    .section-card:nth-child(5){animation-delay:.34s}
-    .section-card:nth-child(6){animation-delay:.41s}
-    .section-card:nth-child(7){animation-delay:.48s}
+    .section-card:hover { box-shadow: var(--shadow-md); border-color: rgba(59,130,196,0.25); }
+    .section-card:nth-child(1){animation-delay:.08s}
+    .section-card:nth-child(2){animation-delay:.16s}
+    .section-card:nth-child(3){animation-delay:.24s}
+    .section-card:nth-child(4){animation-delay:.32s}
+    .section-card:nth-child(5){animation-delay:.40s}
+    .section-card:nth-child(6){animation-delay:.48s}
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
-    /* ── TITLES ── */
     .section-title {
       font-family: var(--font-head);
-      font-size: 1.62rem;
-      color: var(--text-primary);
+      font-size: 1.5rem; color: var(--text-primary);
       margin-bottom: 6px;
       display: flex; align-items: center; gap: 13px;
     }
     .accent-bar {
-      display:inline-block; width:4px; height:24px;
+      display: inline-block; width: 4px; height: 26px;
       background: linear-gradient(180deg, var(--accent), var(--accent-light));
-      border-radius:2px;
+      border-radius: 3px; flex-shrink: 0;
     }
-    .section-sub { color: var(--text-muted); font-size:0.85rem; margin-bottom:24px; padding-left:17px; }
+    .accent-bar.warn { background: linear-gradient(180deg, var(--warn), #f59e0b); }
+    .section-sub { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 26px; padding-left: 17px; }
 
-    /* ── INTRO HIGHLIGHT ── */
-    .intro-box {
-      background: rgba(111,158,205,.08);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 24px;
-      color: #b8c8dc;
-      font-size: 0.95rem;
-      margin-bottom: 28px;
-    }
-    .intro-box strong { color: var(--accent-light); }
-
-    /* ── STATS ROW ── */
+    /* ── STATS ── */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 14px;
     }
     .stat-box {
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 16px;
-      text-align: center;
+      background: linear-gradient(145deg, #fff, var(--accent-soft));
+      border: 1px solid var(--border-card);
+      border-radius: 16px; padding: 24px 18px; text-align: center;
       transition: all .27s;
     }
-    .stat-box:hover {
-      border-color: var(--accent);
-      background: rgba(111,158,205,.08);
-      transform: translateY(-3px);
-    }
-    .stat-box .number {
-      font-family: var(--font-head);
-      font-size: 2rem;
-      color: var(--accent-light);
-      line-height: 1.1;
-    }
-    .stat-box .label {
-      color: var(--text-muted);
-      font-size: 0.78rem;
-      margin-top: 6px;
-      line-height: 1.4;
-    }
+    .stat-box:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+    .stat-box .number { font-family: var(--font-head); font-size: 2.2rem; color: var(--accent); line-height: 1.1; }
+    .stat-box .label { color: var(--text-muted); font-size: 0.78rem; margin-top: 6px; line-height: 1.4; }
 
-    /* ── MODULE CARDS ── */
-    .modules-grid {
+    /* ── CARTES GÉNÉRIQUES ── */
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-    .module-card {
-      background: rgba(255,255,255,.035);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px 18px;
-      transition: all .27s cubic-bezier(.22,1,.36,1);
-    }
-    .module-card:hover {
-      background: rgba(111,158,205,.08);
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px var(--accent-glow);
-    }
-    .module-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
-    .module-card h3 { font-size: 1rem; color: var(--text-primary); margin-bottom: 8px; }
-    .module-card p { color: #9da8be; font-size: 0.87rem; line-height:1.5; }
-    .module-card ul {
-      list-style: none; padding: 0;
-    }
-    .module-card ul li {
-      color: #9da8be; font-size: 0.85rem;
-      padding: 4px 0;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .module-card ul li:last-child { border-bottom: none; }
-    .module-card ul li::before {
-      content: '›'; color: var(--accent); margin-right: 8px; font-weight: 600;
-    }
-
-    /* ── TECH LIST (horizontal pills) ── */
-    .tech-list { list-style: none; padding: 0; }
-    .tech-list li {
-      background: rgba(255,255,255,.035);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 10px;
-      color: #9da8be; font-size: 0.9rem;
-      transition: border-color .25s;
-    }
-    .tech-list li:hover { border-color: var(--accent); }
-    .tech-list li strong { color: var(--accent-light); }
-
-    /* ── DUAL CARD (pros / cons) ── */
-    .dual-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
     }
-    .dual-card {
-      border-radius: 14px;
-      padding: 22px 18px;
+    .info-card {
+      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4));
+      border: 1px solid var(--border-card);
+      border-radius: 16px; padding: 24px 20px;
+      transition: all .27s ease; position: relative; overflow: hidden;
     }
-    .dual-card--good {
-      background: rgba(91,188,170,.08);
-      border: 1px solid rgba(91,188,170,.25);
+    .info-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      opacity: 0; transition: opacity .27s;
     }
-    .dual-card--good:hover { border-color: var(--accent2); }
-    .dual-card--bad {
-      background: rgba(217,107,107,.08);
-      border: 1px solid rgba(217,107,107,.25);
+    .info-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .info-card:hover::before { opacity: 1; }
+    .info-card .card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .info-card h3 { font-size: 0.97rem; color: var(--text-primary); font-weight: 600; margin-bottom: 8px; }
+    .info-card ul { list-style: none; }
+    .info-card ul li {
+      color: var(--text-muted); font-size: 0.83rem;
+      padding: 4px 0; border-bottom: 1px solid rgba(200,215,235,0.4);
+      display: flex; align-items: flex-start; gap: 7px;
     }
-    .dual-card--bad:hover { border-color: var(--accent-bad); }
-    .dual-card h3 {
-      font-size: 1rem; margin-bottom: 12px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .dual-card--good h3 { color: var(--accent2); }
-    .dual-card--bad h3  { color: var(--accent-bad); }
-    .dual-card ul { list-style: none; padding: 0; }
-    .dual-card ul li {
-      font-size: 0.85rem; color: #9da8be;
-      padding: 5px 0;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .dual-card ul li:last-child { border-bottom: none; }
-    .dual-card--good ul li::before { content:'✓ '; color: var(--accent2); font-weight:700; }
-    .dual-card--bad  ul li::before { content:'✕ '; color: var(--accent-bad); font-weight:700; }
+    .info-card ul li:last-child { border-bottom: none; }
+    .info-card ul li::before { content: '▸'; color: var(--accent-light); font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+    .info-card p { color: var(--text-muted); font-size: 0.83rem; line-height: 1.6; }
 
-    /* ── RAM IMAGES ROW ── */
-    .ram-row {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      justify-content: center; margin: 20px 0;
+    /* ── TECH LIST ── */
+    .tech-list { display: flex; flex-direction: column; gap: 12px; }
+    .tech-item {
+      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.3));
+      border: 1px solid var(--border-card);
+      border-radius: 14px; padding: 18px 20px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: all .27s; position: relative; overflow: hidden;
     }
-    .ram-row img {
-      width: 200px; height: 160px; object-fit: contain;
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
+    .tech-item::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
     }
+    .tech-item:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateX(4px); }
+    .tech-item .t-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .tech-item h3 { font-size: 0.97rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .tech-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .tech-item strong { color: var(--accent); }
+
+    /* ── ALERTE CRISE ── */
+    .warn-box {
+      background: linear-gradient(145deg, var(--warn-soft), rgba(254,243,199,0.6));
+      border: 1px solid rgba(217,119,6,0.25);
+      border-radius: 14px; padding: 22px 24px; margin-bottom: 26px;
+    }
+    .warn-box h3 { color: var(--warn); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .warn-box p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+    .warn-box strong { color: var(--warn); }
 
     /* ── ECO BOX ── */
     .eco-box {
-      background: rgba(91,188,170,.07);
-      border: 1px solid rgba(91,188,170,.22);
-      border-radius: 14px;
-      padding: 22px 22px;
-      margin-top: 22px;
+      background: linear-gradient(145deg, var(--safe-soft), rgba(220,252,231,0.5));
+      border: 1px solid rgba(22,163,74,0.2);
+      border-radius: 14px; padding: 22px 24px; margin-top: 22px;
     }
-    .eco-box h3 { color: var(--accent2); font-size: 1rem; margin-bottom: 8px; }
-    .eco-box p { color: #9da8be; font-size: 0.88rem; }
-    .eco-box strong { color: var(--accent2); }
+    .eco-box h3 { color: var(--safe); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .eco-box p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
+    .eco-box strong { color: var(--safe); }
+
+    /* ── RAM ── */
+    .ram-section h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .ram-section p { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 18px; }
+    .ram-section strong { color: var(--accent); }
+    .ram-row {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center; margin: 18px 0 26px;
+    }
+    .ram-item {
+      background: linear-gradient(145deg, #fff, var(--accent-soft));
+      border: 1px solid var(--border-card);
+      border-radius: 14px; padding: 14px;
+      text-align: center;
+      transition: all .27s; flex: 1; min-width: 150px; max-width: 200px;
+    }
+    .ram-item:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+    .ram-item img { width: 100%; height: 130px; object-fit: contain; display: block; margin-bottom: 8px; }
+    .ram-item span { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
+
+    /* ── DUAL (avantages / inconvénients) ── */
+    .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 6px; }
+    .dual-card {
+      border-radius: 14px; padding: 22px 20px;
+    }
+    .dual-card.good {
+      background: linear-gradient(145deg, var(--safe-soft), rgba(220,252,231,0.4));
+      border: 1px solid rgba(22,163,74,0.2);
+    }
+    .dual-card.bad {
+      background: linear-gradient(145deg, var(--danger-soft), rgba(254,226,226,0.4));
+      border: 1px solid rgba(220,38,38,0.15);
+    }
+    .dual-card h3 { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .dual-card.good h3 { color: var(--safe); }
+    .dual-card.bad h3  { color: var(--danger); }
+    .dual-card ul { list-style: none; }
+    .dual-card ul li {
+      color: var(--text-secondary); font-size: 0.87rem;
+      padding: 5px 0; border-bottom: 1px solid rgba(200,215,235,0.4);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .dual-card ul li:last-child { border-bottom: none; }
+    .dual-card.good ul li::before { content: '✓'; color: var(--safe); font-weight: 700; flex-shrink: 0; }
+    .dual-card.bad  ul li::before { content: '✕'; color: var(--danger); font-weight: 700; flex-shrink: 0; }
 
     /* ── SOURCES ── */
-    .sources-list { list-style: none; padding: 0; }
-    .sources-list li {
-      font-size: 0.87rem; color: #9da8be;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,.06);
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
     }
-    .sources-list li:last-child { border-bottom: none; }
-    .sources-list a {
-      color: var(--accent); text-decoration: none;
-      transition: color .2s;
+    .source-item {
+      background: linear-gradient(145deg, #fff, var(--accent-soft));
+      border: 1px solid var(--border-card);
+      border-radius: 12px; padding: 14px 18px;
+      transition: all .22s;
     }
-    .sources-list a:hover { color: var(--accent-light); }
-    .sources-list .src-label {
-      color: var(--text-muted); font-size:0.76rem;
-      text-transform:uppercase; letter-spacing:.6px;
-      margin-bottom:2px;
-    }
+    .source-item:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .source-item .src-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px; }
+    .source-item a { color: var(--accent); font-size: 0.83rem; text-decoration: none; word-break: break-all; transition: color .2s; }
+    .source-item a:hover { color: var(--accent-light); }
 
     /* ── FOOTER ── */
     footer {
-      position: relative; z-index:1;
-      text-align: center; padding: 24px;
-      color: var(--text-muted); font-size: 0.77rem;
-      border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+      text-align: center; padding: 28px;
+      color: var(--text-muted); font-size: 0.78rem;
+      border-top: 1px solid var(--border-card);
+      background: rgba(244, 246, 251, 0.6);
+      backdrop-filter: blur(10px);
     }
-    footer a { color: var(--accent); text-decoration: none; }
-    footer a:hover { color: var(--accent-light); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width:620px) {
-      .section-card { padding:24px 18px; }
+    @media (max-width: 640px) {
+      .hero-inner { padding: 32px 24px; }
+      .hero-text h1 { font-size: 1.5rem; }
+      .section-card { padding: 24px 18px; }
       .dual-grid { grid-template-columns: 1fr; }
-      header h1 { font-size:1.3rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-blob bg-blob--1"></div>
-  <div class="bg-blob bg-blob--2"></div>
-  <div class="bg-blob bg-blob--3"></div>
+  <div class="bg-shape bg-shape--1"></div>
+  <div class="bg-shape bg-shape--2"></div>
 
   <!-- HEADER -->
   <header>
-    <a href="index.html#themedeveille" class="back-link">← Retour au portfolio</a>
-    <h1>🤖 L'IA au Service des Composants Électroniques</h1>
-    <p>Veille Technologique</p>
+    <div class="header-left">
+      <a href="index.html#themedeveille" class="back-btn">← Retour au portfolio</a>
+      <span class="header-title">Veille – Composants & IA</span>
+    </div>
+    <span class="header-badge">🤖 Technologie · Veille technologique</span>
   </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-icon">🤖</div>
+      <div class="hero-text">
+        <h1>L'IA au Service des Composants Électroniques</h1>
+        <p>L'intelligence artificielle révolutionne l'industrie électronique en transformant chaque étape de la conception, fabrication et maintenance des composants.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Intelligence Artificielle</span>
+          <span class="hero-tag">Composants</span>
+          <span class="hero-tag">HBM / RAM</span>
+          <span class="hero-tag">IA Embarquée</span>
+          <span class="hero-tag">Veille 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="page-content">
 
-    <!-- 1 INTRO + STATS -->
+    <!-- 1 CHIFFRES CLÉS -->
     <section class="section-card">
-      <div class="intro-box">
-        <strong>L'intelligence artificielle révolutionne l'industrie électronique</strong> en transformant chaque étape de la conception, fabrication et maintenance des composants. Cette technologie ne se contente pas d'automatiser — elle repense entièrement les processus pour offrir des performances inégalées.
-      </div>
+      <h2 class="section-title"><span class="accent-bar"></span>Chiffres Clés</h2>
+      <p class="section-sub">L'ampleur de la révolution en quelques données</p>
       <div class="stats-grid">
         <div class="stat-box">
           <div class="number">6h</div>
@@ -336,7 +416,7 @@
         </div>
         <div class="stat-box">
           <div class="number">2,5 Md€</div>
-          <div class="label">investis dans l'IA via France 2030</div>
+          <div class="label">investis dans l'IA via le plan France 2030</div>
         </div>
       </div>
     </section>
@@ -345,19 +425,19 @@
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Domaines d'Application</h2>
       <p class="section-sub">Comment l'IA intervient dans le cycle de vie des composants</p>
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="icon">🔬</div>
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="card-icon">🔬</div>
           <h3>Conception Intelligente</h3>
           <ul>
             <li>Génération automatique de plans de masse</li>
             <li>Optimisation topologique des circuits</li>
             <li>Algorithmes génétiques – milliers de configs</li>
-            <li>Réduction du temps de conception de 70 %</li>
+            <li>Réduction du temps de conception de 70%</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="icon">⚙️</div>
+        <div class="info-card">
+          <div class="card-icon">⚙️</div>
           <h3>Fabrication Optimisée</h3>
           <ul>
             <li>Contrôle qualité en temps réel par vision IA</li>
@@ -366,8 +446,8 @@
             <li>Personnalisation à grande échelle</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="icon">🔧</div>
+        <div class="info-card">
+          <div class="card-icon">🔧</div>
           <h3>Maintenance Prédictive</h3>
           <ul>
             <li>Anticipation des défaillances potentielles</li>
@@ -383,20 +463,38 @@
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Technologies Clés</h2>
       <p class="section-sub">Les briques techniques qui propulsent l'évolution</p>
-      <ul class="tech-list">
-        <li><strong>Machine Learning &amp; Deep Learning</strong> — Apprentissage automatique pour optimiser la conception et détecter les anomalies avec une précision surhumaine.</li>
-        <li><strong>IA Embarquée</strong> — Intelligence intégrée directement dans les composants pour un traitement local, une latence minimale et une protection de la vie privée.</li>
-        <li><strong>IA Frugale</strong> — Systèmes économes en énergie et en données pour réduire l'empreinte carbone et démocratiser l'accès à l'IA.</li>
-      </ul>
+      <div class="tech-list">
+        <div class="tech-item">
+          <div class="t-icon">🧠</div>
+          <div>
+            <h3>Machine Learning & Deep Learning</h3>
+            <p>Apprentissage automatique pour optimiser la conception et détecter les anomalies avec une précision surhumaine. <strong>Réduction des erreurs jusqu'à 90%.</strong></p>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="t-icon">💡</div>
+          <div>
+            <h3>IA Embarquée</h3>
+            <p>Intelligence intégrée directement dans les composants pour un traitement local, une <strong>latence minimale</strong> et une protection de la vie privée.</p>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="t-icon">🌱</div>
+          <div>
+            <h3>IA Frugale</h3>
+            <p>Systèmes économes en énergie et en données pour réduire l'empreinte carbone et <strong>démocratiser l'accès à l'IA</strong>.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- 4 AVANTAGES CONCRETS -->
+    <!-- 4 AVANTAGES + ÉCO -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Avantages Concrets</h2>
-      <p class="section-sub">Impacts mesurables sur l'industrie</p>
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="icon">⚡</div>
+      <p class="section-sub">Impacts mesurables sur l'industrie électronique</p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="card-icon">⚡</div>
           <h3>Performance</h3>
           <ul>
             <li>Microprocesseurs plus rapides et efficaces</li>
@@ -404,69 +502,80 @@
             <li>Miniaturisation accrue des composants</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="icon">💰</div>
+        <div class="info-card">
+          <div class="card-icon">💰</div>
           <h3>Coûts</h3>
           <ul>
-            <li>Réduction drastique du temps de développement</li>
+            <li>Réduction du temps de développement</li>
             <li>Diminution du gaspillage de matériaux</li>
             <li>Moins d'erreurs coûteuses en production</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="icon">🚀</div>
+        <div class="info-card">
+          <div class="card-icon">🚀</div>
           <h3>Innovation</h3>
           <ul>
-            <li>Solutions impossibles pour l'humain</li>
+            <li>Solutions impossibles pour l'humain seul</li>
             <li>Designs optimisés au-delà des capacités humaines</li>
-            <li>Accélération de la R&amp;D</li>
+            <li>Accélération de la R&D</li>
           </ul>
         </div>
       </div>
       <div class="eco-box">
         <h3>🌱 Vers une Électronique Durable</h3>
-        <p>L'IA contribue également aux objectifs environnementaux en optimisant l'utilisation des ressources, en réduisant les déchets de production et en développant des systèmes plus économes en énergie. Les stratégies nationales visent à promouvoir une <strong>IA frugale et responsable</strong> pour une industrie électronique plus durable.</p>
+        <p>L'IA contribue aux objectifs environnementaux en optimisant l'utilisation des ressources, en réduisant les déchets de production et en développant des systèmes plus économes en énergie. Les stratégies nationales visent à promouvoir une <strong>IA frugale et responsable</strong> pour une industrie électronique plus durable.</p>
       </div>
     </section>
 
-    <!-- 5 INCONVÉNIENTS + RAM -->
+    <!-- 5 INCONVÉNIENTS + RAM HBM -->
     <section class="section-card">
-      <h2 class="section-title"><span class="accent-bar"></span>Les Inconvénients</h2>
+      <h2 class="section-title"><span class="accent-bar warn"></span>Inconvénients & Crise du Marché</h2>
       <p class="section-sub">La face cachée de la croissance de l'IA</p>
-      <div class="intro-box" style="border-color:var(--accent-warn); background:rgba(232,160,78,.07);">
-        <strong style="color:var(--accent-warn)">⚠️ Crise dans le milieu de la tech</strong><br><br>
-        Dû à sa demande en croissance continue, nous connaissons une crise dans le milieu de la tech.<br>
-        📈 des prix &nbsp;·&nbsp; 📉 de l'offre.
+
+      <div class="warn-box">
+        <h3>⚠️ Crise dans le milieu de la tech</h3>
+        <p>Dû à sa demande en croissance continue, nous connaissons une crise dans le milieu de la tech.<br>
+        <strong>📈 Hausse des prix</strong> &nbsp;·&nbsp; <strong>📉 Baisse de l'offre</strong></p>
       </div>
 
-      <h3 style="color:var(--text-primary); font-size:1.05rem; margin-bottom:14px;">Sa mémoire vive rien que pour elle — la RAM HBM</h3>
-      <p style="color:var(--text-muted); font-size:0.86rem; margin-bottom:16px;">La <strong style="color:var(--accent-light)">HBM (High Bandwidth Memory)</strong> — Mémoire à bande passante élevée</p>
-
-      <div class="ram-row">
-        <img src="DDR5.png"  alt="DDR5">
-        <img src="GDDR7.png" alt="GDDR7">
-        <img src="LPDDR.png" alt="LPDDR">
-      </div>
-
-      <h3 style="color:var(--text-primary); font-size:1.05rem; margin:24px 0 14px;">Récapitulatif de la RAM HBM</h3>
-      <div class="dual-grid">
-        <div class="dual-card dual-card--good">
-          <h3>✓ Avantages</h3>
-          <ul>
-            <li>Bande passante énorme</li>
-            <li>Très faible latence</li>
-            <li>Consommation énergétique réduite</li>
-            <li>Gain de place (mémoire compacte)</li>
-          </ul>
+      <div class="ram-section">
+        <h3>Sa mémoire vive rien que pour elle — la RAM HBM</h3>
+        <p>La <strong>HBM (High Bandwidth Memory)</strong> — Mémoire à bande passante élevée</p>
+        <div class="ram-row">
+          <div class="ram-item">
+            <img src="DDR5.png" alt="DDR5">
+            <span>DDR5</span>
+          </div>
+          <div class="ram-item">
+            <img src="GDDR7.png" alt="GDDR7">
+            <span>GDDR7</span>
+          </div>
+          <div class="ram-item">
+            <img src="LPDDR.png" alt="LPDDR">
+            <span>LPDDR</span>
+          </div>
         </div>
-        <div class="dual-card dual-card--bad">
-          <h3>✕ Inconvénients</h3>
-          <ul>
-            <li>Très coûteuse</li>
-            <li>Fabrication complexe</li>
-            <li>Capacité totale limitée</li>
-            <li>Difficile à réparer / remplacer</li>
-          </ul>
+
+        <h3 style="margin-bottom: 14px;">Récapitulatif de la RAM HBM</h3>
+        <div class="dual-grid">
+          <div class="dual-card good">
+            <h3>✅ Avantages</h3>
+            <ul>
+              <li>Bande passante énorme</li>
+              <li>Très faible latence</li>
+              <li>Consommation énergétique réduite</li>
+              <li>Gain de place (mémoire compacte)</li>
+            </ul>
+          </div>
+          <div class="dual-card bad">
+            <h3>❌ Inconvénients</h3>
+            <ul>
+              <li>Très coûteuse à produire</li>
+              <li>Fabrication complexe</li>
+              <li>Capacité totale limitée</li>
+              <li>Difficile à réparer / remplacer</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -474,27 +583,26 @@
     <!-- 6 SOURCES -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Sources</h2>
-      <p class="section-sub">Références vidéo utilisées</p>
-      <ul class="sources-list">
-        <li>
-          <div class="src-label">YouTube – Salut les Noobs</div>
-          <a href="https://www.youtube.com/watch?v=3nHXy_F8DiQ" target="_blank">https://www.youtube.com/watch?v=3nHXy_F8DiQ</a>
-        </li>
-        <li>
-          <div class="src-label">YouTube – Hugo décrypte</div>
-          <a href="https://youtu.be/9YPf9tNyDTM" target="_blank">https://youtu.be/9YPf9tNyDTM</a>
-        </li>
-        <li>
-          <div class="src-label">YouTube – Les Échos</div>
-          <a href="https://www.youtube.com/watch?v=Y364uDSJMhI" target="_blank">https://www.youtube.com/watch?v=Y364uDSJMhI</a>
-        </li>
-      </ul>
+      <p class="section-sub">Références vidéo utilisées pour cette veille</p>
+      <div class="sources-grid">
+        <div class="source-item">
+          <div class="src-label">📺 YouTube – Salut les Noobs</div>
+          <a href="https://www.youtube.com/watch?v=3nHXy_F8DiQ" target="_blank">youtube.com/watch?v=3nHXy_F8DiQ</a>
+        </div>
+        <div class="source-item">
+          <div class="src-label">📺 YouTube – Hugo décrypte</div>
+          <a href="https://youtu.be/9YPf9tNyDTM" target="_blank">youtu.be/9YPf9tNyDTM</a>
+        </div>
+        <div class="source-item">
+          <div class="src-label">📺 YouTube – Les Échos</div>
+          <a href="https://www.youtube.com/watch?v=Y364uDSJMhI" target="_blank">youtube.com/watch?v=Y364uDSJMhI</a>
+        </div>
+      </div>
     </section>
 
-  </div><!-- end page-content -->
+  </div>
 
-  <footer>
-    Veille Technologique &nbsp;·&nbsp; <a href="CedricProjetsio.html">← Retour au portfolio</a>
-  </footer>
+  <footer>© 2025 Cédric – BTS SIO Projets · Tous droits réservés</footer>
+
 </body>
 </html>
