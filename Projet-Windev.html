@@ -541,22 +541,26 @@
         <div class="ph-icon">🖼️</div>
         <p><strong>Screenshots à venir</strong><br>Les captures d'écran de l'application seront ajoutées ici.</p>
       </div> -->
-
-      <!-- ⬇️ Décommenter et remplir quand les screenshots sont prêts : -->
       <div class="screenshots-grid">
-        <div class="screenshot-item">
+        <div class="screenshot-item" onclick="openLightbox(this)">
           <img src="Windev - GMAO/Interface - Menu.png" alt="Écran d'accueil">
           <div class="sc-caption">Fenêtre d'accueil principale</div>
         </div>
-        <div class="screenshot-item">
+        <div class="screenshot-item" onclick="openLightbox(this)">
           <img src="Windev - GMAO/Interface - Intervention.png" alt="Formulaire de saisie">
           <div class="sc-caption">Formulaire de saisie d'intervention</div>
         </div>
-        <div class="screenshot-item">
-          <img src="Windev - GMAO/Interface - Planning.png" alt="Historique">
-          <div class="sc-caption">Vue historique des interventions</div>
+        <div class="screenshot-item" onclick="openLightbox(this)">
+          <img src="Windev - GMAO/Interface - Planning.png" alt="Planning">
+          <div class="sc-caption">Vue planning des interventions</div>
+        </div>
+        <!-- 4ème screenshot : remplace le src et la légende quand tu as l'image -->
+        <div class="screenshot-item" onclick="openLightbox(this)">
+          <img src="Code - Planning" alt="Code" style="min-height:140px; background: var(--accent-soft);">
+          <div class="sc-caption">Extrait du code</div>
         </div>
       </div>
+    </section>
       
     </section>
 
