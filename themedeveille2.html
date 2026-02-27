@@ -3,322 +3,357 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les Ransomwares et leurs Évolutions</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <title>Les Ransomwares et leurs Évolutions | Cédric BTS SIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-deep:        #0a0e1a;
-      --bg-card:        rgba(18, 24, 42, 0.72);
-      --accent:         #6f9ecd;
-      --accent-light:   #9dc4e8;
-      --accent-glow:    rgba(111, 158, 205, 0.22);
-      --text-primary:   #eef1f7;
-      --text-muted:     #7a84a0;
-      --border:         rgba(111, 158, 205, 0.18);
-      --radius:         16px;
-      --font-head:      'Playfair Display', Georgia, serif;
-      --font-body:      'DM Sans', system-ui, sans-serif;
-      /* threat accents */
-      --threat:         #d96b6b;
-      --threat-glow:    rgba(217,107,107,.18);
-      --threat-border:  rgba(217,107,107,.28);
-      --safe:           #5bbcaa;
-      --safe-glow:      rgba(91,188,170,.18);
-      --warn:           #e8a04e;
-      --warn-glow:      rgba(232,160,78,.18);
+      --bg-base:        #f4f6fb;
+      --bg-card:        rgba(255, 255, 255, 0.85);
+      --accent:         #3b82c4;
+      --accent-light:   #5da0e0;
+      --accent-soft:    #dbeafe;
+      --accent-glow:    rgba(59, 130, 196, 0.15);
+      --danger:         #dc2626;
+      --danger-soft:    #fee2e2;
+      --danger-mid:     #ef4444;
+      --danger-glow:    rgba(220, 38, 38, 0.12);
+      --safe:           #16a34a;
+      --safe-soft:      #dcfce7;
+      --warn:           #d97706;
+      --warn-soft:      #fef3c7;
+      --text-primary:   #1a2340;
+      --text-secondary: #3d4f6e;
+      --text-muted:     #7a8fb0;
+      --border-card:    rgba(200, 215, 235, 0.7);
+      --shadow-sm:      0 2px 12px rgba(30, 60, 120, 0.07);
+      --shadow-md:      0 6px 28px rgba(30, 60, 120, 0.11);
+      --shadow-hover:   0 12px 40px rgba(59, 130, 196, 0.18);
+      --shadow-danger:  0 12px 40px rgba(220, 38, 38, 0.15);
+      --radius:         18px;
+      --font-head:      'Lora', Georgia, serif;
+      --font-body:      'Outfit', system-ui, sans-serif;
     }
 
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
-      background-color: var(--bg-deep);
+      background-color: var(--bg-base);
       color: var(--text-primary);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ── BLOBS ── */
-    .bg-blob { position:fixed; border-radius:50%; filter:blur(130px); opacity:.3; pointer-events:none; z-index:0; }
-    .bg-blob--1 { width:580px; height:580px; background:#2a1a1a; top:-160px; left:-200px; }
-    .bg-blob--2 { width:480px; height:480px; background:#164e63; bottom:-90px; right:-180px; }
-    .bg-blob--3 { width:320px; height:320px; background:#1a2830; top:45%; left:55%; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 700px 500px at 10% 0%, rgba(190, 220, 255, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 400px at 90% 80%, rgba(255, 200, 200, 0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .bg-shape { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; opacity: .55; }
+    .bg-shape--1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(147,200,255,0.22), transparent 70%);
+      top: -120px; left: -150px;
+    }
+    .bg-shape--2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,180,180,0.15), transparent 70%);
+      bottom: -80px; right: -120px;
+    }
 
     /* ── HEADER ── */
     header {
-      position:sticky; top:0; z-index:100;
-      background:rgba(10,14,26,0.72);
-      backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);
-      padding:22px 28px; text-align:center;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(244, 246, 251, 0.82);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border-card);
+      box-shadow: 0 1px 18px rgba(30, 60, 120, 0.07);
+      padding: 14px 28px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+      flex-wrap: wrap;
     }
-    header h1 {
-      font-family:var(--font-head);
-      font-size:1.7rem;
-      color:var(--text-primary);
-      margin-bottom:4px;
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 16px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 0.82rem; font-weight: 600;
+      border-radius: 20px; text-decoration: none;
+      border: 1px solid rgba(59,130,196,0.2);
+      transition: all .22s;
     }
-    header p { color:var(--text-muted); font-size:0.82rem; letter-spacing:.6px; text-transform:uppercase; }
-    .back-link {
-      display:inline-flex; align-items:center; gap:6px;
-      color:var(--accent); text-decoration:none;
-      font-size:0.82rem; font-weight:500;
-      margin-bottom:10px; transition:color .2s;
+    .back-btn:hover { background: var(--accent); color: #fff; }
+    .header-title { font-family: var(--font-head); font-size: 1.15rem; color: var(--text-primary); }
+    .header-badge {
+      background: linear-gradient(135deg, var(--danger), #b91c1c);
+      color: #fff; font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px; letter-spacing: .4px;
     }
-    .back-link:hover { color:var(--accent-light); }
 
-    /* ── LAYOUT ── */
-    .page-content { position:relative; z-index:1; max-width:1040px; margin:0 auto; padding:48px 24px 90px; }
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      max-width: 1040px; margin: 0 auto;
+      padding: 52px 24px 0;
+    }
+    .hero-inner {
+      background: linear-gradient(135deg, #1a0a0a 0%, #3b1010 50%, #5c1a1a 100%);
+      border-radius: 24px;
+      padding: 52px 48px;
+      display: flex; align-items: center; gap: 40px;
+      flex-wrap: wrap;
+      box-shadow: 0 20px 60px rgba(100, 20, 20, 0.4);
+      overflow: hidden; position: relative;
+    }
+    .hero-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 400px 300px at 80% 50%, rgba(220,38,38,0.2), transparent),
+        radial-gradient(ellipse 200px 200px at 10% 80%, rgba(239,68,68,0.1), transparent);
+      pointer-events: none;
+    }
+    .hero-icon {
+      font-size: 5rem; flex-shrink: 0;
+      filter: drop-shadow(0 4px 20px rgba(220,38,38,0.6));
+      position: relative; z-index: 1;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 4px 20px rgba(220,38,38,0.6)); }
+      50%       { filter: drop-shadow(0 4px 32px rgba(220,38,38,1)); }
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-text h1 { font-family: var(--font-head); font-size: 2rem; color: #fff; margin-bottom: 8px; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+    .hero-text p { color: rgba(255,255,255,0.68); font-size: 0.95rem; max-width: 520px; margin-bottom: 20px; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-tag {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,100,100,0.3);
+      color: rgba(255,200,200,0.9);
+      font-size: 0.75rem; font-weight: 500;
+      padding: 4px 12px; border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
 
-    /* ── SECTION CARDS ── */
+    /* ── PAGE CONTENT ── */
+    .page-content {
+      position: relative; z-index: 1;
+      max-width: 1040px; margin: 0 auto;
+      padding: 28px 24px 90px;
+    }
+
     .section-card {
-      background:var(--bg-card);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:38px 36px;
-      margin-bottom:30px;
-      opacity:0; transform:translateY(26px);
-      animation:fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
+      background: var(--bg-card);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius);
+      padding: 42px 40px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      opacity: 0; transform: translateY(24px);
+      animation: fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
+      transition: box-shadow .28s, border-color .28s;
     }
-    .section-card:nth-child(1){animation-delay:.06s}
-    .section-card:nth-child(2){animation-delay:.13s}
-    .section-card:nth-child(3){animation-delay:.20s}
-    .section-card:nth-child(4){animation-delay:.27s}
-    .section-card:nth-child(5){animation-delay:.34s}
-    .section-card:nth-child(6){animation-delay:.41s}
-    .section-card:nth-child(7){animation-delay:.48s}
-    .section-card:nth-child(8){animation-delay:.55s}
+    .section-card:hover { box-shadow: var(--shadow-md); border-color: rgba(59,130,196,0.25); }
+    .section-card:nth-child(1){animation-delay:.08s}
+    .section-card:nth-child(2){animation-delay:.16s}
+    .section-card:nth-child(3){animation-delay:.24s}
+    .section-card:nth-child(4){animation-delay:.32s}
+    .section-card:nth-child(5){animation-delay:.40s}
+    .section-card:nth-child(6){animation-delay:.48s}
+    .section-card:nth-child(7){animation-delay:.56s}
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
-    /* ── TITLES ── */
     .section-title {
-      font-family:var(--font-head);
-      font-size:1.62rem;
-      color:var(--text-primary);
-      margin-bottom:6px;
-      display:flex; align-items:center; gap:13px;
+      font-family: var(--font-head);
+      font-size: 1.5rem; color: var(--text-primary);
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 13px;
     }
     .accent-bar {
-      display:inline-block; width:4px; height:24px;
-      background:linear-gradient(180deg, var(--accent), var(--accent-light));
-      border-radius:2px;
+      display: inline-block; width: 4px; height: 26px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
+      border-radius: 3px; flex-shrink: 0;
     }
-    /* threat variant bar */
-    .accent-bar--threat {
-      background:linear-gradient(180deg, var(--threat), #f09090);
-    }
-    .section-sub { color:var(--text-muted); font-size:0.85rem; margin-bottom:24px; padding-left:17px; }
-
-    /* ── INTRO BOX ── */
-    .intro-box {
-      background:rgba(111,158,205,.08);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:22px 24px;
-      color:#b8c8dc; font-size:0.95rem;
-      margin-bottom:28px;
-    }
-    .intro-box strong { color:var(--accent-light); }
-    .intro-box--threat {
-      background:rgba(217,107,107,.08);
-      border-color:var(--threat-border);
-    }
-    .intro-box--threat strong { color:#f09090; }
+    .accent-bar.red { background: linear-gradient(180deg, var(--danger), var(--danger-mid)); }
+    .section-sub { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 26px; padding-left: 17px; }
 
     /* ── STATS ── */
     .stats-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-      gap:14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px; margin-bottom: 8px;
     }
     .stat-box {
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:22px 16px; text-align:center;
-      transition:all .27s;
+      background: linear-gradient(145deg, #fff, var(--danger-soft));
+      border: 1px solid rgba(220,38,38,0.15);
+      border-radius: 16px; padding: 24px 18px; text-align: center;
+      transition: all .27s;
     }
-    .stat-box:hover {
-      border-color:var(--threat);
-      background:var(--threat-glow);
-      transform:translateY(-3px);
-    }
-    .stat-box .number {
-      font-family:var(--font-head);
-      font-size:2rem;
-      color:var(--threat);
-      line-height:1.1;
-    }
-    .stat-box .label { color:var(--text-muted); font-size:0.78rem; margin-top:6px; line-height:1.4; }
-
-    /* ── MODULE CARDS ── */
-    .modules-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
-      gap:14px;
-    }
-    .module-card {
-      background:rgba(255,255,255,.035);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:22px 18px;
-      transition:all .27s cubic-bezier(.22,1,.36,1);
-    }
-    .module-card:hover {
-      background:rgba(111,158,205,.08);
-      border-color:var(--accent);
-      transform:translateY(-4px);
-      box-shadow:0 8px 24px var(--accent-glow);
-    }
-    /* threat card hover */
-    .module-card--threat:hover {
-      background:var(--threat-glow);
-      border-color:var(--threat);
-      box-shadow:0 8px 24px var(--threat-glow);
-    }
-    .module-card .icon { font-size:1.8rem; margin-bottom:8px; }
-    .module-card h3 { font-size:1rem; color:var(--text-primary); margin-bottom:8px; }
-    .module-card p { color:#9da8be; font-size:0.87rem; line-height:1.5; }
-    .module-card ul { list-style:none; padding:0; }
-    .module-card ul li {
-      color:#9da8be; font-size:0.84rem;
-      padding:4px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .module-card ul li:last-child { border-bottom:none; }
-    .module-card ul li::before { content:'›'; color:var(--accent); margin-right:8px; font-weight:600; }
-    .module-card--threat ul li::before { color:var(--threat); }
+    .stat-box:hover { border-color: var(--danger); box-shadow: var(--shadow-danger); transform: translateY(-3px); }
+    .stat-box .number { font-family: var(--font-head); font-size: 2.2rem; color: var(--danger); line-height: 1.1; }
+    .stat-box .label { color: var(--text-muted); font-size: 0.78rem; margin-top: 6px; line-height: 1.4; }
 
     /* ── ALERT BOX ── */
     .alert-box {
-      background:rgba(232,160,78,.08);
-      border:1px solid rgba(232,160,78,.28);
-      border-radius:14px;
-      padding:20px 22px;
-      margin-bottom:22px;
+      background: linear-gradient(145deg, var(--warn-soft), rgba(254,243,199,0.5));
+      border: 1px solid rgba(217,119,6,0.25);
+      border-radius: 14px; padding: 20px 22px; margin-bottom: 22px;
     }
-    .alert-box h3 { color:var(--warn); font-size:1rem; margin-bottom:10px; }
-    .alert-box p { color:#b8c8dc; font-size:0.9rem; line-height:1.6; }
-    .alert-box strong { color:var(--warn); }
+    .alert-box h3 { color: var(--warn); font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .alert-box p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+    .alert-box strong { color: var(--warn); }
 
-    /* ── TECH LIST ── */
-    .tech-list { list-style:none; padding:0; }
-    .tech-list li {
-      background:rgba(255,255,255,.035);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:18px 20px; margin-bottom:10px;
-      color:#9da8be; font-size:0.9rem;
-      transition:border-color .25s;
+    /* ── CARTES GÉNÉRIQUES ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
     }
-    .tech-list li:hover { border-color:var(--accent); }
-    .tech-list li strong { color:var(--accent-light); }
+    .info-card {
+      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4));
+      border: 1px solid var(--border-card);
+      border-radius: 16px; padding: 24px 20px;
+      transition: all .27s ease; position: relative; overflow: hidden;
+    }
+    .info-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      opacity: 0; transition: opacity .27s;
+    }
+    .info-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .info-card:hover::before { opacity: 1; }
 
-    /* ── GROUP CARDS (special flavour) ── */
-    .group-card {
-      background:rgba(255,255,255,.035);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:22px 18px;
-      transition:all .27s;
-    }
-    .group-card:hover {
-      background:var(--threat-glow);
-      border-color:var(--threat);
-      transform:translateY(-4px);
-      box-shadow:0 8px 24px var(--threat-glow);
-    }
-    .group-card .icon { font-size:1.8rem; margin-bottom:8px; }
-    .group-card h3 { font-size:1rem; color:var(--threat); margin-bottom:8px; }
-    .group-card ul { list-style:none; padding:0; }
-    .group-card ul li {
-      color:#9da8be; font-size:0.84rem;
-      padding:4px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .group-card ul li:last-child { border-bottom:none; }
-    .group-card ul li::before { content:'›'; color:var(--threat); margin-right:8px; font-weight:600; }
+    /* Variante danger */
+    .info-card.danger { background: linear-gradient(145deg, #fff, rgba(254,226,226,0.4)); }
+    .info-card.danger::before { background: linear-gradient(90deg, var(--danger), var(--danger-mid)); }
+    .info-card.danger:hover { border-color: rgba(220,38,38,0.3); box-shadow: var(--shadow-danger); }
 
-    /* ── DEFENSE CARDS ── */
-    .def-card {
-      background:rgba(91,188,170,.06);
-      border:1px solid rgba(91,188,170,.22);
-      border-radius:14px;
-      padding:22px 18px;
-      transition:all .27s;
+    /* Variante safe */
+    .info-card.safe { background: linear-gradient(145deg, #fff, rgba(220,252,231,0.4)); }
+    .info-card.safe::before { background: linear-gradient(90deg, var(--safe), #22c55e); }
+    .info-card.safe:hover { border-color: rgba(22,163,74,0.3); box-shadow: 0 12px 40px rgba(22,163,74,0.12); }
+
+    .info-card .card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .info-card h3 { font-size: 0.97rem; color: var(--text-primary); font-weight: 600; margin-bottom: 8px; }
+    .info-card ul { list-style: none; }
+    .info-card ul li {
+      color: var(--text-muted); font-size: 0.83rem;
+      padding: 4px 0; border-bottom: 1px solid rgba(200,215,235,0.4);
+      display: flex; align-items: flex-start; gap: 7px;
     }
-    .def-card:hover {
-      border-color:var(--safe);
-      background:var(--safe-glow);
-      transform:translateY(-4px);
+    .info-card ul li:last-child { border-bottom: none; }
+    .info-card ul li::before { content: '▸'; color: var(--accent-light); font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+    .info-card.danger ul li::before { color: var(--danger-mid); }
+    .info-card.safe ul li::before { color: var(--safe); }
+    .info-card p { color: var(--text-muted); font-size: 0.83rem; line-height: 1.6; }
+
+    /* Cartes groupes hackers */
+    .info-card.hacker h3 { color: var(--danger); }
+
+    /* ── TENDANCES LIST ── */
+    .tendances-list { display: flex; flex-direction: column; gap: 14px; }
+    .tendance-item {
+      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.3));
+      border: 1px solid var(--border-card);
+      border-radius: 14px; padding: 20px 20px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: all .27s; position: relative; overflow: hidden;
     }
-    .def-card .icon { font-size:1.8rem; margin-bottom:8px; }
-    .def-card h3 { font-size:1rem; color:var(--safe); margin-bottom:8px; }
-    .def-card ul { list-style:none; padding:0; }
-    .def-card ul li {
-      color:#9da8be; font-size:0.84rem;
-      padding:4px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
+    .tendance-item::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--danger), var(--danger-mid));
     }
-    .def-card ul li:last-child { border-bottom:none; }
-    .def-card ul li::before { content:'›'; color:var(--safe); margin-right:8px; font-weight:600; }
+    .tendance-item:hover { border-color: rgba(220,38,38,0.25); box-shadow: var(--shadow-danger); transform: translateX(4px); }
+    .tendance-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .tendance-item h3 { font-size: 0.97rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .tendance-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
 
     /* ── SOURCES ── */
-    .sources-list { list-style:none; padding:0; }
-    .sources-list li {
-      font-size:0.87rem; color:#9da8be;
-      padding:8px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
     }
-    .sources-list li:last-child { border-bottom:none; }
-    .sources-list li::before { content:'📄 '; }
+    .source-item {
+      background: linear-gradient(145deg, #fff, var(--accent-soft));
+      border: 1px solid var(--border-card);
+      border-radius: 12px; padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      color: var(--text-secondary); font-size: 0.85rem;
+      transition: all .22s;
+    }
+    .source-item:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .source-item span { font-size: 1rem; flex-shrink: 0; }
 
     /* ── FOOTER ── */
     footer {
-      position:relative; z-index:1;
-      text-align:center; padding:24px;
-      color:var(--text-muted); font-size:0.77rem;
-      border-top:1px solid var(--border);
+      position: relative; z-index: 1;
+      text-align: center; padding: 28px;
+      color: var(--text-muted); font-size: 0.78rem;
+      border-top: 1px solid var(--border-card);
+      background: rgba(244, 246, 251, 0.6);
+      backdrop-filter: blur(10px);
     }
-    footer a { color:var(--accent); text-decoration:none; }
-    footer a:hover { color:var(--accent-light); }
 
-    @media (max-width:620px) {
-      .section-card { padding:24px 18px; }
-      header h1 { font-size:1.3rem; }
+    @media (max-width: 640px) {
+      .hero-inner { padding: 32px 24px; }
+      .hero-text h1 { font-size: 1.5rem; }
+      .section-card { padding: 24px 18px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-blob bg-blob--1"></div>
-  <div class="bg-blob bg-blob--2"></div>
-  <div class="bg-blob bg-blob--3"></div>
+  <div class="bg-shape bg-shape--1"></div>
+  <div class="bg-shape bg-shape--2"></div>
 
   <!-- HEADER -->
   <header>
-    <a href="index.html#themedeveille" class="back-link">← Retour au portfolio</a>
-    <h1>🦠 Les Ransomwares et leurs Évolutions</h1>
-    <p>Veille Technologique</p>
+    <div class="header-left">
+      <a href="index.html#themedeveille" class="back-btn">← Retour au portfolio</a>
+      <span class="header-title">Veille – Ransomwares</span>
+    </div>
+    <span class="header-badge">🔴 Cybersécurité · Veille technologique</span>
   </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-icon">🦠</div>
+      <div class="hero-text">
+        <h1>Les Ransomwares et leurs Évolutions</h1>
+        <p>En 2025, les ransomwares atteignent un niveau de sophistication jamais vu : IA massive, extorsion sans chiffrement, fragmentation du RaaS et acteurs quasi-étatiques.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Ransomware</span>
+          <span class="hero-tag">Cybersécurité</span>
+          <span class="hero-tag">IA & Malwares</span>
+          <span class="hero-tag">RaaS</span>
+          <span class="hero-tag">Veille 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="page-content">
 
-    <!-- 1 INTRO + STATS -->
+    <!-- 1 CHIFFRES CLÉS -->
     <section class="section-card">
-      <div class="intro-box intro-box--threat">
-        <strong>En 2025, les ransomwares atteignent un niveau de sophistication jamais vu</strong>
-        grâce à l'intégration massive de l'IA, la fragmentation du paysage RaaS et l'émergence d'attaques
-        sans chiffrement. Le nombre d'attaques explose tandis que les montants de rançon baissent dans certains secteurs.
-      </div>
+      <h2 class="section-title"><span class="accent-bar red"></span>Chiffres Clés 2025</h2>
+      <p class="section-sub">L'ampleur de la menace en quelques données</p>
       <div class="stats-grid">
         <div class="stat-box">
           <div class="number">+149%</div>
-          <div class="label">attaques aux États-Unis (début 2025 – Cyble)</div>
+          <div class="label">d'attaques aux États-Unis début 2025 (Cyble)</div>
         </div>
         <div class="stat-box">
           <div class="number">−91%</div>
@@ -326,18 +361,18 @@
         </div>
         <div class="stat-box">
           <div class="number">63%</div>
-          <div class="label">des victimes manquent de compétences / ressources (Sophos)</div>
+          <div class="label">des victimes manquent de compétences ou ressources (Sophos)</div>
         </div>
       </div>
     </section>
 
     <!-- 2 ÉVOLUTIONS MAJEURES -->
     <section class="section-card">
-      <h2 class="section-title"><span class="accent-bar accent-bar--threat"></span>Évolutions Majeures 2025</h2>
+      <h2 class="section-title"><span class="accent-bar red"></span>Évolutions Majeures 2025</h2>
       <p class="section-sub">Les 4 tendances qui redéfinissent le paysage des ransomwares</p>
-      <div class="modules-grid">
-        <div class="module-card module-card--threat">
-          <div class="icon">🤖</div>
+      <div class="cards-grid">
+        <div class="info-card danger">
+          <div class="card-icon">🤖</div>
           <h3>IA Massive</h3>
           <ul>
             <li>Développement ultra-rapide de malwares</li>
@@ -346,8 +381,8 @@
             <li>FunkSec et Black Basta en tête</li>
           </ul>
         </div>
-        <div class="module-card module-card--threat">
-          <div class="icon">📂</div>
+        <div class="info-card danger">
+          <div class="card-icon">📂</div>
           <h3>Extorsion Sans Chiffrement</h3>
           <ul>
             <li>Vol de données sensibles uniquement</li>
@@ -356,18 +391,18 @@
             <li>Contournement des sauvegardes</li>
           </ul>
         </div>
-        <div class="module-card module-card--threat">
-          <div class="icon">🔀</div>
+        <div class="info-card danger">
+          <div class="card-icon">🔀</div>
           <h3>Fragmentation RaaS</h3>
           <ul>
             <li>Chute des gros acteurs historiques</li>
             <li>Multiplication de petits groupes</li>
-            <li>Opérations plus volatiles et agressives</li>
+            <li>Opérations plus volatiles</li>
             <li>Adaptation rapide aux défenses</li>
           </ul>
         </div>
-        <div class="module-card module-card--threat">
-          <div class="icon">🇷🇺</div>
+        <div class="info-card danger">
+          <div class="card-icon">🇷🇺</div>
           <h3>Qilin – Quasi-Étatique</h3>
           <ul>
             <li>Sophistication extrême des méthodes</li>
@@ -381,7 +416,7 @@
 
     <!-- 3 CAUSES RACINES -->
     <section class="section-card">
-      <h2 class="section-title"><span class="accent-bar accent-bar--threat"></span>Causes Racines les Plus Fréquentes</h2>
+      <h2 class="section-title"><span class="accent-bar red"></span>Causes Racines les Plus Fréquentes</h2>
       <p class="section-sub">Points d'entrée les plus exploités par les attaquants</p>
       <div class="alert-box">
         <h3>⚠️ Points d'Entrée Critiques</h3>
@@ -391,19 +426,19 @@
           <strong>3. Manque de compétences / ressources</strong> → 63 % des victimes
         </p>
       </div>
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="icon">🔓</div>
+      <div class="cards-grid">
+        <div class="info-card danger">
+          <div class="card-icon">🔓</div>
           <h3>Vulnérabilités</h3>
           <p>Failles non patchées dans les systèmes, applications obsolètes et configurations par défaut non sécurisées.</p>
         </div>
-        <div class="module-card">
-          <div class="icon">🔑</div>
+        <div class="info-card danger">
+          <div class="card-icon">🔑</div>
           <h3>Identifiants Faibles</h3>
           <p>Mots de passe compromis, réutilisation d'identifiants et absence d'authentification multi-facteurs.</p>
         </div>
-        <div class="module-card">
-          <div class="icon">👥</div>
+        <div class="info-card danger">
+          <div class="card-icon">👥</div>
           <h3>Facteur Humain</h3>
           <p>Manque de formation en cybersécurité, équipes sous-dimensionnées et budgets insuffisants.</p>
         </div>
@@ -412,11 +447,11 @@
 
     <!-- 4 GROUPES ACTIFS -->
     <section class="section-card">
-      <h2 class="section-title"><span class="accent-bar accent-bar--threat"></span>Groupes les Plus Actifs 2025</h2>
+      <h2 class="section-title"><span class="accent-bar red"></span>Groupes les Plus Actifs en 2025</h2>
       <p class="section-sub">Les acteurs qui dominent la scène ransomware</p>
-      <div class="modules-grid">
-        <div class="group-card">
-          <div class="icon">👑</div>
+      <div class="cards-grid">
+        <div class="info-card danger hacker">
+          <div class="card-icon">👑</div>
           <h3>Qilin</h3>
           <ul>
             <li>Quasi-étatique, très sophistiqué</li>
@@ -424,8 +459,8 @@
             <li>Techniques d'évasion avancées</li>
           </ul>
         </div>
-        <div class="group-card">
-          <div class="icon">⚡</div>
+        <div class="info-card danger hacker">
+          <div class="card-icon">⚡</div>
           <h3>FunkSec</h3>
           <ul>
             <li>Ransomware full-IA</li>
@@ -433,8 +468,8 @@
             <li>Développement ultra-rapide</li>
           </ul>
         </div>
-        <div class="group-card">
-          <div class="icon">🆘</div>
+        <div class="info-card danger hacker">
+          <div class="card-icon">🆘</div>
           <h3>Black Basta</h3>
           <ul>
             <li>Toujours actif malgré les fuites</li>
@@ -442,8 +477,8 @@
             <li>Double extorsion systématique</li>
           </ul>
         </div>
-        <div class="group-card">
-          <div class="icon">👁️</div>
+        <div class="info-card danger hacker">
+          <div class="card-icon">👁️</div>
           <h3>Akira</h3>
           <ul>
             <li>Utilise les webcams pour bypass EDR</li>
@@ -451,8 +486,8 @@
             <li>Exploitation de l'IoT</li>
           </ul>
         </div>
-        <div class="group-card">
-          <div class="icon">🔐</div>
+        <div class="info-card danger hacker">
+          <div class="card-icon">🔐</div>
           <h3>LockBit</h3>
           <ul>
             <li>Résiste aux actions policières</li>
@@ -463,35 +498,59 @@
       </div>
     </section>
 
-    <!-- 5 TENDANCES FIN 2025 / 2026 -->
+    <!-- 5 TENDANCES 2026 -->
     <section class="section-card">
-      <h2 class="section-title"><span class="accent-bar"></span>Tendances Fin 2025 / 2026</h2>
+      <h2 class="section-title"><span class="accent-bar red"></span>Tendances Fin 2025 / 2026</h2>
       <p class="section-sub">Ce qui attend les entreprises dans les prochains mois</p>
-      <ul class="tech-list">
-        <li><strong>Attaques Hybrides IA + Géopolitiques</strong> — Convergence entre cybercriminalité et cyberguerre avec des acteurs étatiques soutenant des groupes criminels pour des objectifs stratégiques.</li>
-        <li><strong>Extorsion Multi-Vecteurs</strong> — Combinaison de DDoS, fuite de données, pression réglementaire et menaces physiques pour maximiser les chances de paiement.</li>
-        <li><strong>Vulnérabilités Non Conventionnelles</strong> — Exploitation de webcams, dispositifs IoT, systèmes de contrôle industriel et équipements connectés négligés.</li>
-        <li><strong>Collaboration Accrue</strong> — Marchés chinois anonymes, forums darknet et plateformes RaaS facilitant le partage d'outils et de techniques entre groupes.</li>
-      </ul>
+      <div class="tendances-list">
+        <div class="tendance-item">
+          <div class="tendance-icon">🤖</div>
+          <div>
+            <h3>Attaques Hybrides IA + Géopolitiques</h3>
+            <p>Convergence entre cybercriminalité et cyberguerre avec des acteurs étatiques soutenant des groupes criminels pour des objectifs stratégiques.</p>
+          </div>
+        </div>
+        <div class="tendance-item">
+          <div class="tendance-icon">🎯</div>
+          <div>
+            <h3>Extorsion Multi-Vecteurs</h3>
+            <p>Combinaison de DDoS, fuite de données, pression réglementaire et menaces physiques pour maximiser les chances de paiement.</p>
+          </div>
+        </div>
+        <div class="tendance-item">
+          <div class="tendance-icon">📷</div>
+          <div>
+            <h3>Vulnérabilités Non Conventionnelles</h3>
+            <p>Exploitation de webcams, dispositifs IoT, systèmes de contrôle industriel et équipements connectés négligés.</p>
+          </div>
+        </div>
+        <div class="tendance-item">
+          <div class="tendance-icon">🌐</div>
+          <div>
+            <h3>Collaboration Accrue entre Groupes</h3>
+            <p>Marchés anonymes, forums darknet et plateformes RaaS facilitant le partage d'outils et de techniques entre groupes criminels.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- 6 PROTECTION & PRÉVENTION -->
+    <!-- 6 PROTECTION -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Protection et Prévention</h2>
-      <p class="section-sub">Les bonnes pratiques pour se défendre</p>
-      <div class="modules-grid">
-        <div class="def-card">
-          <div class="icon">🛡️</div>
+      <p class="section-sub">Les bonnes pratiques pour se défendre efficacement</p>
+      <div class="cards-grid">
+        <div class="info-card safe">
+          <div class="card-icon">🛡️</div>
           <h3>Défense en Profondeur</h3>
           <ul>
             <li>Segmentation réseau stricte</li>
             <li>Authentification multi-facteurs obligatoire</li>
             <li>EDR / XDR nouvelle génération</li>
-            <li>Surveillance continue 24 / 7</li>
+            <li>Surveillance continue 24/7</li>
           </ul>
         </div>
-        <div class="def-card">
-          <div class="icon">💾</div>
+        <div class="info-card safe">
+          <div class="card-icon">💾</div>
           <h3>Sauvegardes Robustes</h3>
           <ul>
             <li>Règle 3-2-1 strictement appliquée</li>
@@ -500,8 +559,8 @@
             <li>Chiffrement des backups</li>
           </ul>
         </div>
-        <div class="def-card">
-          <div class="icon">📚</div>
+        <div class="info-card safe">
+          <div class="card-icon">📚</div>
           <h3>Formation Continue</h3>
           <ul>
             <li>Sensibilisation régulière des équipes</li>
@@ -516,23 +575,22 @@
     <!-- 7 SOURCES -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Sources Principales</h2>
-      <p class="section-sub">Rapports et études utilisés</p>
-      <ul class="sources-list">
-        <li>Sophos State of Ransomware 2025</li>
-        <li>CrowdStrike 2025 Threat Reports</li>
-        <li>Kaspersky Security Bulletin 2025</li>
-        <li>Dragos Q1 / Q2 2025 Reports</li>
-        <li>Unit 42 Ransomware Threat Report</li>
-        <li>Veeam Ransomware Trends Report</li>
-        <li>Rapid7 Vulnerability Intelligence</li>
-        <li>BlackFog State of Ransomware</li>
-      </ul>
+      <p class="section-sub">Rapports et études utilisés pour cette veille</p>
+      <div class="sources-grid">
+        <div class="source-item"><span>📄</span>Sophos State of Ransomware 2025</div>
+        <div class="source-item"><span>📄</span>CrowdStrike 2025 Threat Reports</div>
+        <div class="source-item"><span>📄</span>Kaspersky Security Bulletin 2025</div>
+        <div class="source-item"><span>📄</span>Dragos Q1 / Q2 2025 Reports</div>
+        <div class="source-item"><span>📄</span>Unit 42 Ransomware Threat Report</div>
+        <div class="source-item"><span>📄</span>Veeam Ransomware Trends Report</div>
+        <div class="source-item"><span>📄</span>Rapid7 Vulnerability Intelligence</div>
+        <div class="source-item"><span>📄</span>BlackFog State of Ransomware</div>
+      </div>
     </section>
 
-  </div><!-- end page-content -->
+  </div>
 
-  <footer>
-    Veille Technologique – Novembre 2025 &nbsp;·&nbsp; <a href="CedricProjetsio.html">← Retour au portfolio</a>
-  </footer>
+  <footer>© 2025 Cédric – BTS SIO Projets · Tous droits réservés</footer>
+
 </body>
 </html>
