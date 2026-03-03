@@ -1,1 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projet Copieurs & GPO UNIFlow | Cédric BTS SIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg-base:        #f4f6fb;
+      --bg-card:        rgba(255, 255, 255, 0.85);
+      --accent:         #3b82c4;
+      --accent-light:   #5da0e0;
+      --accent-soft:    #dbeafe;
+      --accent-glow:    rgba(59, 130, 196, 0.15);
+      --green:          #16a34a;
+      --green-soft:     #dcfce7;
+      --orange:         #d97706;
+      --orange-soft:    #fef3c7;
+      --text-primary:   #1a2340;
+      --text-secondary: #3d4f6e;
+      --text-muted:     #7a8fb0;
+      --border-card:    rgba(200, 215, 235, 0.7);
+      --shadow-sm:      0 2px 12px rgba(30, 60, 120, 0.07);
+      --shadow-md:      0 6px 28px rgba(30, 60, 120, 0.11);
+      --shadow-hover:   0 12px 40px rgba(59, 130, 196, 0.18);
+      --radius:         18px;
+      --font-head:      'Lora', Georgia, serif;
+      --font-body:      'Outfit', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 700px 500px at 10% 0%, rgba(190, 220, 255, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 400px at 90% 80%, rgba(210, 235, 255, 0.38) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .bg-shape { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; opacity: .55; }
+    .bg-shape--1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(147,200,255,0.22), transparent 70%);
+      top: -120px; left: -150px;
+    }
+    .bg-shape--2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(179,220,255,0.18), transparent 70%);
+      bottom: -80px; right: -120px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(244, 246, 251, 0.82);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border-card);
+      box-shadow: 0 1px 18px rgba(30, 60, 120, 0.07);
+      padding: 14px 28px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+      flex-wrap: wrap;
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 16px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 0.82rem; font-weight: 600;
+      border-radius: 20px; text-decoration: none;
+      border: 1px solid rgba(59,130,196,0.2);
+      transition: all .22s;
+    }
+    .back-btn:hover { background: var(--accent); color: #fff; }
+    .header-title { font-family: var(--font-head); font-size: 1.15rem; color: var(--text-primary); }
+    .header-badge {
+      background: linear-gradient(135deg, var(--accent), #2a6eb0);
+      color: #fff; font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px; letter-spacing: .4px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      max-width: 1040px; margin: 0 auto;
+      padding: 52px 24px 0;
+    }
+    .hero-inner {
+      background: linear-gradient(135deg, #0c1a2e 0%, #1a3a5c 55%, #1e4d7a 100%);
+      border-radius: 24px;
+      padding: 52px 48px;
+      display: flex; align-items: center; gap: 40px;
+      flex-wrap: wrap;
+      box-shadow: 0 20px 60px rgba(12, 26, 46, 0.5);
+      overflow: hidden; position: relative;
+    }
+    .hero-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 400px 300px at 80% 50%, rgba(59,130,196,0.25), transparent),
+        radial-gradient(ellipse 200px 200px at 10% 80%, rgba(93,160,224,0.15), transparent);
+      pointer-events: none;
+    }
+    .hero-inner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 30px,
+        rgba(59,130,196,0.03) 30px, rgba(59,130,196,0.03) 31px
+      );
+      pointer-events: none;
+    }
+    .hero-icon {
+      font-size: 5rem; flex-shrink: 0;
+      filter: drop-shadow(0 4px 20px rgba(59,130,196,0.6));
+      position: relative; z-index: 1;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-text h1 { font-family: var(--font-head); font-size: 2rem; color: #fff; margin-bottom: 8px; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-text p { color: rgba(255,255,255,0.68); font-size: 0.95rem; max-width: 520px; margin-bottom: 20px; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(93,160,224,0.35);
+      color: rgba(200,225,255,0.9);
+      font-size: 0.75rem; font-weight: 500;
+      padding: 4px 12px; border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ── PAGE CONTENT ── */
+    .page-content {
+      position: relative; z-index: 1;
+      max-width: 1040px; margin: 0 auto;
+      padding: 28px 24px 90px;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius);
+      padding: 42px 40px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      opacity: 0; transform: translateY(24px);
+      animation: fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
+      transition: box-shadow .28s, border-color .28s;
+    }
+    .section-card:hover { box-shadow: var(--shadow-md); border-color: rgba(59,130,196,0.25); }
+    .section-card:nth-child(1){animation-delay:.08s}
+    .section-card:nth-child(2){animation-delay:.16s}
+    .section-card:nth-child(3){animation-delay:.24s}
+    .section-card:nth-child(4){animation-delay:.32s}
+    .section-card:nth-child(5){animation-delay:.40s}
+    .section-card:nth-child(6){animation-delay:.48s}
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 1.5rem; color: var(--text-primary);
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 13px;
+    }
+    .accent-bar {
+      display: inline-block; width: 4px; height: 26px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
+      border-radius: 3px; flex-shrink: 0;
+    }
+    .section-sub { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 26px; padding-left: 17px; }
+
+    /* ── QUICK FACTS ── */
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px; margin-top: 26px;
+    }
+    .fact-item {
+      background: linear-gradient(145deg, #fff, var(--accent-soft));
+      border: 1px solid var(--border-card);
+      border-radius: 14px; padding: 18px 16px; text-align: center;
+    }
+    .fact-item .f-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .fact-item .f-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; }
+    .fact-item .f-value { color: var(--text-primary); font-size: 0.9rem; font-weight: 600; margin-top: 3px; }
+
+    /* ── ÉTAPES ── */
+    .steps-list { display: flex; flex-direction: column; gap: 16px; }
+    .step-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.3));
+      border: 1px solid var(--border-card);
+      border-radius: 16px; padding: 24px 22px;
+      transition: all .27s ease; position: relative; overflow: hidden;
+    }
+    .step-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
+    }
+    .step-item:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateX(4px); }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), #2a6eb0);
+      color: #fff; font-size: 0.88rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 10px var(--accent-glow);
+    }
+    .step-content h3 { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .step-content p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+    .step-content strong { color: var(--accent); }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4));
+      border: 1px solid var(--border-card);
+      border-radius: 16px; padding: 24px 20px;
+      transition: all .27s ease; position: relative; overflow: hidden;
+    }
+    .info-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      opacity: 0; transition: opacity .27s;
+    }
+    .info-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .info-card:hover::before { opacity: 1; }
+    .info-card .card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .info-card h3 { font-size: 0.97rem; color: var(--text-primary); font-weight: 600; margin-bottom: 8px; }
+    .info-card p { color: var(--text-muted); font-size: 0.83rem; line-height: 1.6; }
+    .info-card ul { list-style: none; }
+    .info-card ul li {
+      color: var(--text-muted); font-size: 0.83rem;
+      padding: 4px 0; border-bottom: 1px solid rgba(200,215,235,0.4);
+      display: flex; align-items: flex-start; gap: 7px;
+    }
+    .info-card ul li:last-child { border-bottom: none; }
+    .info-card ul li::before { content: '▸'; color: var(--accent-light); font-size: 0.75rem; flex-shrink: 0; margin-top: 3px; }
+
+    /* ── UNIFLOW CARD ── */
+    .uniflow-card {
+      background: linear-gradient(145deg, #0c1a2e, #1a3a5c);
+      border: 1px solid rgba(59,130,196,0.25);
+      border-radius: 18px; padding: 32px 28px;
+      display: flex; gap: 28px; align-items: center; flex-wrap: wrap;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+    .uniflow-logo { font-size: 3.5rem; flex-shrink: 0; filter: drop-shadow(0 2px 10px rgba(59,130,196,0.5)); }
+    .uniflow-info h3 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .uniflow-info p { color: rgba(255,255,255,0.6); font-size: 0.87rem; line-height: 1.6; }
+
+    /* ── GPO BLOCK ── */
+    .gpo-block {
+      background: linear-gradient(145deg, #fff, var(--orange-soft));
+      border: 1px solid rgba(217,119,6,0.2);
+      border-radius: 14px; padding: 22px 24px; margin-top: 20px;
+    }
+    .gpo-block h3 { color: var(--orange); font-size: 1rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .gpo-block p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
+    .gpo-block strong { color: var(--orange); }
+    .gpo-steps { list-style: none; margin-top: 12px; }
+    .gpo-steps li {
+      color: var(--text-secondary); font-size: 0.86rem;
+      padding: 5px 0; border-bottom: 1px solid rgba(217,119,6,0.1);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .gpo-steps li:last-child { border-bottom: none; }
+    .gpo-steps li::before { content: '⚙️'; font-size: 0.75rem; flex-shrink: 0; }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .screenshot-item {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-sm);
+      transition: all .27s; cursor: zoom-in;
+      position: relative;
+    }
+    .screenshot-item:hover { box-shadow: var(--shadow-hover); border-color: var(--accent-light); transform: translateY(-3px); }
+    .screenshot-item .img-wrap {
+      overflow: hidden; height: 200px;
+      background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .screenshot-item .img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .4s cubic-bezier(.22,1,.36,1);
+    }
+    .screenshot-item:hover .img-wrap img { transform: scale(1.08); }
+    .screenshot-item .sc-caption {
+      padding: 10px 14px; background: #fff;
+      color: var(--text-muted); font-size: 0.78rem; text-align: center;
+      border-top: 1px solid var(--border-card);
+    }
+    .screenshot-item .img-wrap::after {
+      content: '🔍 Cliquer pour agrandir';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: rgba(26,35,64,0.75); color: #fff;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px;
+      opacity: 0; transition: opacity .27s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .screenshot-item:hover .img-wrap::after { opacity: 1; }
+    @media (max-width: 600px) {
+      .screenshots-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── BILAN ── */
+    .bilan-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .bilan-col {
+      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4));
+      border: 1px solid var(--border-card);
+      border-radius: 14px; padding: 22px 20px;
+    }
+    .bilan-col h3 {
+      font-size: 0.88rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .8px;
+      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .bilan-col.positif h3 { color: var(--green); }
+    .bilan-col.apprentissage h3 { color: var(--accent); }
+    .bilan-col ul { list-style: none; }
+    .bilan-col ul li {
+      color: var(--text-secondary); font-size: 0.87rem;
+      padding: 5px 0; border-bottom: 1px solid rgba(200,215,235,0.4);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .bilan-col ul li:last-child { border-bottom: none; }
+    .bilan-col.positif ul li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .bilan-col.apprentissage ul li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(10, 15, 30, 0.93);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .lightbox-overlay.active { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      position: relative; max-width: 90vw; max-height: 88vh;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .lightbox-inner img {
+      max-width: 100%; max-height: 80vh;
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      transform: scale(.92);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+    }
+    .lightbox-overlay.active .lightbox-inner img { transform: scale(1); }
+    .lightbox-caption { color: rgba(255,255,255,0.7); font-size: 0.85rem; text-align: center; }
+    .lightbox-close {
+      position: absolute; top: -40px; right: 0;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 1.2rem;
+      width: 34px; height: 34px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(59,130,196,0.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 28px;
+      color: var(--text-muted); font-size: 0.78rem;
+      border-top: 1px solid var(--border-card);
+      background: rgba(244, 246, 251, 0.6);
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 640px) {
+      .hero-inner { padding: 32px 24px; }
+      .hero-text h1 { font-size: 1.5rem; }
+      .section-card { padding: 24px 18px; }
+      .bilan-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-shape bg-shape--1"></div>
+  <div class="bg-shape bg-shape--2"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <a href="index.html" class="back-btn">← Retour au portfolio</a>
+      <span class="header-title">Projet 4 – Copieurs & GPO</span>
+    </div>
+    <span class="header-badge">🖨️ Infrastructure · Stage Groupe BOËT</span>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-icon">🖨️</div>
+      <div class="hero-text">
+        <h1>Renouvellement de la Flotte de Copieurs</h1>
+        <p>Remplacement complet de la flotte de copieurs Canon au sein du Groupe BOËT, intégration d'UNIFlow via GPO et formation des collaborateurs à cette nouvelle solution d'impression.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Canon</span>
+          <span class="hero-tag">UNIFlow</span>
+          <span class="hero-tag">GPO</span>
+          <span class="hero-tag">Réseau / IP</span>
+          <span class="hero-tag">Travail en équipe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- CONTEXTE -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Contexte & Objectif</h2>
+      <p class="section-sub">Pourquoi ce projet ?</p>
+      <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
+        Le <strong style="color:var(--accent)">Groupe BOËT</strong> souhaitait renouveler l'ensemble de sa flotte de copieurs,
+        vieillissante et ne répondant plus aux besoins des différents départements. Ce projet impliquait
+        une <strong style="color:var(--accent)">étude comparative</strong> des prestataires, le déploiement des nouvelles machines
+        et l'intégration d'une solution d'impression sécurisée : <strong style="color:var(--accent)">UNIFlow</strong>.
+      </p>
+      <div class="quick-facts">
+        <div class="fact-item">
+          <div class="f-icon">👥</div>
+          <div class="f-label">Réalisation</div>
+          <div class="f-value">En équipe</div>
+        </div>
+        <div class="fact-item">
+          <div class="f-icon">🖨️</div>
+          <div class="f-label">Marque choisie</div>
+          <div class="f-value">Canon</div>
+        </div>
+        <div class="fact-item">
+          <div class="f-icon">🌐</div>
+          <div class="f-label">Déploiement</div>
+          <div class="f-value">GPO + MSI</div>
+        </div>
+        <div class="fact-item">
+          <div class="f-icon">🏢</div>
+          <div class="f-label">Contexte</div>
+          <div class="f-value">Stage en entreprise</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DÉROULEMENT -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Déroulement du Projet</h2>
+      <p class="section-sub">Les grandes étapes de A à Z</p>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Étude comparative des prestataires</h3>
+            <p>Analyse de plusieurs entreprises proposant des copieurs : comparaison des <strong>engagements contractuels</strong>, des <strong>prix</strong>, des <strong>marques</strong> et des fonctionnalités offertes pour retenir la meilleure offre.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Analyse des besoins par département</h3>
+            <p>Identification des copieurs nécessaires selon les usages de chaque département : volume d'impression, formats, fonctions requises (scan, couleur, recto-verso...).</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Réception et configuration réseau des copieurs</h3>
+            <p>Une fois les copieurs <strong>Canon livrés</strong>, configuration des <strong>adresses IP</strong> de chaque machine afin qu'elles correspondent aux IPs des anciens copieurs — garantissant une transition transparente pour les utilisateurs.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Déploiement d'UNIFlow via GPO</h3>
+            <p>Mise en place d'une <strong>GPO (Group Policy Object)</strong> pour déployer automatiquement le logiciel UNIFlow (fichier MSI) sur l'ensemble des postes des collaborateurs du domaine.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h3>Formation du personnel</h3>
+            <p>Organisation et animation de sessions de <strong>formation</strong> auprès des collaborateurs pour les accompagner dans la prise en main de la nouvelle solution UNIFlow et des nouvelles machines Canon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIFLOW + GPO -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>UNIFlow & Déploiement GPO</h2>
+      <p class="section-sub">La solution d'impression sécurisée et son déploiement</p>
+
+      <div class="uniflow-card">
+        <div class="uniflow-logo">🔐</div>
+        <div class="uniflow-info">
+          <h3>UNIFlow — Impression Sécurisée</h3>
+          <p>UNIFlow est une solution logicielle d'impression sécurisée. Elle permet aux utilisateurs de libérer leurs impressions uniquement après s'être authentifiés directement sur le copieur, évitant ainsi les impressions oubliées et garantissant la confidentialité des documents.</p>
+        </div>
+      </div>
+
+      <div class="gpo-block">
+        <h3>⚙️ Déploiement par GPO — Fichier MSI</h3>
+        <p>Le déploiement d'UNIFlow sur l'ensemble des postes a été réalisé via une <strong>Group Policy Object (GPO)</strong> liée au domaine Active Directory. Un fichier <strong>MSI</strong> a été utilisé pour une installation automatique et silencieuse.</p>
+        <ul class="gpo-steps">
+          <li>Création de la GPO dans la console de gestion Active Directory</li>
+          <li>Hébergement du fichier MSI UNIFlow sur un partage réseau</li>
+          <li>Attribution de la GPO aux unités organisationnelles concernées</li>
+          <li>Vérification du déploiement sur les postes au redémarrage</li>
+        </ul>
+      </div>
+
+      <div class="cards-grid" style="margin-top: 20px;">
+        <div class="info-card">
+          <div class="card-icon">🔒</div>
+          <h3>Sécurité renforcée</h3>
+          <p>Les impressions ne sont libérées qu'après authentification sur le copieur, évitant tout document confidentiel oublié.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">💸</div>
+          <h3>Réduction des coûts</h3>
+          <p>Les impressions non récupérées sont automatiquement annulées, réduisant le gaspillage de papier et d'encre.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">📊</div>
+          <h3>Suivi des usages</h3>
+          <p>UNIFlow permet de suivre les impressions par utilisateur et par département pour optimiser les ressources.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPTURES D'ÉCRAN -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Captures d'écran & Photos</h2>
+      <p class="section-sub">Aperçu du projet</p>
+      <div class="screenshots-grid">
+        <div class="screenshot-item" onclick="openLightbox(this)">
+          <div class="img-wrap">
+            <img src="copieur.png" alt="Copieur Canon">
+          </div>
+          <div class="sc-caption">Nouveau copieur Canon déployé</div>
+        </div>
+        <div class="screenshot-item" onclick="openLightbox(this)">
+          <div class="img-wrap">
+            <img src="image1.png" alt="Image 1">
+          </div>
+          <div class="sc-caption">À compléter</div>
+        </div>
+        <div class="screenshot-item" onclick="openLightbox(this)">
+          <div class="img-wrap">
+            <img src="image2.png" alt="Image 2">
+          </div>
+          <div class="sc-caption">À compléter</div>
+        </div>
+        <div class="screenshot-item" onclick="openLightbox(this)">
+          <div class="img-wrap">
+            <img src="image3.png" alt="Image 3">
+          </div>
+          <div class="sc-caption">À compléter</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BILAN -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Bilan du projet</h2>
+      <p class="section-sub">Ce que ce projet m'a apporté</p>
+      <div class="bilan-row">
+        <div class="bilan-col positif">
+          <h3>✅ Résultats obtenus</h3>
+          <ul>
+            <li>Flotte entièrement renouvelée avec Canon</li>
+            <li>UNIFlow déployé sur tous les postes via GPO</li>
+            <li>Transition réseau transparente (IPs conservées)</li>
+            <li>Personnel formé à la nouvelle solution</li>
+          </ul>
+        </div>
+        <div class="bilan-col apprentissage">
+          <h3>📘 Compétences acquises</h3>
+          <ul>
+            <li>Conduite d'une étude comparative fournisseurs</li>
+            <li>Configuration réseau (adresses IP)</li>
+            <li>Création et gestion d'une GPO</li>
+            <li>Déploiement logiciel via fichier MSI</li>
+            <li>Formation et accompagnement utilisateurs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    function openLightbox(card) {
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.sc-caption');
+      if (!img.src || img.src === window.location.href || !img.naturalWidth) return;
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+      if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lightbox-close')) return;
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+
+</body>
+</html>
