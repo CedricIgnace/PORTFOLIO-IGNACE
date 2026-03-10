@@ -209,19 +209,25 @@
 
     /* ── PILL BUTTON ── */
     .pill-btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 7px 18px;
-      background: linear-gradient(135deg, var(--accent), #2a6eb0);
-      color: #fff; font-size: 0.81rem; font-weight: 600;
-      border-radius: 20px; text-decoration: none;
-      transition: all .24s; letter-spacing: .3px;
-      box-shadow: 0 3px 12px var(--accent-glow);
-    }
-    .pill-btn:hover {
-      filter: brightness(1.1);
-      box-shadow: 0 6px 20px rgba(59, 130, 196, 0.3);
-      transform: translateY(-2px);
-    }
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 20px;
+  border: 1px solid rgba(59,130,196,0.2);
+  text-decoration: none;
+  transition: all .22s;
+}
+.pill-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59,130,196,0.25);
+}
 
     /* ── ANSSI ── */
     .anssi-row { display: flex; justify-content: center; }
@@ -451,42 +457,34 @@
     </section>
 
     <!-- 5 PROJETS -->
-    <section class="section-card" id="projets">
-      <h2 class="section-title"><span class="accent-bar"></span>Mes Projets</h2>
-      <p class="section-sub">Réalisations en stage &amp; école</p>
+<section class="section-card" id="projets">
+  <h2 class="section-title"><span class="accent-bar"></span>Mes Projets</h2>
+  <p class="section-sub">Réalisations en stage &amp; école</p>
 
-      <div class="projet-item">
-        <h3>Projet 1 – L'outil de développement WINDEV</h3>
-        <p>WINDEV est un environnement de développement intégré (IDE) édité par PC SOFT, destiné principalement à la création d'applications Windows, mais aussi Web et mobiles(via Webdev et Windev Mobile).</p>
-        <a href="Projet-Windev.html" class="pill-btn">
-          <img src="Windev.png" alt="Logo Windev">
-        </a>
-      </div>
-      
-      <div class="projet-item">
-        <h3>Projet 2 – Outil de test de phishing</h3>
-        <p>Mise en place d'un outil de test de phishing au sein de la société.</p>
-        <a href="Projet phishing.html" class="pill-btn">
-          <img src="Phising/riot.png" alt="Niveaux cybersécurité">
-        </a>
-      </div>
-      
-      <div class="projet-item">
-        <h3>Projet 3 – Modification de composants</h3>
-        <p>Modification de composants d'ordinateurs fixes et portables.</p>
-        <a href="Projet-Composants.html" class="pill-btn">
-          <img src="FakeChangementAlim.jpg" alt="Changement alimentation">
-        </a>
-      </div>
-      
-      <div class="projet-item">
-        <h3>Projet 4 – Nouveaux copieurs &amp; GPO</h3>
-        <p>Mise en place de nouveaux copieurs et mise en place d'une GPO pour le driver.</p>
-        <a href="Projet-Copieur.html" class="pill-btn">
-          <img src="copieur.png" alt="Copieur">
-        </a>
-      </div>
-    </section>
+  <div class="projet-item">
+    <h3>Projet 1 – L'outil de développement WINDEV</h3>
+    <p>WINDEV est un environnement de développement intégré (IDE) édité par PC SOFT, destiné principalement à la création d'applications Windows, mais aussi Web et mobiles (via Webdev et Windev Mobile).</p>
+    <a href="Projet-Windev.html" class="pill-btn">💻 Voir le projet</a>
+  </div>
+
+  <div class="projet-item">
+    <h3>Projet 2 – Outil de test de phishing</h3>
+    <p>Mise en place d'un outil de test de phishing au sein de la société.</p>
+    <a href="Projet phishing.html" class="pill-btn">🎣 Voir le projet</a>
+  </div>
+
+  <div class="projet-item">
+    <h3>Projet 3 – Modification de composants</h3>
+    <p>Modification de composants d'ordinateurs fixes et portables.</p>
+    <a href="Projet-Composants.html" class="pill-btn">🖥️ Voir le projet</a>
+  </div>
+
+  <div class="projet-item">
+    <h3>Projet 4 – Nouveaux copieurs &amp; GPO</h3>
+    <p>Mise en place de nouveaux copieurs et mise en place d'une GPO pour le driver.</p>
+    <a href="Projet-Copieur.html" class="pill-btn">🖨️ Voir le projet</a>
+  </div>
+</section>
 
     <!-- 6 TDB -->
     <section class="section-card" id="tdb">
