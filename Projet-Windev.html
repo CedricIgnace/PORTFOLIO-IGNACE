@@ -15,6 +15,9 @@
       --accent-light:   #5da0e0;
       --accent-soft:    #dbeafe;
       --accent-glow:    rgba(59, 130, 196, 0.15);
+      --danger:         #dc2626;
+      --danger-soft:    #fee2e2;
+      --danger-mid:     #ef4444;
       --text-primary:   #1a2340;
       --text-secondary: #3d4f6e;
       --text-muted:     #7a8fb0;
@@ -41,7 +44,7 @@
       position: fixed; inset: 0; z-index: 0;
       background:
         radial-gradient(ellipse 700px 500px at 10% 0%, rgba(190, 220, 255, 0.45) 0%, transparent 70%),
-        radial-gradient(ellipse 500px 400px at 90% 80%, rgba(210, 235, 255, 0.38) 0%, transparent 65%);
+        radial-gradient(ellipse 500px 400px at 90% 80%, rgba(255, 200, 200, 0.18) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -56,7 +59,7 @@
     }
     .bg-shape--2 {
       width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(179,220,255,0.18), transparent 70%);
+      background: radial-gradient(circle, rgba(255,180,180,0.15), transparent 70%);
       bottom: -80px; right: -120px;
     }
 
@@ -95,7 +98,7 @@
       color: var(--text-primary);
     }
     .header-badge {
-      background: linear-gradient(135deg, var(--accent), #2a6eb0);
+      background: linear-gradient(135deg, var(--danger), #b91c1c);
       color: #fff;
       font-size: 0.72rem; font-weight: 600;
       padding: 4px 12px; border-radius: 20px;
@@ -109,12 +112,12 @@
       padding: 52px 24px 0;
     }
     .hero-inner {
-      background: linear-gradient(135deg, #1a2340 0%, #1e3a5f 60%, #2a5a8c 100%);
+      background: linear-gradient(135deg, #1a0a0a 0%, #3b1010 50%, #5c1a1a 100%);
       border-radius: 24px;
       padding: 52px 48px;
       display: flex; align-items: center; gap: 40px;
       flex-wrap: wrap;
-      box-shadow: 0 20px 60px rgba(26, 35, 64, 0.35);
+      box-shadow: 0 20px 60px rgba(100, 20, 20, 0.4);
       overflow: hidden;
       position: relative;
     }
@@ -122,32 +125,49 @@
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 400px 300px at 80% 50%, rgba(59,130,196,0.25), transparent),
-        radial-gradient(ellipse 200px 200px at 10% 80%, rgba(93,160,224,0.15), transparent);
+        radial-gradient(ellipse 400px 300px at 80% 50%, rgba(220,38,38,0.2), transparent),
+        radial-gradient(ellipse 200px 200px at 10% 80%, rgba(239,68,68,0.1), transparent);
+      pointer-events: none;
+    }
+    .hero-inner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,0,0,0.02) 2px,
+        rgba(255,0,0,0.02) 4px
+      );
       pointer-events: none;
     }
     .hero-icon {
       font-size: 5rem; flex-shrink: 0;
-      filter: drop-shadow(0 4px 16px rgba(59,130,196,0.4));
+      filter: drop-shadow(0 4px 20px rgba(220,38,38,0.6));
       position: relative; z-index: 1;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 4px 20px rgba(220,38,38,0.6)); }
+      50% { filter: drop-shadow(0 4px 32px rgba(220,38,38,1)); }
     }
     .hero-text { position: relative; z-index: 1; }
     .hero-text h1 {
       font-family: var(--font-head);
       font-size: 2rem; color: #fff;
       margin-bottom: 8px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
     }
     .hero-text p {
-      color: rgba(255,255,255,0.72);
+      color: rgba(255,255,255,0.68);
       font-size: 0.95rem; max-width: 520px;
       margin-bottom: 20px;
     }
     .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .hero-tag {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,100,100,0.3);
+      color: rgba(255,200,200,0.9);
       font-size: 0.75rem; font-weight: 500;
       padding: 4px 12px; border-radius: 20px;
       backdrop-filter: blur(8px);
@@ -174,7 +194,7 @@
     }
     .section-card:hover {
       box-shadow: var(--shadow-md);
-      border-color: rgba(59,130,196,0.25);
+      border-color: rgba(220,38,38,0.2);
     }
     .section-card:nth-child(1){animation-delay:.08s}
     .section-card:nth-child(2){animation-delay:.16s}
@@ -193,7 +213,7 @@
     }
     .accent-bar {
       display: inline-block; width: 4px; height: 26px;
-      background: linear-gradient(180deg, var(--accent), var(--accent-light));
+      background: linear-gradient(180deg, var(--danger), var(--danger-mid));
       border-radius: 3px; flex-shrink: 0;
     }
     .section-sub {
@@ -206,7 +226,7 @@
       color: var(--text-secondary); font-size: 0.95rem;
       line-height: 1.8;
     }
-    .context-text strong { color: var(--accent); font-weight: 600; }
+    .context-text strong { color: var(--danger); font-weight: 600; }
 
     /* ── INFOS RAPIDES ── */
     .quick-facts {
@@ -216,7 +236,7 @@
       margin-top: 26px;
     }
     .fact-item {
-      background: linear-gradient(145deg, #fff, var(--accent-soft));
+      background: linear-gradient(145deg, #fff, var(--danger-soft));
       border: 1px solid var(--border-card);
       border-radius: 14px;
       padding: 18px 16px;
@@ -233,7 +253,7 @@
       gap: 16px;
     }
     .feature-card {
-      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4));
+      background: linear-gradient(145deg, #fff, rgba(254,226,226,0.3));
       border: 1px solid var(--border-card);
       border-radius: 16px;
       padding: 26px 22px;
@@ -244,12 +264,12 @@
       content: '';
       position: absolute; top: 0; left: 0;
       width: 100%; height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      background: linear-gradient(90deg, var(--danger), var(--danger-mid));
       opacity: 0; transition: opacity .27s;
     }
     .feature-card:hover {
-      border-color: var(--accent-light);
-      box-shadow: var(--shadow-hover);
+      border-color: rgba(220,38,38,0.3);
+      box-shadow: 0 12px 40px rgba(220,38,38,0.12);
       transform: translateY(-4px);
     }
     .feature-card:hover::before { opacity: 1; }
@@ -263,14 +283,14 @@
     }
     .tech-block {
       flex: 1; min-width: 200px;
-      background: linear-gradient(145deg, #fff, var(--accent-soft));
+      background: linear-gradient(145deg, #fff, var(--danger-soft));
       border: 1px solid var(--border-card);
       border-radius: 14px;
       padding: 22px 20px;
     }
     .tech-block h3 {
       font-size: 0.9rem; font-weight: 700;
-      color: var(--accent); margin-bottom: 12px;
+      color: var(--danger); margin-bottom: 12px;
       text-transform: uppercase; letter-spacing: .8px;
     }
     .tech-list { list-style: none; }
@@ -283,21 +303,10 @@
     .tech-list li:last-child { border-bottom: none; }
     .tech-list li::before {
       content: '▸';
-      color: var(--accent-light); font-size: 0.75rem; flex-shrink: 0;
+      color: var(--danger-mid); font-size: 0.75rem; flex-shrink: 0;
     }
 
     /* ── SCREENSHOTS ── */
-    .screenshots-placeholder {
-      border: 2px dashed rgba(59,130,196,0.3);
-      border-radius: 16px;
-      padding: 48px 24px;
-      text-align: center;
-      background: rgba(219,234,254,0.15);
-    }
-    .screenshots-placeholder .ph-icon { font-size: 2.5rem; margin-bottom: 12px; }
-    .screenshots-placeholder p { color: var(--text-muted); font-size: 0.88rem; }
-    .screenshots-placeholder strong { color: var(--accent); }
-
     .screenshots-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -307,10 +316,10 @@
       border-radius: 14px; overflow: hidden;
       border: 1px solid var(--border-card);
       box-shadow: var(--shadow-sm);
-      transition: all .27s;
+      transition: all .27s; cursor: zoom-in;
     }
     .screenshot-item:hover {
-      box-shadow: var(--shadow-hover);
+      box-shadow: 0 12px 40px rgba(220,38,38,0.15);
       transform: translateY(-3px);
     }
     .screenshot-item img {
@@ -330,7 +339,7 @@
       gap: 16px;
     }
     .bilan-col {
-      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4));
+      background: linear-gradient(145deg, #fff, rgba(254,226,226,0.3));
       border: 1px solid var(--border-card);
       border-radius: 14px;
       padding: 22px 20px;
@@ -342,7 +351,7 @@
       display: flex; align-items: center; gap: 8px;
     }
     .bilan-col.positif h3 { color: #2d7a4f; }
-    .bilan-col.apprentissage h3 { color: var(--accent); }
+    .bilan-col.apprentissage h3 { color: var(--danger); }
     .bilan-col ul { list-style: none; }
     .bilan-col ul li {
       color: var(--text-secondary); font-size: 0.87rem;
@@ -352,23 +361,42 @@
     }
     .bilan-col ul li:last-child { border-bottom: none; }
     .bilan-col.positif ul li::before { content: '✓'; color: #2d7a4f; font-weight: 700; flex-shrink: 0; }
-    .bilan-col.apprentissage ul li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+    .bilan-col.apprentissage ul li::before { content: '→'; color: var(--danger); flex-shrink: 0; }
 
-    /* ── PILL BTN ── */
-    .pill-btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 9px 22px;
-      background: linear-gradient(135deg, var(--accent), #2a6eb0);
-      color: #fff; font-size: 0.84rem; font-weight: 600;
-      border-radius: 20px; text-decoration: none;
-      transition: all .24s; letter-spacing: .3px;
-      box-shadow: 0 3px 12px var(--accent-glow);
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(10, 5, 5, 0.93);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
     }
-    .pill-btn:hover {
-      filter: brightness(1.1);
-      box-shadow: 0 6px 20px rgba(59,130,196,0.3);
-      transform: translateY(-2px);
+    .lightbox-overlay.active { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 90vw; max-height: 88vh;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
     }
+    .lightbox-inner img {
+      max-width: 100%; max-height: 80vh;
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      transform: scale(.92);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+    }
+    .lightbox-overlay.active .lightbox-inner img { transform: scale(1); }
+    .lightbox-caption { color: rgba(255,255,255,0.7); font-size: 0.85rem; text-align: center; }
+    .lightbox-close {
+      position: absolute; top: -40px; right: 0;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 1.2rem;
+      width: 34px; height: 34px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(220,38,38,0.4); }
 
     /* ── FOOTER ── */
     footer {
@@ -535,12 +563,6 @@
     <section class="section-card" id="screenshots">
       <h2 class="section-title"><span class="accent-bar"></span>Captures d'écran</h2>
       <p class="section-sub">Aperçu de l'application</p>
-
-      <!-- ⬇️ Remplacer ce bloc par les vraies images quand disponibles
-      <div class="screenshots-placeholder">
-        <div class="ph-icon">🖼️</div>
-        <p><strong>Screenshots à venir</strong><br>Les captures d'écran de l'application seront ajoutées ici.</p>
-      </div> -->
       <div class="screenshots-grid">
         <div class="screenshot-item" onclick="openLightbox(this)">
           <img src="Windev - GMAO/Interface - Menu.png" alt="Écran d'accueil">
@@ -554,14 +576,11 @@
           <img src="Windev - GMAO/Interface - Planning.png" alt="Planning">
           <div class="sc-caption">Vue planning des interventions</div>
         </div>
-        <!-- 4ème screenshot : remplace le src et la légende quand tu as l'image -->
         <div class="screenshot-item" onclick="openLightbox(this)">
-          <img src="Windev - GMAO/Code - Planning.png" alt="4ème capture" style="min-height:140px; background: var(--accent-soft);">
+          <img src="Windev - GMAO/Code - Planning.png" alt="4ème capture" style="min-height:140px; background: var(--danger-soft);">
           <div class="sc-caption">Extrait du code</div>
         </div>
       </div>
-    </section>
-      
     </section>
 
     <!-- BILAN -->
@@ -592,15 +611,15 @@
 
   </div>
 
-  <footer>© 2025 Cédric – BTS SIO Projets · Tous droits réservés</footer>
 
-<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
     <div class="lightbox-inner">
       <button class="lightbox-close" onclick="closeLightbox()">✕</button>
       <img id="lightbox-img" src="" alt="">
       <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
-</div>
+  </div>
 
   <script>
     function openLightbox(card) {
@@ -625,6 +644,6 @@
       }
     });
   </script>
-  
+
 </body>
 </html>
