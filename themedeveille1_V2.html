@@ -24,6 +24,8 @@
       --danger-mid:     #ef4444;
       --purple:         #7c3aed;
       --purple-soft:    #ede9fe;
+      --sisr:           #0891b2;
+      --sisr-soft:      #cffafe;
       --text-primary:   #1a2340;
       --text-secondary: #3d4f6e;
       --text-muted:     #7a8fb0;
@@ -176,6 +178,12 @@
       transition: all .2s;
     }
     .toc-list a:hover { background: var(--accent); color: #fff; }
+    .toc-list a.sisr-link {
+      background: var(--sisr-soft); color: var(--sisr);
+      border-color: rgba(8,145,178,0.3);
+      font-weight: 700;
+    }
+    .toc-list a.sisr-link:hover { background: var(--sisr); color: #fff; }
 
     /* ── PAGE CONTENT ── */
     .page-content {
@@ -197,6 +205,11 @@
       transition: box-shadow .28s, border-color .28s;
     }
     .section-card:hover { box-shadow: var(--shadow-md); border-color: rgba(59,130,196,0.25); }
+    .section-card.sisr-card {
+      border-color: rgba(8,145,178,0.3);
+      background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(207,250,254,0.25));
+    }
+    .section-card.sisr-card:hover { border-color: var(--sisr); box-shadow: 0 12px 40px rgba(8,145,178,0.15); }
     .section-card:nth-child(1){animation-delay:.08s}
     .section-card:nth-child(2){animation-delay:.16s}
     .section-card:nth-child(3){animation-delay:.24s}
@@ -206,6 +219,7 @@
     .section-card:nth-child(7){animation-delay:.56s}
     .section-card:nth-child(8){animation-delay:.64s}
     .section-card:nth-child(9){animation-delay:.72s}
+    .section-card:nth-child(10){animation-delay:.80s}
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
     .section-title {
@@ -222,6 +236,7 @@
     .accent-bar.warn  { background: linear-gradient(180deg, var(--warn), #f59e0b); }
     .accent-bar.geo   { background: linear-gradient(180deg, #dc2626, #f97316); }
     .accent-bar.neuro { background: linear-gradient(180deg, var(--purple), #a855f7); }
+    .accent-bar.sisr  { background: linear-gradient(180deg, var(--sisr), #22d3ee); }
     .section-sub { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 26px; padding-left: 17px; }
 
     /* ── STATS ── */
@@ -272,6 +287,36 @@
     .info-card ul li::before { content: '▸'; color: var(--accent-light); font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
     .info-card p { color: var(--text-muted); font-size: 0.83rem; line-height: 1.6; }
 
+    /* ── SISR BLOCKS ── */
+    .sisr-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid rgba(8,145,178,0.2);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .sisr-block {
+      padding: 24px 28px;
+      border-bottom: 1px solid rgba(8,145,178,0.12);
+      transition: background .22s;
+    }
+    .sisr-block:last-child { border-bottom: none; }
+    .sisr-block:hover { background: rgba(207,250,254,0.18); }
+    .sisr-block-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 10px;
+    }
+    .sisr-block-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .sisr-block h3 {
+      font-size: 0.97rem; font-weight: 700;
+      color: var(--sisr);
+    }
+    .sisr-block p {
+      color: var(--text-secondary); font-size: 0.88rem;
+      line-height: 1.75; padding-left: 37px;
+    }
+
     /* ── TECH LIST ── */
     .tech-list { display: flex; flex-direction: column; gap: 12px; }
     .tech-item {
@@ -304,6 +349,13 @@
     .badge-corrected {
       display: inline-block;
       background: linear-gradient(135deg, var(--safe), #22c55e);
+      color: #fff; font-size: 0.65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px; letter-spacing: .5px;
+      vertical-align: middle; margin-left: 8px;
+    }
+    .badge-sisr {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--sisr), #22d3ee);
       color: #fff; font-size: 0.65rem; font-weight: 700;
       padding: 2px 8px; border-radius: 10px; letter-spacing: .5px;
       vertical-align: middle; margin-left: 8px;
@@ -465,6 +517,7 @@
       .hero-text h1 { font-size: 1.5rem; }
       .section-card { padding: 24px 18px; }
       .dual-grid { grid-template-columns: 1fr; }
+      .sisr-cards-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -515,6 +568,7 @@
         <a href="#ram">💾 RAM & Crise</a>
         <a href="#geopolitique">🌍 Géopolitique</a>
         <a href="#neuromorphique">🧠 Neuromorphique</a>
+        <a href="#sisr">🖥️ Impact SISR</a>
         <a href="#enjeux">⚖️ Enjeux éthiques</a>
         <a href="#sources">📚 Sources</a>
       </div>
@@ -530,7 +584,7 @@
           <div class="label">au lieu de plusieurs semaines pour certaines étapes de conception de circuit grâce à l'IA</div>
         </div>
         <div class="stat-box">
-          <div class="number">10 à 15%</div>
+          <div class="number">~20%</div>
           <div class="label">du marché mondial de l'IA embarquée visé par la France d'ici 2030 selon le plan national</div>
         </div>
         <div class="stat-box">
@@ -539,7 +593,7 @@
         </div>
         <div class="stat-box">
           <div class="number">600 Md$</div>
-          <div class="label">investis par les États-Unis dans les semi-conducteurs (CHIPS Act (280 Md$) + initiatives privées)</div>
+          <div class="label">investis par les États-Unis dans les semi-conducteurs (CHIPS Act + initiatives privées)</div>
         </div>
       </div>
     </section>
@@ -718,7 +772,7 @@
       </div>
     </section>
 
-    <!-- 6 GÉOPOLITIQUE (NOUVEAU) -->
+    <!-- 6 GÉOPOLITIQUE -->
     <section class="section-card" id="geopolitique">
       <h2 class="section-title"><span class="accent-bar geo"></span>Géopolitique des Semi-Conducteurs <span class="badge-new">NOUVEAU</span></h2>
       <p class="section-sub">Les composants au cœur des tensions mondiales</p>
@@ -747,7 +801,7 @@
       </div>
     </section>
 
-    <!-- 7 NEUROMORPHIQUE (NOUVEAU) -->
+    <!-- 7 NEUROMORPHIQUE -->
     <section class="section-card" id="neuromorphique">
       <h2 class="section-title"><span class="accent-bar neuro"></span>Vers des Puces Neuromorphiques <span class="badge-new">NOUVEAU</span></h2>
       <p class="section-sub">La prochaine révolution dans l'architecture des composants IA</p>
@@ -782,7 +836,41 @@
       </div>
     </section>
 
-    <!-- 8 ENJEUX ÉTHIQUES (NOUVEAU) -->
+    <!-- 8 IMPACT SISR -->
+    <section class="section-card sisr-card" id="sisr">
+      <h2 class="section-title"><span class="accent-bar sisr"></span>Impact pour le Technicien SISR <span class="badge-sisr">SISR</span></h2>
+      <p class="section-sub">Ce que cette évolution change concrètement dans mon futur métier</p>
+
+      <div class="sisr-blocks">
+
+        <div class="sisr-block">
+          <div class="sisr-block-header">
+            <span class="sisr-block-icon">🔒</span>
+            <h3>Sécurité des équipements réseau</h3>
+          </div>
+          <p>Les firewalls, switches et routeurs modernes embarquent des puces IA pour analyser le trafic en temps réel. Cela crée de nouvelles surfaces d'attaque : une IA intégrée peut être manipulée par des attaques adversariales. Le risque de backdoors dans des composants étrangers impose une politique d'achat rigoureuse. En tant que technicien SISR, cela signifie maintenir les firmwares à jour et connaître précisément les équipements que l'on administre.</p>
+        </div>
+
+        <div class="sisr-block">
+          <div class="sisr-block-header">
+            <span class="sisr-block-icon">📡</span>
+            <h3>Supervision & maintenance prédictive</h3>
+          </div>
+          <p>Les outils de monitoring comme Zabbix ou PRTG intègrent désormais des modules IA capables de détecter des anomalies avant qu'une panne survienne. Les serveurs remontent des données (température, tension, SMART) analysées automatiquement. Le rôle du technicien SISR évolue : moins de réaction en urgence, plus d'anticipation et d'analyse de tendances.</p>
+        </div>
+
+        <div class="sisr-block">
+          <div class="sisr-block-header">
+            <span class="sisr-block-icon">⚡</span>
+            <h3>Énergie & dimensionnement</h3>
+          </div>
+          <p>Les accélérateurs IA comme le H100 consomment entre 300 W et 700 W par unité. Un technicien SISR doit anticiper la capacité électrique des baies, le refroidissement et le PUE du datacenter. Le choix entre un NPU basse consommation et un GPU haute performance devient un critère d'administration à part entière, notamment sous l'angle Green IT.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9 ENJEUX ÉTHIQUES -->
     <section class="section-card" id="enjeux">
       <h2 class="section-title"><span class="accent-bar warn"></span>Enjeux Éthiques & Sociétaux <span class="badge-new">NOUVEAU</span></h2>
       <p class="section-sub">Les questions que soulève cette révolution technologique</p>
@@ -821,7 +909,7 @@
       </div>
     </section>
 
-    <!-- 9 SOURCES -->
+    <!-- 10 SOURCES -->
     <section class="section-card" id="sources">
       <h2 class="section-title"><span class="accent-bar"></span>Sources</h2>
       <p class="section-sub">Références utilisées pour cette veille</p>
@@ -854,6 +942,10 @@
     </section>
 
   </div>
-<footer>Dernière mise à jour : Mars 2026</footer>
+
+  <footer>
+    Veille technologique BTS SIO SISR &nbsp;·&nbsp; Dernière mise à jour : Mars 2026 &nbsp;·&nbsp; Cédric
+  </footer>
+
 </body>
 </html>
