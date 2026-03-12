@@ -207,6 +207,24 @@
     .module-card h3 { font-size: 0.97rem; color: var(--text-primary); margin-bottom: 4px; font-weight: 600; }
     .module-card p { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 13px; }
 
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(180deg, var(--danger), var(--danger-mid), transparent);
+      border-radius: 2px;
+    }
+    .tl-item { position: relative; margin-bottom: 20px; }
+    .tl-item::before {
+      content: ''; position: absolute; left: -25px; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--danger); border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--danger);
+    }
+    .tl-year { font-size: 0.75rem; font-weight: 700; color: var(--danger); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .tl-item h4 { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+    .tl-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
     /* ── PILL BUTTON ── */
     .pill-btn {
   display: inline-flex;
