@@ -211,41 +211,41 @@
     .timeline { position: relative; padding-left: 28px; }
     .timeline::before {
       content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
-      width: 2px; background: linear-gradient(180deg, var(--danger), var(--danger-mid), transparent);
+      width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent-light), transparent);
       border-radius: 2px;
     }
     .tl-item { position: relative; margin-bottom: 20px; }
     .tl-item::before {
       content: ''; position: absolute; left: -25px; top: 6px;
       width: 10px; height: 10px; border-radius: 50%;
-      background: var(--danger); border: 2px solid #fff;
-      box-shadow: 0 0 0 2px var(--danger);
+      background: var(--accent); border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--accent);
     }
-    .tl-year { font-size: 0.75rem; font-weight: 700; color: var(--danger); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .tl-year { font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
     .tl-item h4 { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
     .tl-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
     /* ── PILL BUTTON ── */
     .pill-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 20px;
-  border: 1px solid rgba(59,130,196,0.2);
-  text-decoration: none;
-  transition: all .22s;
-}
-.pill-btn:hover {
-  background: var(--accent);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59,130,196,0.25);
-}
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 20px;
+      border: 1px solid rgba(59,130,196,0.2);
+      text-decoration: none;
+      transition: all .22s;
+    }
+    .pill-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59,130,196,0.25);
+    }
 
     /* ── ANSSI ── */
     .anssi-row { display: flex; justify-content: center; }
@@ -320,12 +320,15 @@
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 14px;
     }
+
     .contact-item {
       background: linear-gradient(145deg, #fff, rgba(219, 234, 254, 0.4));
       border: 1px solid var(--border-card);
       border-radius: 14px;
       padding: 20px 18px;
-      display: flex; align-items: center; gap: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       text-decoration: none;
       box-shadow: var(--shadow-sm);
       transition: all .24s ease;
@@ -335,12 +338,56 @@
       box-shadow: var(--shadow-hover);
       transform: translateY(-2px);
     }
-    .contact-item .c-icon { font-size: 1.4rem; flex-shrink: 0; }
-    .contact-item .c-label {
+    .contact-item.email-card {
+      border-color: rgba(59, 130, 196, 0.3);
+      background: linear-gradient(145deg, #fff, rgba(219, 234, 254, 0.6));
+    }
+
+    .contact-icon-wrap {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon-wrap svg { width: 18px; height: 18px; }
+    .icon-blue  { background: rgba(59, 130, 196, 0.12); }
+    .icon-red   { background: rgba(220, 80,  80,  0.10); }
+    .icon-green { background: rgba(60,  160, 80,  0.10); }
+
+    .c-label {
       color: var(--text-muted); font-size: 0.72rem;
       text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
     }
-    .contact-item .c-value { color: var(--text-primary); font-size: 0.88rem; margin-top: 3px; font-weight: 500; }
+    .c-value {
+      color: var(--text-primary); font-size: 0.88rem;
+      margin-top: 3px; font-weight: 500;
+    }
+    .c-value a {
+      color: var(--accent); text-decoration: none;
+    }
+    .c-value a:hover { text-decoration: underline; }
+
+    .rgpd-block {
+      border-top: 1px solid rgba(59, 130, 196, 0.12);
+      padding-top: 10px;
+      margin-top: 2px;
+    }
+    .rgpd-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 20px;
+      padding: 4px 10px;
+      border: 1px solid rgba(59, 130, 196, 0.2);
+      margin-bottom: 7px;
+    }
+    .rgpd-badge svg { width: 11px; height: 11px; flex-shrink: 0; }
+    .rgpd-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
 
     /* ── DIVIDER ── */
     .section-divider {
@@ -383,7 +430,6 @@
       <ul>
         <li><a href="#presentation">Présentation</a></li>
         <li><a href="#BoetStopson">Groupe BOËT</a></li>
-       
         <li><a href="#certification">Certification</a></li>
         <li><a href="#projets">Projets</a></li>
         <li><a href="#tdb">Tableau de bord</a></li>
@@ -409,39 +455,37 @@
 
     <!-- TIMELINE PARCOURS -->
     <section class="section-card" id="historique">
-      <h2 class="section-title"><span class="accent-bar red"></span>Parcours Scolaire et professionnel</h2>
+      <h2 class="section-title"><span class="accent-bar"></span>Parcours Scolaire et professionnel</h2>
       <p class="section-sub"></p>
-       <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-year">2018</div>
-            <h4>BAC STI2D</h4>
-            <p>BAC STI2D Option SIN au lycée de l'Europe à Dunkerque</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2020</div>
-            <h4>BTS Systèmes Numériques option A Informatique et Réseaux</h4>
-            <p>BTS SNIR au lycée de l'Europe à Dunkerque</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2022</div>
-            <h4>Opérateur de production à Kubota, Bierne</h4>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2023</div>
-            <h4>Opérateur / Emballeur à ArcelorMittal, Mardyck</h4>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2024-2026</div>
-            <h4>BTS SIO option SISR</h4>
-            <p>BTS SIO option SISR à l'AFPI de Marcq-En-Baroeul</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-year">2026-</div>
-            <h4>Souhait de continuer en bachelor ...</h4>
-          
-          </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">2018</div>
+          <h4>BAC STI2D</h4>
+          <p>BAC STI2D Option SIN au lycée de l'Europe à Dunkerque</p>
         </div>
-
+        <div class="tl-item">
+          <div class="tl-year">2020</div>
+          <h4>BTS Systèmes Numériques option A Informatique et Réseaux</h4>
+          <p>BTS SNIR au lycée de l'Europe à Dunkerque</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2022</div>
+          <h4>Opérateur de production à Kubota, Bierne</h4>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2023</div>
+          <h4>Opérateur / Emballeur à ArcelorMittal, Mardyck</h4>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2024-2026</div>
+          <h4>BTS SIO option SISR</h4>
+          <p>BTS SIO option SISR à l'AFPI de Marcq-En-Baroeul</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2026-</div>
+          <h4>Souhait de continuer en bachelor ...</h4>
+        </div>
+      </div>
     </section>
 
     <!-- 2 BOËT -->
@@ -512,40 +556,40 @@
     </section>
 
     <!-- 5 PROJETS -->
-<section class="section-card" id="projets">
-  <h2 class="section-title"><span class="accent-bar"></span>Mes Projets</h2>
-  <p class="section-sub">Réalisations en stage &amp; école</p>
+    <section class="section-card" id="projets">
+      <h2 class="section-title"><span class="accent-bar"></span>Mes Projets</h2>
+      <p class="section-sub">Réalisations en stage &amp; école</p>
 
-  <div class="projet-item">
-    <h3>Projet 1 – L'outil de développement WINDEV</h3>
-    <p>WINDEV est un environnement de développement intégré (IDE) édité par PC SOFT, destiné principalement à la création d'applications Windows, mais aussi Web et mobiles (via Webdev et Windev Mobile).</p>
-    <a href="Projet-Windev.html" class="pill-btn">💻 Voir le projet</a>
-  </div>
+      <div class="projet-item">
+        <h3>Projet 1 – L'outil de développement WINDEV</h3>
+        <p>WINDEV est un environnement de développement intégré (IDE) édité par PC SOFT, destiné principalement à la création d'applications Windows, mais aussi Web et mobiles (via Webdev et Windev Mobile).</p>
+        <a href="Projet-Windev.html" class="pill-btn">💻 Voir le projet</a>
+      </div>
 
-  <div class="projet-item">
-    <h3>Projet 2 - L'ERP CLIPPER</h3>
-    <p>CLIPPER ERP est une solution pratique pour définir et suivre les temps de fabrication et piloter la rentabilité des ateliers.</p>
-    <a href="Projet-CLIPPER.html" class="pill-btn">📊 Voir le projet</a>
-  </div>
+      <div class="projet-item">
+        <h3>Projet 2 - L'ERP CLIPPER</h3>
+        <p>CLIPPER ERP est une solution pratique pour définir et suivre les temps de fabrication et piloter la rentabilité des ateliers.</p>
+        <a href="Projet-CLIPPER.html" class="pill-btn">📊 Voir le projet</a>
+      </div>
 
-  <div class="projet-item">
-    <h3>Projet 3 – Outil de test de phishing</h3>
-    <p>Mise en place d'un outil de test de phishing au sein de la société.</p>
-    <a href="Projet phishing.html" class="pill-btn">🎣 Voir le projet</a>
-  </div>
+      <div class="projet-item">
+        <h3>Projet 3 – Outil de test de phishing</h3>
+        <p>Mise en place d'un outil de test de phishing au sein de la société.</p>
+        <a href="Projet phishing.html" class="pill-btn">🎣 Voir le projet</a>
+      </div>
 
-  <div class="projet-item">
-    <h3>Projet 4 – Modification de composants</h3>
-    <p>Modification de composants d'ordinateurs fixes et portables.</p>
-    <a href="Projet-Composants.html" class="pill-btn">🖥️ Voir le projet</a>
-  </div>
+      <div class="projet-item">
+        <h3>Projet 4 – Modification de composants</h3>
+        <p>Modification de composants d'ordinateurs fixes et portables.</p>
+        <a href="Projet-Composants.html" class="pill-btn">🖥️ Voir le projet</a>
+      </div>
 
-  <div class="projet-item">
-    <h3>Projet 5 – Nouveaux copieurs &amp; GPO</h3>
-    <p>Mise en place de nouveaux copieurs et mise en place d'une GPO pour le driver.</p>
-    <a href="Projet-Copieur.html" class="pill-btn">🖨️ Voir le projet</a>
-  </div>
-</section>
+      <div class="projet-item">
+        <h3>Projet 5 – Nouveaux copieurs &amp; GPO</h3>
+        <p>Mise en place de nouveaux copieurs et mise en place d'une GPO pour le driver.</p>
+        <a href="Projet-Copieur.html" class="pill-btn">🖨️ Voir le projet</a>
+      </div>
+    </section>
 
     <!-- 6 TDB -->
     <section class="section-card" id="tdb">
@@ -582,26 +626,77 @@
       <h2 class="section-title"><span class="accent-bar"></span>Contact</h2>
       <p class="section-sub">Prise de contact</p>
       <div class="contact-grid">
-        <a href="mailto:cedric.ignace19@gmail.com" class="contact-item">
-          <span class="c-icon">📧</span><p class="rgpd-mention">
-  En m'envoyant un email, vous acceptez que vos données (nom, adresse email, contenu du message) 
-  soient utilisées uniquement pour répondre à votre demande, conformément au 
-  <abbr title="Règlement Général sur la Protection des Données">RGPD</abbr>. 
-  Elles ne seront ni partagées, ni conservées au-delà du nécessaire.
-</p>
-          <div><div class="c-label">Email</div><div class="c-value">cedric.ignace19@gmail.com</div></div>
-        </a>
-        <div class="contact-item">
-          <span class="c-icon">📍</span>
-          <div><div class="c-label">Adresse</div><div class="c-value">128 rue de la louvière, 59800 LILLE</div></div>
+
+        <!-- Email card avec mention RGPD -->
+        <div class="contact-item email-card">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="contact-icon-wrap icon-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3b82c4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M2 7l10 7 10-7"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-label">Email</div>
+              <div class="c-value">
+                <a href="mailto:cedric.ignace19@gmail.com">cedric.ignace19@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="rgpd-block">
+            <div class="rgpd-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3b82c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              Données protégées · RGPD
+            </div>
+            <p class="rgpd-text">
+              Vos données (email, message) sont utilisées uniquement pour répondre à votre demande,
+              conformément au <abbr title="Règlement Général sur la Protection des Données">RGPD</abbr>.
+              Elles ne sont ni partagées, ni conservées au-delà du nécessaire.
+            </p>
+          </div>
         </div>
+
+        <!-- Adresse -->
         <div class="contact-item">
-          <span class="c-icon">📱</span>
-          <div><div class="c-label">Téléphone</div><div class="c-value">06 43 57 01 18</div></div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="contact-icon-wrap icon-red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#dc5050" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-label">Adresse</div>
+              <div class="c-value">128 rue de la Louvière<br>59800 LILLE</div>
+            </div>
+          </div>
         </div>
+
+        <!-- Téléphone -->
+        <div class="contact-item">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="contact-icon-wrap icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3ca050" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.93 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.93 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-label">Téléphone</div>
+              <div class="c-value">06 43 57 01 18</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
   </div>
+
+  <footer>
+    © 2026 Cédric – Portfolio BTS SIO · Tous droits réservés
+  </footer>
+
 </body>
 </html>
