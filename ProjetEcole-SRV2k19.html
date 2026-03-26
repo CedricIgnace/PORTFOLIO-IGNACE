@@ -103,6 +103,7 @@
     .section-card:nth-child(1){animation-delay:.08s} .section-card:nth-child(2){animation-delay:.16s}
     .section-card:nth-child(3){animation-delay:.24s} .section-card:nth-child(4){animation-delay:.32s}
     .section-card:nth-child(5){animation-delay:.40s} .section-card:nth-child(6){animation-delay:.48s}
+    .section-card:nth-child(7){animation-delay:.56s}
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
     .section-title { font-family:var(--font-head); font-size:1.5rem; color:var(--text-primary); margin-bottom:6px; display:flex; align-items:center; gap:13px; }
@@ -132,6 +133,130 @@
     .detail-list li { display:flex; align-items:flex-start; gap:10px; color:var(--text-muted); font-size:0.85rem; padding:6px 10px; background:rgba(219,234,254,0.3); border-radius:8px; }
     .detail-list li::before { content:'✓'; color:var(--accent); font-weight:700; flex-shrink:0; font-size:0.8rem; margin-top:1px; }
     .detail-list li strong { color:var(--text-primary); }
+
+    /* ── INTRO SECTION ── */
+    .intro-section {
+      background: linear-gradient(135deg, rgba(219,234,254,0.5) 0%, rgba(255,255,255,0.9) 100%);
+      border: 1px solid var(--border-card);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .intro-section::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(59,130,196,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .intro-section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .intro-section-icon {
+      width: 42px; height: 42px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(59,130,196,0.25);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .intro-section-header h2 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      color: var(--text-primary);
+    }
+    .intro-section-header .intro-badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(59,130,196,0.2);
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+    .intro-text {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.85;
+    }
+    .intro-text p { margin-bottom: 14px; }
+    .intro-text p:last-child { margin-bottom: 0; }
+    .intro-text strong { color: var(--text-primary); font-weight: 600; }
+    .intro-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(59,130,196,0.08);
+      border: 1px solid rgba(59,130,196,0.18);
+      border-radius: 8px;
+      padding: 2px 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* ── BLOCS CONTEXTUELS (B2.2 / B3.2 / B3.3) ── */
+    .context-block {
+      margin-top: 20px; margin-bottom: 4px;
+      background: linear-gradient(135deg, rgba(219,234,254,0.45), rgba(255,255,255,0.8));
+      border: 1px solid rgba(59,130,196,0.22);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px; padding: 20px 22px;
+    }
+    .context-block--green {
+      background: linear-gradient(135deg, rgba(220,252,231,0.45), rgba(255,255,255,0.8));
+      border-color: rgba(22,163,74,0.22); border-left-color: var(--safe);
+    }
+    .context-block--purple {
+      background: linear-gradient(135deg, rgba(237,233,254,0.45), rgba(255,255,255,0.8));
+      border-color: rgba(124,58,237,0.22); border-left-color: var(--purple);
+    }
+    .context-block-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .context-ref {
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 0.7rem; font-weight: 800; padding: 3px 10px;
+      border-radius: 20px; border: 1px solid rgba(59,130,196,0.25);
+      letter-spacing: .4px; white-space: nowrap; flex-shrink: 0;
+    }
+    .context-ref--green  { background: var(--safe-soft);   color: var(--safe);   border-color: rgba(22,163,74,0.25); }
+    .context-ref--purple { background: var(--purple-soft); color: var(--purple); border-color: rgba(124,58,237,0.25); }
+    .context-title {
+      font-family: var(--font-head); font-size: 0.88rem;
+      color: var(--text-primary); font-weight: 600;
+    }
+    .context-block p {
+      color: var(--text-secondary); font-size: 0.87rem; line-height: 1.8; margin-bottom: 10px;
+    }
+    .context-block p:last-child { margin-bottom: 0; }
+    .context-tag {
+      display: inline-block; background: var(--accent-soft); color: var(--accent);
+      font-size: 0.78rem; font-weight: 600; padding: 1px 8px; border-radius: 6px;
+      border: 1px solid rgba(59,130,196,0.2);
+    }
+    .context-tag--green { background: var(--safe-soft); color: var(--safe); border-color: rgba(22,163,74,0.2); }
+    .context-gpo-list {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+      margin: 10px 0; padding: 0;
+    }
+    .context-gpo-list li {
+      color: var(--text-secondary); font-size: 0.87rem; line-height: 1.7;
+      padding: 8px 12px; background: rgba(237,233,254,0.35);
+      border-radius: 8px; border-left: 3px solid rgba(124,58,237,0.35);
+    }
+    .context-gpo-list li strong { color: var(--purple); }
 
     /* ── ZONE SCREENSHOT ── */
     .screenshot-zone {
@@ -170,6 +295,7 @@
     @media (max-width:640px) {
       .hero-inner { padding:32px 24px; } .hero-text h1 { font-size:1.5rem; }
       .section-card { padding:24px 18px; } .topo-arrow { display:none; }
+      .intro-section { padding:24px 20px; }
     }
   </style>
 </head>
@@ -190,12 +316,11 @@
       <div class="hero-icon">🖥️</div>
       <div class="hero-text">
         <h1>Windows Server 2019</h1>
-        <p>Déploiement et configuration d'un serveur Windows Server 2019 en formation : Active Directory, DNS, DHCP, NPS, GPO et Bureau à distance installés et administrés.</p>
+        <p>Déploiement et configuration d'un serveur Windows Server 2019 en formation : Active Directory, DNS, DHCP, GPO et Bureau à distance installés et administrés.</p>
         <div class="hero-tags">
           <span class="hero-tag">Windows Server 2019</span>
           <span class="hero-tag">Active Directory</span>
           <span class="hero-tag">DNS & DHCP</span>
-          
           <span class="hero-tag">GPO</span>
           <span class="hero-tag">RDS</span>
         </div>
@@ -206,7 +331,6 @@
   <div class="screenshot-wrap">
     <div class="screenshot-inner">
       <div class="screenshot-bar">
-        
         <span class="screenshot-title">Srv-2k19 — Bureau Windows Server 2019</span>
       </div>
       <img src="Srv2k19/ScreenPrincipal.png" alt="Bureau Windows Server 2019">
@@ -223,6 +347,29 @@
         <a href="#dns-dhcp">🌐 DNS & DHCP</a>
         <a href="#nps-gpo">🛡️ GPO</a>
         <a href="#rds">🖥️ Bureau à distance</a>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="intro-section">
+      <div class="intro-section-header">
+        <div class="intro-section-icon">📝</div>
+        <h2>Présentation du projet</h2>
+        <span class="intro-badge">Vue d'ensemble</span>
+      </div>
+      <div class="intro-text">
+        <p>
+          Dans le cadre de ce projet, j'ai installé et configuré un serveur <strong>Windows Server 2019</strong> en tant que
+          contrôleur de domaine principal. J'ai mis en place l'annuaire <strong>Active Directory Domain Services (AD DS)</strong> en
+          créant une nouvelle forêt avec le domaine <span class="intro-highlight">🌐 srv-2k19.local</span>. La configuration comprend la création
+          d'unités d'organisation <strong>(OU)</strong> structurées par département, la gestion des comptes utilisateurs avec leurs
+          attributs, et l'intégration des postes clients au domaine.
+        </p>
+        <p>
+          J'ai également automatisé la création d'utilisateurs en développant un <strong>script PowerShell</strong> qui permet
+          d'ajouter des comptes en masse à partir d'un fichier <strong>CSV</strong>, réduisant ainsi le temps d'administration et
+          limitant les erreurs de saisie.
+        </p>
       </div>
     </div>
 
@@ -244,7 +391,6 @@
         <div style="background:var(--accent-soft);border:1px solid rgba(59,130,196,0.2);border-radius:12px;padding:16px;text-align:center;"><div style="font-size:1.6rem;margin-bottom:6px;">🏛️</div><div style="font-size:0.82rem;font-weight:700;color:var(--accent);">AD DS</div><div style="font-size:0.72rem;color:var(--text-muted);">Active Directory</div></div>
         <div style="background:var(--accent-soft);border:1px solid rgba(59,130,196,0.2);border-radius:12px;padding:16px;text-align:center;"><div style="font-size:1.6rem;margin-bottom:6px;">🌐</div><div style="font-size:0.82rem;font-weight:700;color:var(--accent);">DNS</div><div style="font-size:0.72rem;color:var(--text-muted);">Résolution de noms</div></div>
         <div style="background:var(--accent-soft);border:1px solid rgba(59,130,196,0.2);border-radius:12px;padding:16px;text-align:center;"><div style="font-size:1.6rem;margin-bottom:6px;">📡</div><div style="font-size:0.82rem;font-weight:700;color:var(--accent);">DHCP</div><div style="font-size:0.72rem;color:var(--text-muted);">Attribution IP</div></div>
-        <div style="background:var(--accent-soft);border:1px solid rgba(59,130,196,0.2);border-radius:12px;padding:16px;text-align:center;"><div style="font-size:1.6rem;margin-bottom:6px;">🛡️</div><div style="font-size:0.82rem;font-weight:700;color:var(--accent);">NPS</div><div style="font-size:0.72rem;color:var(--text-muted);">Politique réseau</div></div>
         <div style="background:var(--accent-soft);border:1px solid rgba(59,130,196,0.2);border-radius:12px;padding:16px;text-align:center;"><div style="font-size:1.6rem;margin-bottom:6px;">⚙️</div><div style="font-size:0.82rem;font-weight:700;color:var(--accent);">GPO</div><div style="font-size:0.72rem;color:var(--text-muted);">Stratégies de groupe</div></div>
         <div style="background:var(--accent-soft);border:1px solid rgba(59,130,196,0.2);border-radius:12px;padding:16px;text-align:center;"><div style="font-size:1.6rem;margin-bottom:6px;">🖥️</div><div style="font-size:0.82rem;font-weight:700;color:var(--accent);">RDS</div><div style="font-size:0.72rem;color:var(--text-muted);">Bureau à distance</div></div>
       </div>
@@ -268,13 +414,22 @@
           <li><strong>Groupes de sécurité</strong> — regroupement d'utilisateurs pour la gestion des droits</li>
           <li><strong>Jonction de postes</strong> — intégration des machines clientes au domaine</li>
         </ul>
+
+        <div class="context-block">
+          <div class="context-block-header">
+            <span class="context-ref">B3.2</span>
+            <span class="context-title">Préserver l'identité numérique de l'organisation</span>
+          </div>
+          <p>La gestion des identités est centralisée dans l'Active Directory. Chaque utilisateur dispose d'un compte nominatif avec un identifiant unique (format <strong>prenom.nom</strong>) et un mot de passe temporaire qu'il doit changer à la première connexion. Les comptes sont organisés en groupes de sécurité (<span class="context-tag">GRP_Direction</span>, <span class="context-tag">GRP_Informatique</span>, <span class="context-tag">GRP_Exploitation</span>) permettant d'attribuer des droits d'accès de manière cohérente.</p>
+          <p>J'ai appliqué le principe du <strong>moindre privilège</strong> : chaque utilisateur n'a accès qu'aux ressources nécessaires à son travail. Les administrateurs disposent de comptes séparés pour l'administration et l'usage quotidien. La politique de mot de passe impose une longueur minimale de <strong>10 caractères</strong> avec complexité obligatoire.</p>
+        </div>
+
         <div class="screenshot-zone">
           <div class="screenshot-zone-bar">
-           
             <span class="caption">Active Directory Users and Computers</span>
           </div>
           <img src="Srv2k19/Screen-AD.png" alt="Capture Active Directory" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          </div>
+        </div>
       </div>
 
       <div class="service-card">
@@ -284,12 +439,9 @@
         </div>
         <p class="service-desc">Script PowerShell afin d'ajouter de nouveaux utilisateurs.</p>
         <div class="screenshot-zone">
-          <div class="screenshot-zone-bar">
-           
-
-          </div>
+          <div class="screenshot-zone-bar"></div>
           <img src="Srv2k19/ScreenPowerShell.png" alt="Powershell" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="placeholder" style="display:none"><div class="placeholder-icon">🛠️</div>
+          <div class="placeholder" style="display:none"><div class="placeholder-icon">🛠️</div></div>
         </div>
       </div>
     </section>
@@ -311,9 +463,18 @@
           <li><strong>Enregistrements A et PTR</strong> — associent machines et adresses IP</li>
           <li><strong>Intégration AD</strong> — zones DNS intégrées à l'annuaire pour la réplication</li>
         </ul>
+
+        <div class="context-block context-block--green">
+          <div class="context-block-header">
+            <span class="context-ref context-ref--green">B2.2</span>
+            <span class="context-title">Administrer les réseaux</span>
+          </div>
+          <p>J'ai configuré les services réseau essentiels sur le serveur. Le service DNS assure la résolution de noms au sein du domaine avec une zone de recherche directe (<span class="context-tag context-tag--green">srv-2k19.local</span>) et une zone de recherche inversée pour la résolution IP vers nom. Les enregistrements A et PTR sont gérés automatiquement grâce à l'intégration avec Active Directory.</p>
+          <p>Le service DHCP distribue automatiquement les configurations IP aux postes clients. J'ai créé une étendue (scope) avec la plage d'adresses <strong>192.168.1.100 à 192.168.1.200</strong>, configuré les exclusions pour les équipements à IP fixe (serveurs, imprimantes), et défini les options DHCP (passerelle par défaut, serveur DNS). Le bail est configuré sur <strong>8 jours</strong> avec renouvellement automatique.</p>
+        </div>
+
         <div class="screenshot-zone">
           <div class="screenshot-zone-bar">
-            
             <span class="caption">Console DNS — Gestionnaire DNS</span>
           </div>
           <img src="Srv2k19/Screen-dns.png" alt="Console DNS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -338,7 +499,6 @@
         </ul>
         <div class="screenshot-zone">
           <div class="screenshot-zone-bar">
-           
             <span class="caption">Console DHCP — Étendue et baux actifs</span>
           </div>
           <img src="Srv2k19/screen-dhcp.png" alt="Console DHCP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -365,9 +525,23 @@
           <li><strong>Configuration réseau</strong> — lecteurs réseau mappés, imprimantes déployées automatiquement</li>
           <li><strong>Scripts de démarrage/fermeture</strong> — exécution de scripts à l'ouverture de session</li>
         </ul>
+
+        <div class="context-block context-block--purple">
+          <div class="context-block-header">
+            <span class="context-ref context-ref--purple">B3.3</span>
+            <span class="context-title">Sécuriser les équipements et les usages des utilisateurs</span>
+          </div>
+          <p>J'ai déployé plusieurs stratégies de groupe (GPO) pour sécuriser le parc informatique et encadrer les usages :</p>
+          <ul class="context-gpo-list">
+            <li><strong>GPO_MDP_Politique</strong> : impose un mot de passe de 10 caractères minimum avec complexité, expiration tous les 90 jours, et verrouillage du compte après 5 tentatives échouées.</li>
+            <li><strong>GPO_Ecran_Veille</strong> : active l'écran de veille avec mot de passe après 10 minutes d'inactivité pour éviter l'accès non autorisé aux postes non surveillés.</li>
+            <li><strong>GPO_Blocage_USB</strong> : désactive les périphériques de stockage USB amovibles sur les postes de l'OU Exploitation pour prévenir l'exfiltration de données et l'introduction de malwares.</li>
+          </ul>
+          <p>L'accès distant au serveur via RDS (Remote Desktop Services) est sécurisé par l'authentification <strong>NLA</strong> (Network Level Authentication) qui vérifie l'identité de l'utilisateur avant d'établir la session graphique.</p>
+        </div>
+
         <div class="screenshot-zone">
           <div class="screenshot-zone-bar">
-         
             <span class="caption">Gestionnaire de stratégie de groupe (GPMC)</span>
           </div>
           <img src="Srv2k19/screen-gpo.png" alt="Console GPO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -396,7 +570,6 @@
 
         <div class="screenshot-zone">
           <div class="screenshot-zone-bar">
-        
             <span class="caption">Connexion Bureau à distance — Client RDP</span>
           </div>
           <img src="Srv2k19/screen-rds-connexion.png" alt="Connexion RDP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -405,7 +578,6 @@
 
         <div class="screenshot-zone" style="margin-top:14px;">
           <div class="screenshot-zone-bar">
-        
             <span class="caption">Session Bureau à distance active — Srv-2k19</span>
           </div>
           <img src="Srv2k19/screen-rds-session.png" alt="Session RDS active" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
