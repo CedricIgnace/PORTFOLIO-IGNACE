@@ -48,20 +48,9 @@
       pointer-events: none;
     }
 
-    .bg-shape {
-      position: fixed; border-radius: 50%;
-      pointer-events: none; z-index: 0; opacity: .55;
-    }
-    .bg-shape--1 {
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(147,200,255,0.22), transparent 70%);
-      top: -120px; left: -150px;
-    }
-    .bg-shape--2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(255,180,180,0.15), transparent 70%);
-      bottom: -80px; right: -120px;
-    }
+    .bg-shape { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; opacity: .55; }
+    .bg-shape--1 { width: 520px; height: 520px; background: radial-gradient(circle, rgba(147,200,255,0.22), transparent 70%); top: -120px; left: -150px; }
+    .bg-shape--2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,180,180,0.15), transparent 70%); bottom: -80px; right: -120px; }
 
     /* ── HEADER ── */
     header {
@@ -72,19 +61,14 @@
       box-shadow: 0 1px 18px rgba(30, 60, 120, 0.07);
       padding: 14px 28px;
       display: flex; align-items: center;
-      justify-content: space-between; gap: 20px;
-      flex-wrap: wrap;
+      justify-content: space-between; gap: 20px; flex-wrap: wrap;
     }
     .header-left { display: flex; align-items: center; gap: 14px; }
     .back-btn {
       display: inline-flex; align-items: center; gap: 7px;
-      padding: 7px 16px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.82rem; font-weight: 600;
-      border-radius: 20px; text-decoration: none;
-      border: 1px solid rgba(59,130,196,0.2);
-      transition: all .22s;
+      padding: 7px 16px; background: var(--accent-soft); color: var(--accent);
+      font-size: 0.82rem; font-weight: 600; border-radius: 20px; text-decoration: none;
+      border: 1px solid rgba(59,130,196,0.2); transition: all .22s;
     }
     .back-btn:hover { background: var(--accent); color: #fff; }
     .header-title { font-family: var(--font-head); font-size: 1.15rem; color: var(--text-primary); }
@@ -95,39 +79,24 @@
     }
 
     /* ── HERO ── */
-    .hero {
-      position: relative; z-index: 1;
-      max-width: 1040px; margin: 0 auto;
-      padding: 52px 24px 0;
-    }
+    .hero { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 52px 24px 0; }
     .hero-inner {
       background: linear-gradient(135deg, #1a0a0a 0%, #3b1010 50%, #5c1a1a 100%);
-      border-radius: 24px;
-      padding: 52px 48px;
-      display: flex; align-items: center; gap: 40px;
-      flex-wrap: wrap;
+      border-radius: 24px; padding: 52px 48px;
+      display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
       box-shadow: 0 20px 60px rgba(100, 20, 20, 0.4);
       overflow: hidden; position: relative;
     }
     .hero-inner::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background:
         radial-gradient(ellipse 400px 300px at 80% 50%, rgba(220,38,38,0.2), transparent),
         radial-gradient(ellipse 200px 200px at 10% 80%, rgba(239,68,68,0.1), transparent);
       pointer-events: none;
     }
-    /* Animated scan line effect */
     .hero-inner::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255,0,0,0.02) 2px,
-        rgba(255,0,0,0.02) 4px
-      );
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,0.02) 2px, rgba(255,0,0,0.02) 4px);
       pointer-events: none;
     }
     .hero-icon {
@@ -141,42 +110,22 @@
       50% { filter: drop-shadow(0 4px 32px rgba(220,38,38,1)); }
     }
     .hero-text { position: relative; z-index: 1; }
-    .hero-text h1 {
-      font-family: var(--font-head);
-      font-size: 2rem; color: #fff;
-      margin-bottom: 8px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-    }
-    .hero-text p {
-      color: rgba(255,255,255,0.68);
-      font-size: 0.95rem; max-width: 520px;
-      margin-bottom: 20px;
-    }
+    .hero-text h1 { font-family: var(--font-head); font-size: 2rem; color: #fff; margin-bottom: 8px; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+    .hero-text p { color: rgba(255,255,255,0.68); font-size: 0.95rem; max-width: 520px; margin-bottom: 20px; }
     .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .hero-tag {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,100,100,0.3);
-      color: rgba(255,200,200,0.9);
-      font-size: 0.75rem; font-weight: 500;
-      padding: 4px 12px; border-radius: 20px;
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,100,100,0.3);
+      color: rgba(255,200,200,0.9); font-size: 0.75rem; font-weight: 500;
+      padding: 4px 12px; border-radius: 20px; backdrop-filter: blur(8px);
     }
 
     /* ── CONTENT ── */
-    .page-content {
-      position: relative; z-index: 1;
-      max-width: 1040px; margin: 0 auto;
-      padding: 28px 24px 90px;
-    }
+    .page-content { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 28px 24px 90px; }
 
     .section-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(18px);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius);
-      padding: 42px 40px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow-sm);
+      background: var(--bg-card); backdrop-filter: blur(18px);
+      border: 1px solid var(--border-card); border-radius: var(--radius);
+      padding: 42px 40px; margin-bottom: 24px; box-shadow: var(--shadow-sm);
       opacity: 0; transform: translateY(24px);
       animation: fadeUp .5s cubic-bezier(.22,1,.36,1) forwards;
       transition: box-shadow .28s, border-color .28s;
@@ -187,43 +136,24 @@
     .section-card:nth-child(3){animation-delay:.24s}
     .section-card:nth-child(4){animation-delay:.32s}
     .section-card:nth-child(5){animation-delay:.40s}
-
+    .section-card:nth-child(6){animation-delay:.48s}
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
     .section-title {
-      font-family: var(--font-head);
-      font-size: 1.5rem; color: var(--text-primary);
-      margin-bottom: 6px;
-      display: flex; align-items: center; gap: 13px;
+      font-family: var(--font-head); font-size: 1.5rem; color: var(--text-primary);
+      margin-bottom: 6px; display: flex; align-items: center; gap: 13px;
     }
-    .accent-bar {
-      display: inline-block; width: 4px; height: 26px;
-      background: linear-gradient(180deg, var(--accent), var(--accent-light));
-      border-radius: 3px; flex-shrink: 0;
-    }
-    .accent-bar.red {
-      background: linear-gradient(180deg, var(--danger), var(--danger-mid));
-    }
-    .section-sub {
-      color: var(--text-muted); font-size: 0.86rem;
-      margin-bottom: 26px; padding-left: 17px;
-    }
+    .accent-bar { display: inline-block; width: 4px; height: 26px; background: linear-gradient(180deg, var(--accent), var(--accent-light)); border-radius: 3px; flex-shrink: 0; }
+    .accent-bar.red { background: linear-gradient(180deg, var(--danger), var(--danger-mid)); }
+    .section-sub { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 26px; padding-left: 17px; }
 
     /* ── CONTEXTE ── */
     .context-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; }
     .context-text strong { color: var(--accent); font-weight: 600; }
     .context-text strong.red { color: var(--danger); }
 
-    .quick-facts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 14px; margin-top: 26px;
-    }
-    .fact-item {
-      background: linear-gradient(145deg, #fff, var(--accent-soft));
-      border: 1px solid var(--border-card);
-      border-radius: 14px; padding: 18px 16px; text-align: center;
-    }
+    .quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-top: 26px; }
+    .fact-item { background: linear-gradient(145deg, #fff, var(--accent-soft)); border: 1px solid var(--border-card); border-radius: 14px; padding: 18px 16px; text-align: center; }
     .fact-item .f-icon { font-size: 1.5rem; margin-bottom: 6px; }
     .fact-item .f-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; }
     .fact-item .f-value { color: var(--text-primary); font-size: 0.9rem; font-weight: 600; margin-top: 3px; }
@@ -233,16 +163,10 @@
     .step-item {
       display: flex; gap: 20px; align-items: flex-start;
       background: linear-gradient(145deg, #fff, rgba(219,234,254,0.3));
-      border: 1px solid var(--border-card);
-      border-radius: 16px; padding: 22px 20px;
+      border: 1px solid var(--border-card); border-radius: 16px; padding: 22px 20px;
       transition: all .27s ease; position: relative; overflow: hidden;
     }
-    .step-item::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: linear-gradient(180deg, var(--danger), var(--danger-mid));
-    }
+    .step-item::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--danger), var(--danger-mid)); }
     .step-item:hover { border-color: rgba(220,38,38,0.25); box-shadow: var(--shadow-hover); transform: translateX(4px); }
     .step-num {
       width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
@@ -262,42 +186,26 @@
       display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
-    .riot-logo {
-      font-size: 3rem; flex-shrink: 0;
-      filter: drop-shadow(0 2px 10px rgba(220,38,38,0.5));
-    }
+    .riot-logo { font-size: 3rem; flex-shrink: 0; filter: drop-shadow(0 2px 10px rgba(220,38,38,0.5)); }
     .riot-info h3 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
     .riot-info p { color: rgba(255,255,255,0.6); font-size: 0.87rem; line-height: 1.6; margin-bottom: 14px; }
     .riot-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 7px 18px;
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px;
       background: linear-gradient(135deg, var(--danger), #b91c1c);
       color: #fff; font-size: 0.8rem; font-weight: 600;
-      border-radius: 20px; text-decoration: none;
-      transition: all .22s;
+      border-radius: 20px; text-decoration: none; transition: all .22s;
       box-shadow: 0 3px 12px rgba(220,38,38,0.3);
     }
     .riot-link:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
     /* ── FEATURES ── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
     .feature-card {
       background: linear-gradient(145deg, #fff, rgba(254,226,226,0.3));
-      border: 1px solid var(--border-card);
-      border-radius: 16px; padding: 24px 20px;
+      border: 1px solid var(--border-card); border-radius: 16px; padding: 24px 20px;
       transition: all .27s ease; position: relative; overflow: hidden;
     }
-    .feature-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 3px;
-      background: linear-gradient(90deg, var(--danger), var(--danger-mid));
-      opacity: 0; transition: opacity .27s;
-    }
+    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--danger), var(--danger-mid)); opacity: 0; transition: opacity .27s; }
     .feature-card:hover { border-color: rgba(220,38,38,0.3); box-shadow: 0 12px 40px rgba(220,38,38,0.12); transform: translateY(-4px); }
     .feature-card:hover::before { opacity: 1; }
     .feature-card .f-icon { font-size: 1.8rem; margin-bottom: 10px; }
@@ -305,92 +213,105 @@
     .feature-card p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; }
 
     /* ── SCREENSHOTS ── */
-    .screenshots-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-    }
+    .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .screenshot-item {
       border-radius: 14px; overflow: hidden;
-      border: 1px solid var(--border-card);
-      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);
       transition: all .27s; cursor: zoom-in;
     }
     .screenshot-item:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
     .screenshot-item img { width: 100%; height: auto; display: block; }
-    .screenshot-item .sc-caption {
-      padding: 10px 14px; background: #fff;
-      color: var(--text-muted); font-size: 0.78rem; text-align: center;
-    }
+    .screenshot-item .sc-caption { padding: 10px 14px; background: #fff; color: var(--text-muted); font-size: 0.78rem; text-align: center; }
 
     /* ── BILAN ── */
     .bilan-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .bilan-col {
-      background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4));
-      border: 1px solid var(--border-card);
-      border-radius: 14px; padding: 22px 20px;
-    }
-    .bilan-col h3 {
-      font-size: 0.88rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .8px;
-      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
-    }
+    .bilan-col { background: linear-gradient(145deg, #fff, rgba(219,234,254,0.4)); border: 1px solid var(--border-card); border-radius: 14px; padding: 22px 20px; }
+    .bilan-col h3 { font-size: 0.88rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
     .bilan-col.positif h3 { color: #2d7a4f; }
     .bilan-col.apprentissage h3 { color: var(--accent); }
     .bilan-col ul { list-style: none; }
-    .bilan-col ul li {
-      color: var(--text-secondary); font-size: 0.87rem;
-      padding: 5px 0; border-bottom: 1px solid rgba(200,215,235,0.4);
-      display: flex; align-items: flex-start; gap: 8px;
-    }
+    .bilan-col ul li { color: var(--text-secondary); font-size: 0.87rem; padding: 5px 0; border-bottom: 1px solid rgba(200,215,235,0.4); display: flex; align-items: flex-start; gap: 8px; }
     .bilan-col ul li:last-child { border-bottom: none; }
     .bilan-col.positif ul li::before { content: '✓'; color: #2d7a4f; font-weight: 700; flex-shrink: 0; }
     .bilan-col.apprentissage ul li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
 
+    /* ── BLOCS CONTEXTUELS ── */
+    .context-block {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(254,226,226,0.4), rgba(255,255,255,0.85));
+      border: 1px solid rgba(220,38,38,0.2);
+      border-left: 4px solid var(--danger);
+      border-radius: 12px; padding: 20px 22px;
+    }
+    .context-block--blue {
+      background: linear-gradient(135deg, rgba(219,234,254,0.45), rgba(255,255,255,0.85));
+      border-color: rgba(59,130,196,0.22); border-left-color: var(--accent);
+    }
+    .context-block-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .context-ref {
+      background: var(--danger-soft); color: var(--danger);
+      font-size: 0.7rem; font-weight: 800; padding: 3px 10px;
+      border-radius: 20px; border: 1px solid rgba(220,38,38,0.25);
+      letter-spacing: .4px; white-space: nowrap; flex-shrink: 0;
+    }
+    .context-ref--blue { background: var(--accent-soft); color: var(--accent); border-color: rgba(59,130,196,0.25); }
+    .context-title { font-family: var(--font-head); font-size: 0.88rem; color: var(--text-primary); font-weight: 600; }
+    .context-block p { color: var(--text-secondary); font-size: 0.87rem; line-height: 1.8; margin-bottom: 10px; }
+    .context-block p:last-child { margin-bottom: 0; }
+    .context-block strong { color: var(--text-primary); font-weight: 600; }
+    .context-block strong.red { color: var(--danger); }
+
+    /* Stats résultats */
+    .results-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px; margin: 14px 0;
+    }
+    .result-stat {
+      background: rgba(254,226,226,0.5); border: 1px solid rgba(220,38,38,0.15);
+      border-radius: 10px; padding: 12px 14px; text-align: center;
+    }
+    .result-stat .rs-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: .8px; }
+    .result-stat .rs-value { color: var(--danger); font-size: 1.1rem; font-weight: 800; margin-top: 2px; }
+
+    /* Compétences list */
+    .competences-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+    .competences-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      color: var(--text-secondary); font-size: 0.87rem;
+      padding: 8px 12px; background: rgba(219,234,254,0.35);
+      border-radius: 8px; border-left: 3px solid rgba(59,130,196,0.35);
+    }
+    .competences-list li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* Actions correctives list */
+    .actions-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin: 10px 0; }
+    .actions-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      color: var(--text-secondary); font-size: 0.87rem;
+      padding: 7px 12px; background: rgba(254,226,226,0.3);
+      border-radius: 8px; border-left: 3px solid rgba(220,38,38,0.3);
+    }
+    .actions-list li::before { content: '✦'; color: var(--danger); font-size: 0.7rem; flex-shrink: 0; margin-top: 3px; }
+
     /* ── LIGHTBOX ── */
     .lightbox-overlay {
       position: fixed; inset: 0; z-index: 999;
-      background: rgba(10, 5, 5, 0.93);
-      backdrop-filter: blur(10px);
+      background: rgba(10, 5, 5, 0.93); backdrop-filter: blur(10px);
       display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s ease;
+      opacity: 0; pointer-events: none; transition: opacity .3s ease;
     }
     .lightbox-overlay.active { opacity: 1; pointer-events: all; }
-    .lightbox-inner {
-      position: relative;
-      max-width: 90vw; max-height: 88vh;
-      display: flex; flex-direction: column; align-items: center; gap: 14px;
-    }
-    .lightbox-inner img {
-      max-width: 100%; max-height: 80vh;
-      border-radius: 16px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
-      transform: scale(.92);
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
-    }
+    .lightbox-inner { position: relative; max-width: 90vw; max-height: 88vh; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .lightbox-inner img { max-width: 100%; max-height: 80vh; border-radius: 16px; box-shadow: 0 24px 80px rgba(0,0,0,0.7); transform: scale(.92); transition: transform .35s cubic-bezier(.22,1,.36,1); }
     .lightbox-overlay.active .lightbox-inner img { transform: scale(1); }
     .lightbox-caption { color: rgba(255,255,255,0.7); font-size: 0.85rem; text-align: center; }
-    .lightbox-close {
-      position: absolute; top: -40px; right: 0;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff; font-size: 1.2rem;
-      width: 34px; height: 34px; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background .2s;
-    }
+    .lightbox-close { position: absolute; top: -40px; right: 0; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 1.2rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
     .lightbox-close:hover { background: rgba(220,38,38,0.4); }
 
     /* ── FOOTER ── */
-    footer {
-      position: relative; z-index: 1;
-      text-align: center; padding: 28px;
-      color: var(--text-muted); font-size: 0.78rem;
-      border-top: 1px solid var(--border-card);
-      background: rgba(244, 246, 251, 0.6);
-      backdrop-filter: blur(10px);
-    }
+    footer { position: relative; z-index: 1; text-align: center; padding: 28px; color: var(--text-muted); font-size: 0.78rem; border-top: 1px solid var(--border-card); background: rgba(244, 246, 251, 0.6); backdrop-filter: blur(10px); }
 
     @media (max-width: 640px) {
       .hero-inner { padding: 32px 24px; }
@@ -405,7 +326,6 @@
   <div class="bg-shape bg-shape--1"></div>
   <div class="bg-shape bg-shape--2"></div>
 
-  <!-- HEADER -->
   <header>
     <div class="header-left">
       <a href="index.html" class="back-btn">← Retour au portfolio</a>
@@ -414,7 +334,6 @@
     <span class="header-badge">🔴 Cybersécurité · Stage Groupe BOËT</span>
   </header>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
       <div class="hero-icon">🎣</div>
@@ -446,6 +365,18 @@
         de phishing réalistes, d'analyser les comportements des employés, puis de produire un rapport
         pour identifier les axes d'amélioration en matière de cybersécurité.
       </p>
+
+      <!-- B3.1 -->
+      <div class="context-block">
+        <div class="context-block-header">
+          <span class="context-ref">B3.1</span>
+          <span class="context-title">Protéger les données à caractère personnel</span>
+        </div>
+        <p>Le phishing est l'une des principales menaces pesant sur les données personnelles en entreprise. En 2024, <strong>91% des cyberattaques</strong> débutent par un e-mail de phishing (source : Verizon DBIR). L'objectif de ce projet était d'évaluer la vulnérabilité des collaborateurs du Groupe BOËT face à ces attaques et de renforcer leur vigilance.</p>
+        <p>J'ai utilisé la plateforme Riot (TryRiot) pour créer des campagnes de simulation réalistes imitant des services connus (<strong>Microsoft Teams, OpenAI, Google</strong>). Les e-mails contenaient des liens vers des pages de connexion factices permettant de mesurer le taux de clic et de saisie d'identifiants.</p>
+        <p>Cette démarche s'inscrit dans le cadre du <strong>RGPD</strong> qui impose aux organisations de mettre en œuvre des mesures techniques et organisationnelles pour protéger les données personnelles (Article 32). La sensibilisation des employés fait partie de ces mesures.</p>
+      </div>
+
       <div class="quick-facts">
         <div class="fact-item">
           <div class="f-icon">👤</div>
@@ -524,6 +455,41 @@
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar red"></span>Captures d'écran</h2>
       <p class="section-sub">Aperçu de la plateforme Riot en action</p>
+
+      <!-- B3.3 -->
+      <div class="context-block" style="margin-top:0; margin-bottom:24px;">
+        <div class="context-block-header">
+          <span class="context-ref">B3.3</span>
+          <span class="context-title">Sécuriser les équipements et les usages des utilisateurs</span>
+        </div>
+        <p>Au-delà de la simulation, ce projet visait à renforcer concrètement la sécurité des usages au sein de l'entreprise. J'ai analysé les résultats des campagnes pour identifier les profils les plus vulnérables et les services les plus exposés.</p>
+        <p><strong>Résultats obtenus lors de la première campagne :</strong></p>
+        <div class="results-grid">
+          <div class="result-stat">
+            <div class="rs-label">Attaques envoyées</div>
+            <div class="rs-value">3.294</div>
+          </div>
+          <div class="result-stat">
+            <div class="rs-label">Clic sur le lien</div>
+            <div class="rs-value">3%</div>
+          </div>
+          <div class="result-stat">
+            <div class="rs-label">Saisie d'identifiants</div>
+            <div class="rs-value">2%</div>
+          </div>
+          <div class="result-stat">
+            <div class="rs-label">Signalement (vigilants)</div>
+            <div class="rs-value">16%</div>
+          </div>
+        </div>
+        <p>Suite à ces résultats, j'ai rédigé un rapport de sensibilisation à destination de la direction et proposé des actions correctives :</p>
+        <ul class="actions-list">
+          <li>Affichage de bonnes pratiques auprès des équipes concernées</li>
+          <li>Rappel par e-mail des indices permettant de détecter un phishing</li>
+          <li>Recommandation d'activer l'authentification à deux facteurs (MFA) sur les comptes sensibles</li>
+        </ul>
+      </div>
+
       <div class="screenshots-grid">
         <div class="screenshot-item" onclick="openLightbox(this)">
           <img src="Phishing Boet Sans Nom.png" alt="Tableau de bord des simulations">
@@ -533,7 +499,6 @@
           <img src="Top1CyberSecu.png" alt="Liste des niveaux employés">
           <div class="sc-caption">Liste des niveaux de sensibilisation par employé</div>
         </div>
-        <!-- Emplacements pour les screenshots supplémentaires -->
         <div class="screenshot-item" onclick="openLightbox(this)">
           <img src="" alt="Screenshot 3" style="min-height:140px; background: var(--accent-soft);">
           <div class="sc-caption">À compléter</div>
@@ -549,6 +514,24 @@
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Bilan du projet</h2>
       <p class="section-sub">Ce que ce projet m'a apporté</p>
+
+      <!-- B1.6 -->
+      <div class="context-block context-block--blue" style="margin-top:0; margin-bottom:24px;">
+        <div class="context-block-header">
+          <span class="context-ref context-ref--blue">B1.6</span>
+          <span class="context-title">Organiser son développement professionnel</span>
+        </div>
+        <p>Ce projet m'a permis de développer des compétences dans le domaine de la <strong>cybersécurité offensive (Red Team)</strong> et <strong>défensive (Blue Team)</strong>. J'ai appris à utiliser une plateforme SaaS professionnelle de simulation d'attaques et à analyser les comportements humains face aux menaces.</p>
+        <p><strong>Compétences acquises :</strong></p>
+        <ul class="competences-list">
+          <li>Compréhension des techniques d'ingénierie sociale (social engineering)</li>
+          <li>Configuration et pilotage d'une plateforme de simulation de phishing</li>
+          <li>Analyse de données comportementales et rédaction de rapports</li>
+          <li>Communication pédagogique auprès d'un public non-technique</li>
+        </ul>
+        <p>Cette expérience renforce mon profil vers les métiers de la <strong>cybersécurité</strong> et de l'<strong>administration sécurisée des systèmes d'information</strong>.</p>
+      </div>
+
       <div class="bilan-row">
         <div class="bilan-col positif">
           <h3>✅ Résultats obtenus</h3>
@@ -573,7 +556,7 @@
 
   </div>
 
-  <footer>© 2025 Cédric – BTS SIO Projets · Tous droits réservés</footer>
+  <footer>© 2026 Cédric – Portfolio BTS SIO · Tous droits réservés</footer>
 
   <!-- LIGHTBOX -->
   <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
@@ -607,10 +590,6 @@
       }
     });
   </script>
-    <footer>
-    © 2026 Cédric – Portfolio BTS SIO · Tous droits réservés
-  </footer>
-
 
 </body>
 </html>
