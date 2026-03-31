@@ -322,6 +322,35 @@
     .spec-item .s-label { color: rgba(148,163,184,0.8); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; }
     .spec-item .s-value { color: #fff; font-size: 0.85rem; font-weight: 600; margin-top: 2px; }
 
+    /* ── COMPÉTENCES E4 ── */
+.context-block {
+  margin-top: 24px;
+  background: linear-gradient(135deg, rgba(219,234,254,0.45), rgba(255,255,255,0.85));
+  border: 1px solid rgba(59,130,196,0.22);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px; padding: 20px 22px;
+}
+.context-block-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.context-ref {
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 0.7rem; font-weight: 800; padding: 3px 10px;
+  border-radius: 20px; border: 1px solid rgba(59,130,196,0.25);
+  letter-spacing: .4px; white-space: nowrap; flex-shrink: 0;
+}
+.context-title { font-family: var(--font-head); font-size: 0.88rem; color: var(--text-primary); font-weight: 600; }
+.context-block p { color: var(--text-secondary); font-size: 0.87rem; line-height: 1.8; margin-bottom: 10px; }
+.context-block p:last-child { margin-bottom: 0; }
+.context-block strong { color: var(--text-primary); font-weight: 600; }
+.competences-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.competences-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  color: var(--text-secondary); font-size: 0.87rem;
+  padding: 8px 12px;
+  background: rgba(219,234,254,0.35);
+  border-radius: 8px; border-left: 3px solid rgba(59,130,196,0.35);
+}
+.competences-list li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
     /* ── BILAN ── */
     .bilan-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .bilan-col {
@@ -599,6 +628,43 @@ Boîtier PC Deepcool CH510 Noir</div>
         <div class="photo-caption">Mon poste de travail — Groupe BOËT</div>
       </div>
     </section>
+
+    <!-- COMPÉTENCES E4 -->
+<section class="section-card">
+  <h2 class="section-title"><span class="accent-bar"></span>Compétences E4 du référentiel</h2>
+  <p class="section-sub">Compétences mobilisées dans ce projet</p>
+
+  <!-- B1.2 -->
+  <div class="context-block">
+    <div class="context-block-header">
+      <span class="context-ref">B1.2</span>
+      <span class="context-title">Répondre aux incidents</span>
+    </div>
+    <p>Les interventions sur les postes des collègues ont nécessité un <strong>diagnostic précis des pannes matérielles</strong> avant toute action corrective.</p>
+    <ul class="competences-list">
+      <li>Diagnostic des redémarrages aléatoires liés à l'alimentation défaillante</li>
+      <li>Identification des artefacts visuels et crashs d'affichage liés au GPU</li>
+      <li>Analyse des lenteurs système liées à une RAM insuffisante</li>
+      <li>Résolution et test de bon fonctionnement après chaque intervention</li>
+    </ul>
+  </div>
+
+  <!-- B1.1 -->
+  <div class="context-block">
+    <div class="context-block-header">
+      <span class="context-ref">B1.1</span>
+      <span class="context-title">Gérer le patrimoine informatique</span>
+    </div>
+    <p>Ce projet m'a permis de mettre en pratique le <strong>montage et la configuration d'un poste de travail</strong> complet, ainsi que la gestion des composants du parc matériel de l'entreprise.</p>
+    <ul class="competences-list">
+      <li>Montage complet de mon poste de travail dès l'arrivée en stage</li>
+      <li>Sélection et vérification des compatibilités entre composants</li>
+      <li>Remplacement de composants défectueux sur les machines du parc</li>
+      <li>Mise à jour de l'inventaire matériel suite aux interventions</li>
+    </ul>
+  </div>
+
+</section>
 
     <!-- BILAN -->
     <section class="section-card">
