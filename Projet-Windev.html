@@ -9,19 +9,19 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-base:        #f4f6fb;
+      --bg-base:        #fbf4f4;
       --bg-card:        rgba(255, 255, 255, 0.85);
-      --accent:         #3b82c4;
-      --accent-light:   #5da0e0;
-      --accent-soft:    #dbeafe;
+      --accent:         #c43b3b;
+      --accent-light:   #e05d5d;
+      --accent-soft:    #dbebfe;
       --accent-glow:    rgba(59, 130, 196, 0.15);
       --danger:         #dc2626;
       --danger-soft:    #fee2e2;
       --danger-mid:     #ef4444;
-      --text-primary:   #1a2340;
-      --text-secondary: #3d4f6e;
-      --text-muted:     #7a8fb0;
-      --border-card:    rgba(200, 215, 235, 0.7);
+      --text-primary:   #401a1a;
+      --text-secondary: #6e3d3d;
+      --text-muted:     #b07a7a;
+      --border-card:    rgba(235, 200, 200, 0.7);
       --shadow-sm:      0 2px 12px rgba(30, 60, 120, 0.07);
       --shadow-md:      0 6px 28px rgba(30, 60, 120, 0.11);
       --shadow-hover:   0 12px 40px rgba(59, 130, 196, 0.18);
@@ -201,6 +201,7 @@
     .section-card:nth-child(3){animation-delay:.24s}
     .section-card:nth-child(4){animation-delay:.32s}
     .section-card:nth-child(5){animation-delay:.40s}
+    .section-card:nth-child(6){animation-delay:.48s}
 
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
@@ -331,6 +332,44 @@
       color: var(--text-muted); font-size: 0.78rem;
       text-align: center;
     }
+
+    /* ── COMPÉTENCES E4 ── */
+    .context-block {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(254,226,226,0.4), rgba(255,255,255,0.85));
+      border: 1px solid rgba(220,38,38,0.2);
+      border-left: 4px solid var(--danger);
+      border-radius: 12px; padding: 20px 22px;
+    }
+    .context-block-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .context-ref {
+      background: var(--danger-soft); color: var(--danger);
+      font-size: 0.7rem; font-weight: 800; padding: 3px 10px;
+      border-radius: 20px; border: 1px solid rgba(220,38,38,0.25);
+      letter-spacing: .4px; white-space: nowrap; flex-shrink: 0;
+    }
+    .context-title {
+      font-family: var(--font-head); font-size: 0.88rem;
+      color: var(--text-primary); font-weight: 600;
+    }
+    .context-block p {
+      color: var(--text-secondary); font-size: 0.87rem;
+      line-height: 1.8; margin-bottom: 10px;
+    }
+    .context-block p:last-child { margin-bottom: 0; }
+    .context-block strong { color: var(--text-primary); font-weight: 600; }
+
+    .competences-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+    .competences-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      color: var(--text-secondary); font-size: 0.87rem;
+      padding: 8px 12px;
+      background: rgba(254,226,226,0.35);
+      border-radius: 8px; border-left: 3px solid rgba(220,38,38,0.35);
+    }
+    .competences-list li::before { content: '→'; color: var(--danger); font-weight: 700; flex-shrink: 0; }
 
     /* ── BILAN ── */
     .bilan-row {
@@ -583,6 +622,58 @@
       </div>
     </section>
 
+    <!-- COMPÉTENCES E4 -->
+    <section class="section-card">
+      <h2 class="section-title"><span class="accent-bar"></span>Compétences E4 du référentiel</h2>
+      <p class="section-sub">Compétences mobilisées dans ce projet</p>
+
+      <!-- B1.1 -->
+      <div class="context-block">
+        <div class="context-block-header">
+          <span class="context-ref">B1.1</span>
+          <span class="context-title">Gérer le patrimoine informatique</span>
+        </div>
+        <p>Ce projet m'a amené à concevoir et structurer une <strong>base de données HyperFileSQL</strong> complète pour centraliser le suivi des machines industrielles du Groupe BOËT.</p>
+        <ul class="competences-list">
+          <li>Modélisation des entités métier (machines, interventions, techniciens)</li>
+          <li>Définition des liaisons et clés entre les fichiers de données</li>
+          <li>Mise en place des règles de gestion et contrôles d'intégrité</li>
+          <li>Centralisation et structuration du patrimoine de données de maintenance</li>
+        </ul>
+      </div>
+
+      <!-- B1.4 -->
+      <div class="context-block">
+        <div class="context-block-header">
+          <span class="context-ref">B1.4</span>
+          <span class="context-title">Travailler en mode projet</span>
+        </div>
+        <p>Ce projet a été mené de façon entièrement <strong>autonome</strong>, en passant par toutes les phases d'un projet informatique classique.</p>
+        <ul class="competences-list">
+          <li>Analyse des besoins auprès des équipes techniques de l'entreprise</li>
+          <li>Conception de la base de données et des maquettes d'interface</li>
+          <li>Développement itératif sous WINDEV avec tests réguliers</li>
+          <li>Livraison de l'application fonctionnelle à l'entreprise</li>
+        </ul>
+      </div>
+
+      <!-- B1.5 -->
+      <div class="context-block">
+        <div class="context-block-header">
+          <span class="context-ref">B1.5</span>
+          <span class="context-title">Mettre à disposition un service informatique</span>
+        </div>
+        <p>L'application a été <strong>déployée auprès des techniciens de maintenance</strong> du Groupe BOËT, constituant une mise en production réelle d'un service informatique métier.</p>
+        <ul class="competences-list">
+          <li>Déploiement de l'application sur les postes des techniciens</li>
+          <li>Présentation et prise en main de l'outil par les utilisateurs finaux</li>
+          <li>Adaptation de l'interface aux retours des utilisateurs lors des tests</li>
+          <li>Documentation fonctionnelle à destination des équipes</li>
+        </ul>
+      </div>
+
+    </section>
+
     <!-- BILAN -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Bilan du projet</h2>
@@ -610,7 +701,6 @@
     </section>
 
   </div>
-
 
   <!-- LIGHTBOX -->
   <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
@@ -644,6 +734,7 @@
       }
     });
   </script>
+
   <footer>
     © 2026 Cédric – Portfolio BTS SIO · Tous droits réservés
   </footer>
