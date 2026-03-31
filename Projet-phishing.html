@@ -11,17 +11,17 @@
     :root {
       --bg-base:        #f4f6fb;
       --bg-card:        rgba(255, 255, 255, 0.85);
-      --accent:         #3b82c4;
-      --accent-light:   #5da0e0;
+      --accent:         #c43b3b;
+      --accent-light:   #e05d5d;
       --accent-soft:    #dbeafe;
       --accent-glow:    rgba(59, 130, 196, 0.15);
       --danger:         #dc2626;
       --danger-soft:    #fee2e2;
       --danger-mid:     #ef4444;
-      --text-primary:   #1a2340;
-      --text-secondary: #3d4f6e;
-      --text-muted:     #7a8fb0;
-      --border-card:    rgba(200, 215, 235, 0.7);
+      --text-primary:   #401a1a;
+      --text-secondary: #6e3d3d;
+      --text-muted:     #b07a7a;
+      --border-card:    rgba(235, 200, 200, 0.7);
       --shadow-sm:      0 2px 12px rgba(30, 60, 120, 0.07);
       --shadow-md:      0 6px 28px rgba(30, 60, 120, 0.11);
       --shadow-hover:   0 12px 40px rgba(59, 130, 196, 0.18);
@@ -58,7 +58,7 @@
       background: rgba(244, 246, 251, 0.82);
       backdrop-filter: blur(22px);
       border-bottom: 1px solid var(--border-card);
-      box-shadow: 0 1px 18px rgba(30, 60, 120, 0.07);
+      box-shadow: 0 1px 18px rgba(151, 36, 36, 0.07);
       padding: 14px 28px;
       display: flex; align-items: center;
       justify-content: space-between; gap: 20px; flex-wrap: wrap;
@@ -68,7 +68,7 @@
       display: inline-flex; align-items: center; gap: 7px;
       padding: 7px 16px; background: var(--accent-soft); color: var(--accent);
       font-size: 0.82rem; font-weight: 600; border-radius: 20px; text-decoration: none;
-      border: 1px solid rgba(59,130,196,0.2); transition: all .22s;
+      border: 1px solid rgb(206, 25, 25); transition: all .22s;
     }
     .back-btn:hover { background: var(--accent); color: #fff; }
     .header-title { font-family: var(--font-head); font-size: 1.15rem; color: var(--text-primary); }
@@ -512,18 +512,18 @@
 
     <!-- BILAN -->
     <section class="section-card">
-      <h2 class="section-title"><span class="accent-bar"></span>Bilan du projet</h2>
+      <h2 class="section-title"><span class="accent-bar red"></span>Bilan du projet</h2>
       <p class="section-sub">Ce que ce projet m'a apporté</p>
 
       <!-- B1.6 -->
-      <div class="context-block context-block--blue" style="margin-top:0; margin-bottom:24px;">
+      <div class="context-block context-block--red" style="margin-top:0; margin-bottom:24px;">
         <div class="context-block-header">
-          <span class="context-ref context-ref--blue">B1.6</span>
+          <span class="context-ref context-ref--red">B1.6</span>
           <span class="context-title">Organiser son développement professionnel</span>
         </div>
         <p>Ce projet m'a permis de développer des compétences dans le domaine de la <strong>cybersécurité offensive (Red Team)</strong> et <strong>défensive (Blue Team)</strong>. J'ai appris à utiliser une plateforme SaaS professionnelle de simulation d'attaques et à analyser les comportements humains face aux menaces.</p>
         <p><strong>Compétences acquises :</strong></p>
-        <ul class="competences-list">
+        <ul class="actions-list">
           <li>Compréhension des techniques d'ingénierie sociale (social engineering)</li>
           <li>Configuration et pilotage d'une plateforme de simulation de phishing</li>
           <li>Analyse de données comportementales et rédaction de rapports</li>
