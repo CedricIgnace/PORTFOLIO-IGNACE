@@ -9,10 +9,10 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-base:        #f4f6fb;
+      --bg-base:        #fbf4f4;
       --bg-card:        rgba(255, 255, 255, 0.85);
-      --accent:         #3b82c4;
-      --accent-light:   #5da0e0;
+      --accent:         #c43b3b;
+      --accent-light:   #e05d5d;
       --accent-soft:    #dbeafe;
       --accent-glow:    rgba(59, 130, 196, 0.15);
       --danger:         #dc2626;
@@ -22,10 +22,10 @@
       --green-soft:     #dcfce7;
       --orange:         #d97706;
       --orange-soft:    #fef3c7;
-      --text-primary:   #1a2340;
-      --text-secondary: #3d4f6e;
-      --text-muted:     #7a8fb0;
-      --border-card:    rgba(200, 215, 235, 0.7);
+      --text-primary:   #401a1a;
+      --text-secondary: #6e3d3d;
+      --text-muted:     #b07a7a;
+      --border-card:    rgba(235, 200, 200, 0.7);
       --shadow-sm:      0 2px 12px rgba(30, 60, 120, 0.07);
       --shadow-md:      0 6px 28px rgba(30, 60, 120, 0.11);
       --shadow-hover:   0 12px 40px rgba(59, 130, 196, 0.18);
@@ -72,7 +72,7 @@
       display: inline-flex; align-items: center; gap: 7px;
       padding: 7px 16px; background: var(--accent-soft); color: var(--accent);
       font-size: 0.82rem; font-weight: 600; border-radius: 20px; text-decoration: none;
-      border: 1px solid rgba(59,130,196,0.2); transition: all .22s;
+      border: 1px solid rgba(196, 59, 59, 0.2); transition: all .22s;
     }
     .back-btn:hover { background: var(--accent); color: #fff; }
     .header-title { font-family: var(--font-head); font-size: 1.15rem; color: var(--text-primary); }
@@ -259,6 +259,35 @@
     }
     .screenshot-item:hover .img-wrap::after { opacity: 1; }
     @media (max-width: 600px) { .screenshots-grid { grid-template-columns: 1fr; } }
+
+    /* ── COMPÉTENCES E4 ── */
+.context-block {
+  margin-top: 24px;
+  background: linear-gradient(135deg, rgba(254,226,226,0.4), rgba(255,255,255,0.85));
+  border: 1px solid rgba(220,38,38,0.2);
+  border-left: 4px solid var(--danger);
+  border-radius: 12px; padding: 20px 22px;
+}
+.context-block-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.context-ref {
+  background: var(--danger-soft); color: var(--danger);
+  font-size: 0.7rem; font-weight: 800; padding: 3px 10px;
+  border-radius: 20px; border: 1px solid rgba(220,38,38,0.25);
+  letter-spacing: .4px; white-space: nowrap; flex-shrink: 0;
+}
+.context-title { font-family: var(--font-head); font-size: 0.88rem; color: var(--text-primary); font-weight: 600; }
+.context-block p { color: var(--text-secondary); font-size: 0.87rem; line-height: 1.8; margin-bottom: 10px; }
+.context-block p:last-child { margin-bottom: 0; }
+.context-block strong { color: var(--text-primary); font-weight: 600; }
+.competences-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.competences-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  color: var(--text-secondary); font-size: 0.87rem;
+  padding: 8px 12px;
+  background: rgba(254,226,226,0.35);
+  border-radius: 8px; border-left: 3px solid rgba(220,38,38,0.35);
+}
+.competences-list li::before { content: '→'; color: var(--danger); font-weight: 700; flex-shrink: 0; }
 
     /* ── BILAN ── */
     .bilan-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -484,6 +513,43 @@
       </div>
     </section>
 
+    <!-- COMPÉTENCES E4 -->
+<section class="section-card">
+  <h2 class="section-title"><span class="accent-bar"></span>Compétences E4 du référentiel</h2>
+  <p class="section-sub">Compétences mobilisées dans ce projet</p>
+
+  <!-- B2.1 -->
+  <div class="context-block">
+    <div class="context-block-header">
+      <span class="context-ref">B2.1</span>
+      <span class="context-title">Administrer les systèmes</span>
+    </div>
+    <p>J'ai administré le déploiement du logiciel UNIFlow sur l'ensemble du parc via une <strong>GPO (Group Policy Object)</strong> liée au domaine Active Directory.</p>
+    <ul class="competences-list">
+      <li>Création et configuration d'une GPO dans la console Active Directory</li>
+      <li>Déploiement silencieux du driver UNIFlow via fichier MSI sur tous les postes</li>
+      <li>Attribution de la GPO aux unités organisationnelles ciblées</li>
+      <li>Vérification du déploiement effectif sur les postes au redémarrage</li>
+    </ul>
+  </div>
+
+  <!-- B1.5 -->
+  <div class="context-block">
+    <div class="context-block-header">
+      <span class="context-ref">B1.5</span>
+      <span class="context-title">Mettre à disposition un service informatique</span>
+    </div>
+    <p>J'ai contribué à l'<strong>installation et la configuration complète des copieurs réseau</strong> pour les rendre opérationnels auprès de l'ensemble des collaborateurs du Groupe BOËT.</p>
+    <ul class="competences-list">
+      <li>Installation physique et raccordement réseau des copieurs Canon dans les départements</li>
+      <li>Configuration des paramètres réseau et des profils d'impression</li>
+      <li>Formation des utilisateurs à la solution UNIFlow et aux nouveaux copieurs</li>
+      <li>Mise à disposition des guides d'utilisation pour assurer l'autonomie des équipes</li>
+    </ul>
+  </div>
+
+</section>
+
     <!-- BILAN -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar blue"></span>Bilan du projet</h2>
@@ -523,6 +589,7 @@
       <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
   </div>
+  
 
   <script>
     function openLightbox(card) {
