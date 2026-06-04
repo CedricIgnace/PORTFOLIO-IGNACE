@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
       --bg-base:        #f4f6fb;
       --bg-card:        rgba(255, 255, 255, 0.85);
@@ -37,7 +37,7 @@
       --font-head:      'Lora', Georgia, serif;
       --font-body:      'Outfit', system-ui, sans-serif;
     }
-
+ 
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
@@ -46,7 +46,7 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
+ 
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -55,7 +55,7 @@
         radial-gradient(ellipse 500px 400px at 90% 80%, rgba(210, 235, 255, 0.38) 0%, transparent 65%);
       pointer-events: none;
     }
-
+ 
     .bg-shape { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; opacity: .55; }
     .bg-shape--1 {
       width: 520px; height: 520px;
@@ -67,7 +67,7 @@
       background: radial-gradient(circle, rgba(179,220,255,0.18), transparent 70%);
       bottom: -80px; right: -120px;
     }
-
+ 
     /* ── HEADER ── */
     header {
       position: sticky; top: 0; z-index: 100;
@@ -97,7 +97,7 @@
       color: #fff; font-size: 0.72rem; font-weight: 600;
       padding: 4px 12px; border-radius: 20px; letter-spacing: .4px;
     }
-
+ 
     /* ── HERO ── */
     .hero {
       position: relative; z-index: 1;
@@ -156,7 +156,7 @@
       padding: 4px 12px; border-radius: 20px;
       backdrop-filter: blur(8px);
     }
-
+ 
     /* ── TABLE OF CONTENTS ── */
     .toc {
       background: var(--bg-card);
@@ -184,14 +184,14 @@
       font-weight: 700;
     }
     .toc-list a.sisr-link:hover { background: var(--sisr); color: #fff; }
-
+ 
     /* ── PAGE CONTENT ── */
     .page-content {
       position: relative; z-index: 1;
       max-width: 1040px; margin: 0 auto;
       padding: 28px 24px 90px;
     }
-
+ 
     .section-card {
       background: var(--bg-card);
       backdrop-filter: blur(18px);
@@ -220,8 +220,10 @@
     .section-card:nth-child(8){animation-delay:.64s}
     .section-card:nth-child(9){animation-delay:.72s}
     .section-card:nth-child(10){animation-delay:.80s}
+    .section-card:nth-child(11){animation-delay:.88s}
+    .section-card:nth-child(12){animation-delay:.96s}
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
-
+ 
     .section-title {
       font-family: var(--font-head);
       font-size: 1.5rem; color: var(--text-primary);
@@ -238,7 +240,7 @@
     .accent-bar.neuro { background: linear-gradient(180deg, var(--purple), #a855f7); }
     .accent-bar.sisr  { background: linear-gradient(180deg, var(--sisr), #22d3ee); }
     .section-sub { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 26px; padding-left: 17px; }
-
+ 
     /* ── STATS ── */
     .stats-grid {
       display: grid;
@@ -254,7 +256,7 @@
     .stat-box:hover { border-color: var(--accent-light); box-shadow: var(--shadow-hover); transform: translateY(-3px); }
     .stat-box .number { font-family: var(--font-head); font-size: 2.2rem; color: var(--accent); line-height: 1.1; }
     .stat-box .label { color: var(--text-muted); font-size: 0.78rem; margin-top: 6px; line-height: 1.4; }
-
+ 
     /* ── CARTES GÉNÉRIQUES ── */
     .cards-grid {
       display: grid;
@@ -286,7 +288,7 @@
     .info-card ul li:last-child { border-bottom: none; }
     .info-card ul li::before { content: '▸'; color: var(--accent-light); font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
     .info-card p { color: var(--text-muted); font-size: 0.83rem; line-height: 1.6; }
-
+ 
     /* ── SISR BLOCKS ── */
     .sisr-blocks {
       display: flex;
@@ -316,7 +318,38 @@
       color: var(--text-secondary); font-size: 0.88rem;
       line-height: 1.75; padding-left: 37px;
     }
-
+ 
+    /* ── PARTENARIAT BLOCKS (réutilise le style sisr-blocks avec accent bleu) ── */
+    .partner-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid rgba(59,130,196,0.2);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+    .partner-block {
+      padding: 24px 28px;
+      border-bottom: 1px solid rgba(59,130,196,0.1);
+      transition: background .22s;
+    }
+    .partner-block:last-child { border-bottom: none; }
+    .partner-block:hover { background: rgba(219,234,254,0.2); }
+    .partner-block-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 10px;
+    }
+    .partner-block-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .partner-block h3 {
+      font-size: 0.97rem; font-weight: 700;
+      color: var(--accent);
+    }
+    .partner-block p {
+      color: var(--text-secondary); font-size: 0.88rem;
+      line-height: 1.75; padding-left: 37px;
+    }
+ 
     /* ── TECH LIST ── */
     .tech-list { display: flex; flex-direction: column; gap: 12px; }
     .tech-item {
@@ -337,7 +370,7 @@
     .tech-item h3 { font-size: 0.97rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
     .tech-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
     .tech-item strong { color: var(--accent); }
-
+ 
     /* ── BADGE NEW ── */
     .badge-new {
       display: inline-block;
@@ -360,7 +393,7 @@
       padding: 2px 8px; border-radius: 10px; letter-spacing: .5px;
       vertical-align: middle; margin-left: 8px;
     }
-
+ 
     /* ── GÉO ENJEUX ── */
     .geo-grid {
       display: grid;
@@ -381,7 +414,7 @@
     .geo-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
     .geo-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
     .geo-card strong { color: var(--text-secondary); }
-
+ 
     /* ── TIMELINE ── */
     .timeline { position: relative; padding-left: 28px; margin-top: 8px; }
     .timeline::before {
@@ -399,7 +432,7 @@
     .tl-year { font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
     .tl-item h4 { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
     .tl-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
-
+ 
     /* ── ALERTE CRISE ── */
     .warn-box {
       background: linear-gradient(145deg, var(--warn-soft), rgba(254,243,199,0.6));
@@ -409,7 +442,7 @@
     .warn-box h3 { color: var(--warn); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
     .warn-box p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
     .warn-box strong { color: var(--warn); }
-
+ 
     /* ── INFO BOX ── */
     .info-box {
       background: linear-gradient(145deg, var(--purple-soft), rgba(237,233,254,0.5));
@@ -419,7 +452,7 @@
     .info-box h3 { color: var(--purple); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
     .info-box p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
     .info-box strong { color: var(--purple); }
-
+ 
     /* ── ECO BOX ── */
     .eco-box {
       background: linear-gradient(145deg, var(--safe-soft), rgba(220,252,231,0.5));
@@ -429,7 +462,31 @@
     .eco-box h3 { color: var(--safe); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
     .eco-box p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
     .eco-box strong { color: var(--safe); }
-
+ 
+    /* ── ACCENT BOX (bleu neutre, cohérent avec le reste) ── */
+    .accent-box {
+      background: linear-gradient(145deg, var(--accent-soft), rgba(219,234,254,0.5));
+      border: 1px solid rgba(59,130,196,0.25);
+      border-radius: 14px; padding: 22px 24px; margin-top: 22px;
+    }
+    .accent-box h3 { color: var(--accent); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .accent-box p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
+    .accent-box strong { color: var(--accent); }
+ 
+    /* ── QUOTE BOX ── */
+    .quote-box {
+      background: linear-gradient(145deg, var(--accent-soft), rgba(219,234,254,0.4));
+      border-left: 4px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .quote-box blockquote {
+      color: var(--text-secondary); font-size: 0.92rem;
+      font-style: italic; line-height: 1.75;
+    }
+    .quote-box cite { display: block; margin-top: 10px; font-style: normal; font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+ 
     /* ── RAM ── */
     .ram-section h3 {
       font-size: 1.05rem; font-weight: 700; color: var(--text-primary);
@@ -458,7 +515,7 @@
     }
     .ram-item span { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); display: block; }
     .ram-item small { font-size: 0.72rem; color: var(--text-muted); }
-
+ 
     /* ── DUAL (avantages / inconvénients) ── */
     .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 6px; }
     .dual-card {
@@ -484,7 +541,7 @@
     .dual-card ul li:last-child { border-bottom: none; }
     .dual-card.good ul li::before { content: '✓'; color: var(--safe); font-weight: 700; flex-shrink: 0; }
     .dual-card.bad  ul li::before { content: '✕'; color: var(--danger); font-weight: 700; flex-shrink: 0; }
-
+ 
     /* ── SOURCES ── */
     .sources-grid {
       display: grid;
@@ -501,7 +558,7 @@
     .source-item .src-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px; }
     .source-item a { color: var(--accent); font-size: 0.83rem; text-decoration: none; word-break: break-all; transition: color .2s; }
     .source-item a:hover { color: var(--accent-light); }
-
+ 
     /* ── FOOTER ── */
     footer {
       position: relative; z-index: 1;
@@ -511,21 +568,20 @@
       background: rgba(244, 246, 251, 0.6);
       backdrop-filter: blur(10px);
     }
-
+ 
     @media (max-width: 640px) {
       .hero-inner { padding: 32px 24px; }
       .hero-text h1 { font-size: 1.5rem; }
       .section-card { padding: 24px 18px; }
       .dual-grid { grid-template-columns: 1fr; }
-      .sisr-cards-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
+ 
   <div class="bg-shape bg-shape--1"></div>
   <div class="bg-shape bg-shape--2"></div>
-
+ 
   <!-- HEADER -->
   <header>
     <div class="header-left">
@@ -534,7 +590,7 @@
     </div>
     <span class="header-badge">🤖 Technologie · Veille technologique</span>
   </header>
-
+ 
   <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
@@ -548,15 +604,17 @@
           <span class="hero-tag">HBM / RAM</span>
           <span class="hero-tag">IA Embarquée</span>
           <span class="hero-tag">Géopolitique</span>
+          <span class="hero-tag">NVIDIA × TSMC</span>
+          <span class="hero-tag">RTX Spark</span>
           <span class="hero-tag">Neuromorphique</span>
           <span class="hero-tag">Veille 2025-2026</span>
         </div>
       </div>
     </div>
   </div>
-
+ 
   <div class="page-content">
-
+ 
     <!-- TABLE DES MATIÈRES -->
     <div class="toc">
       <h3>📋 Sommaire</h3>
@@ -567,13 +625,15 @@
         <a href="#avantages">✅ Avantages</a>
         <a href="#ram">💾 RAM & Crise</a>
         <a href="#geopolitique">🌍 Géopolitique</a>
+        <a href="#nvidia-tsmc">🔗 NVIDIA × TSMC dans les fabs</a>
+        <a href="#rtx-spark">💻 RTX Spark — IA dans le PC</a>
         <a href="#neuromorphique">🧠 Neuromorphique</a>
-        <a href="#sisr">🖥️ Impact SISR</a>
+        <a href="#sisr" class="sisr-link">🖥️ Impact SISR</a>
         <a href="#enjeux">⚖️ Enjeux éthiques</a>
         <a href="#sources">📚 Sources</a>
       </div>
     </div>
-
+ 
     <!-- 1 CHIFFRES CLÉS -->
     <section class="section-card" id="chiffres">
       <h2 class="section-title"><span class="accent-bar"></span>Chiffres Clés</h2>
@@ -597,7 +657,7 @@
         </div>
       </div>
     </section>
-
+ 
     <!-- 2 DOMAINES D'APPLICATION -->
     <section class="section-card" id="domaines">
       <h2 class="section-title"><span class="accent-bar"></span>Domaines d'Application</h2>
@@ -635,7 +695,7 @@
         </div>
       </div>
     </section>
-
+ 
     <!-- 3 TECHNOLOGIES CLÉS -->
     <section class="section-card" id="technologies">
       <h2 class="section-title"><span class="accent-bar"></span>Technologies Clés</h2>
@@ -671,7 +731,7 @@
         </div>
       </div>
     </section>
-
+ 
     <!-- 4 AVANTAGES -->
     <section class="section-card" id="avantages">
       <h2 class="section-title"><span class="accent-bar"></span>Avantages Concrets</h2>
@@ -710,18 +770,18 @@
         <p>L'IA contribue aux objectifs environnementaux en optimisant l'utilisation des ressources, en réduisant les déchets de production et en développant des systèmes plus économes en énergie. Les stratégies nationales visent à promouvoir une <strong>IA frugale et responsable</strong> pour une industrie électronique plus durable. Attention cependant : les centres de données alimentant l'IA consomment eux-mêmes des quantités croissantes d'énergie — un paradoxe à surveiller.</p>
       </div>
     </section>
-
+ 
     <!-- 5 RAM + CRISE -->
     <section class="section-card" id="ram">
-      <h2 class="section-title"><span class="accent-bar"></span>Inconvénients & Crise du Marché</h2>
+      <h2 class="section-title"><span class="accent-bar warn"></span>Inconvénients & Crise du Marché</h2>
       <p class="section-sub">La face cachée de la croissance de l'IA</p>
-
+ 
       <div class="warn-box">
         <h3>⚠️ Tensions sur le marché des composants</h3>
         <p>La demande en composants liés à l'IA (GPU, HBM, semi-conducteurs avancés) connaît une croissance sans précédent depuis 2023, entraînant des tensions d'approvisionnement mondiales.<br>
         <strong>📈 Hausse des prix</strong> &nbsp;·&nbsp; <strong>📉 Pénurie de l'offre</strong> &nbsp;·&nbsp; <strong>⏳ Délais de livraison allongés</strong></p>
       </div>
-
+ 
       <div class="ram-section">
         <h3>Sa mémoire vive rien que pour elle — la RAM HBM</h3>
         <p>La <strong>HBM (High Bandwidth Memory)</strong> — Mémoire à haute bande passante — est une technologie qui empile verticalement des couches de DRAM reliées par des connexions très denses (TSV). Elle est utilisée principalement dans les GPU et accélérateurs IA (H100, MI300X...).</p>
@@ -747,7 +807,7 @@
             <small>IA & supercalcul</small>
           </div>
         </div>
-
+ 
         <h3 style="margin-bottom: 14px;">Récapitulatif de la RAM HBM</h3>
         <div class="dual-grid">
           <div class="dual-card good">
@@ -771,12 +831,12 @@
         </div>
       </div>
     </section>
-
+ 
     <!-- 6 GÉOPOLITIQUE -->
     <section class="section-card" id="geopolitique">
-      <h2 class="section-title"><span class="accent-bar"></span>Géopolitique des Semi-Conducteurs</h2>
+      <h2 class="section-title"><span class="accent-bar geo"></span>Géopolitique des Semi-Conducteurs</h2>
       <p class="section-sub">Les composants au cœur des tensions mondiales</p>
-
+ 
       <div class="geo-grid">
         <div class="geo-card usa">
           <div class="geo-flag">🇺🇸</div>
@@ -794,18 +854,121 @@
           <p>Le <strong>European Chips Act</strong> vise 20% de part de marché mondial en 2030 (contre ~8% aujourd'hui). TSMC construit une usine en Allemagne, Intel a prévu Dresden. La France mise sur STMicroelectronics et Soitec.</p>
         </div>
       </div>
-
+ 
       <div class="warn-box" style="margin-top: 20px; margin-bottom: 0;">
         <h3>⚠️ Taïwan, un enjeu stratégique mondial</h3>
         <p>TSMC fabrique environ <strong>90% des puces les plus avancées du monde</strong> (3nm, 2nm). Sa position géographique à Taïwan en fait un enjeu géopolitique majeur : une rupture d'approvisionnement affecterait l'ensemble de l'économie mondiale, de l'automobile à la défense.</p>
       </div>
     </section>
-
-    <!-- 7 NEUROMORPHIQUE -->
+     
+    <!-- 8 RTX SPARK — IA DANS LE PC -->
+    <section class="section-card" id="rtx-spark">
+      <h2 class="section-title"><span class="accent-bar"></span>RTX Spark : l'IA directement dans votre PC</h2>
+      <p class="section-sub">La nouvelle puce NVIDIA qui réinvente l'ordinateur personnel — Computex Taipei, juin 2026</p>
+ 
+      <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.8; margin-bottom: 22px;">
+        Présenté au <strong>Computex de Taipei</strong> en juin 2026, le <strong>NVIDIA RTX Spark</strong> est un « superchip » combinant un GPU Blackwell RTX et un CPU Grace basé sur l'architecture ARM. Son objectif : transformer le PC Windows en plateforme native d'exécution d'agents IA, sans dépendre du cloud.
+      </p>
+ 
+      <!-- Chiffres clés RTX Spark -->
+      <div class="stats-grid" style="margin-bottom: 22px;">
+        <div class="stat-box">
+          <div class="number">1 500+</div>
+          <div class="label">TOPS de puissance IA — soit 30× plus qu'un NPU classique (55 TOPS)</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">128 Go</div>
+          <div class="label">de mémoire unifiée maximum pour des modèles IA lourds en local</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">10–80 W</div>
+          <div class="label">de consommation adaptable selon la charge, pensé pour les laptops fins</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">= RTX 5070</div>
+          <div class="label">performances comparables à un GPU laptop RTX 5070 selon NVIDIA</div>
+        </div>
+      </div>
+ 
+      <!-- Blocs de contenu -->
+      <div class="partner-blocks">
+ 
+        <div class="partner-block">
+          <div class="partner-block-header">
+            <span class="partner-block-icon">🧩</span>
+            <h3>Une architecture hybride CPU + GPU + NPU</h3>
+          </div>
+          <p>Le RTX Spark fusionne en une seule puce un <strong>GPU NVIDIA Blackwell RTX</strong>, un <strong>CPU Grace ARM</strong> et un <strong>NPU intégré</strong> répondant aux exigences 40 TOPS de Microsoft Copilot+. C'est la première fois que NVIDIA revient sur le marché des SoC grand public depuis sa gamme Tegra, cette fois en visant directement les PC Windows haut de gamme comme le <em>Surface Laptop Ultra</em> ou le <em>Dell XPS 16</em>.</p>
+        </div>
+ 
+        <div class="partner-block">
+          <div class="partner-block-header">
+            <span class="partner-block-icon">🤖</span>
+            <h3>Des agents IA exécutés en local — sans cloud</h3>
+          </div>
+          <p>L'enjeu central du RTX Spark est de faire tourner des <strong>agents IA agentiques directement sur l'appareil</strong>, sans envoyer les données vers des serveurs distants. Cela garantit une meilleure confidentialité, une latence quasi nulle et une disponibilité hors connexion. Jensen Huang parle d'un PC qui passe des « applications traditionnelles » à un véritable <em>ordinateur personnel doté d'une IA agentique</em>.</p>
+        </div>
+ 
+        <div class="partner-block">
+          <div class="partner-block-header">
+            <span class="partner-block-icon">⚙️</span>
+            <h3>L'écosystème CUDA s'impose dans les PC Windows ARM</h3>
+          </div>
+          <p>Contrairement aux PC ARM Qualcomm (Snapdragon X) qui misent sur le NPU et Copilot+, le RTX Spark apporte <strong>l'environnement CUDA natif</strong> dans les laptops Windows. C'est un avantage décisif pour les développeurs IA et les créateurs de contenu qui utilisent déjà CUDA sur leurs stations de travail. NVIDIA impose ainsi son écosystème au cœur du marché PC grand public.</p>
+        </div>
+ 
+        <div class="partner-block">
+          <div class="partner-block-header">
+            <span class="partner-block-icon">🎨</span>
+            <h3>Usages concrets : création, développement, gaming IA</h3>
+          </div>
+          <p>Le RTX Spark cible en priorité les <strong>créateurs de contenu et développeurs IA</strong> : génération d'images avec Stable Diffusion en local, amélioration vidéo DLSS 4, exécution de LLM compacts (Llama, Mistral), assistance à la programmation. Pour les usages gaming intensifs ou l'entraînement de modèles lourds, les GPU RTX 50 série en carte dédiée restent supérieurs — le RTX Spark vise la mobilité et la polyvalence.</p>
+        </div>
+ 
+      </div>
+ 
+      <div class="quote-box">
+        <blockquote>
+          « Le RTX Spark vise à transformer le PC traditionnel centré sur les applications en un véritable ordinateur personnel doté d'une IA agentique, qui finira par être présent dans tous les foyers dans les années à venir, à mesure que les agents d'IA en périphérie privée deviendront essentiels. »
+        </blockquote>
+        <cite>— Neil Shah, cofondateur de Counterpoint Research</cite>
+      </div>
+ 
+      <!-- Comparatif NPU vs GPU -->
+      <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin: 22px 0 14px;">NPU embarqué vs GPU RTX dédié — lequel choisir ?</h3>
+      <div class="dual-grid">
+        <div class="dual-card good">
+          <h3>✅ RTX Spark (GPU intégré)</h3>
+          <ul>
+            <li>1 500+ TOPS — idéal pour la génération IA lourde</li>
+            <li>CUDA natif — compatibilité maximale</li>
+            <li>Mémoire unifiée jusqu'à 128 Go</li>
+            <li>Agents IA locaux performants</li>
+            <li>PC fin et léger, meilleure autonomie vs GPU discret</li>
+          </ul>
+        </div>
+        <div class="dual-card bad">
+          <h3>⚠️ Limites à connaître</h3>
+          <ul>
+            <li>Moins puissant qu'une RTX 5090 en carte dédiée</li>
+            <li>Prix élevé attendu (haut de gamme)</li>
+            <li>Architecture ARM : compatibilité logicielle à vérifier</li>
+            <li>Pas adapté à l'entraînement de très grands modèles</li>
+          </ul>
+        </div>
+      </div>
+ 
+      <div class="accent-box">
+        <h3>💡 Lien avec la section SISR</h3>
+        <p>Pour un technicien SISR, l'arrivée du RTX Spark signifie que les postes utilisateurs deviennent capables d'exécuter des agents IA locaux en entreprise. Cela soulève de nouvelles questions d'administration : <strong>gestion des modèles IA déployés en local</strong>, contrôle des données traitées hors cloud, mise à jour des pilotes CUDA, et dimensionnement des postes de travail en tenant compte de la consommation accrue liée à l'inférence IA embarquée.</p>
+      </div>
+    </section>
+ 
+    <!-- 9 NEUROMORPHIQUE -->
     <section class="section-card" id="neuromorphique">
-      <h2 class="section-title"><span class="accent-bar"></span>Vers des Puces Neuromorphiques</h2>
+      <h2 class="section-title"><span class="accent-bar neuro"></span>Vers des Puces Neuromorphiques</h2>
       <p class="section-sub">La prochaine révolution dans l'architecture des composants IA</p>
-
+ 
       <div class="tech-list">
         <div class="tech-item purple">
           <div class="t-icon">🧬</div>
@@ -829,20 +992,20 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="info-box">
         <h3>🔬 Lien avec l'IA générative</h3>
         <p>Les puces neuromorphiques ne sont pas conçues pour faire tourner des LLM (ChatGPT, etc.) qui nécessitent des GPU massivement parallèles. Elles visent plutôt <strong>l'inférence efficiente sur des tâches spécifiques</strong>, là où la consommation énergétique est critique. Les deux approches sont complémentaires.</p>
       </div>
     </section>
-
-    <!-- 8 IMPACT SISR -->
+ 
+    <!-- 10 IMPACT SISR -->
     <section class="section-card sisr-card" id="sisr">
-      <h2 class="section-title"><span class="accent-bar"></span>Impact pour le Technicien SISR</h2>
+      <h2 class="section-title"><span class="accent-bar sisr"></span>Impact pour le Technicien SISR</h2>
       <p class="section-sub">Ce que cette évolution change concrètement dans mon futur métier</p>
-
+ 
       <div class="sisr-blocks">
-
+ 
         <div class="sisr-block">
           <div class="sisr-block-header">
             <span class="sisr-block-icon">🔒</span>
@@ -850,7 +1013,7 @@
           </div>
           <p>Les firewalls, switches et routeurs modernes embarquent des puces IA pour analyser le trafic en temps réel. Cela crée de nouvelles surfaces d'attaque : une IA intégrée peut être manipulée par des attaques adversariales. Le risque de backdoors dans des composants étrangers impose une politique d'achat rigoureuse. En tant que technicien SISR, cela signifie maintenir les firmwares à jour et connaître précisément les équipements que l'on administre.</p>
         </div>
-
+ 
         <div class="sisr-block">
           <div class="sisr-block-header">
             <span class="sisr-block-icon">📡</span>
@@ -858,7 +1021,7 @@
           </div>
           <p>Les outils de monitoring comme Zabbix ou PRTG intègrent désormais des modules IA capables de détecter des anomalies avant qu'une panne survienne. Les serveurs remontent des données (température, tension, SMART) analysées automatiquement. Le rôle du technicien SISR évolue : moins de réaction en urgence, plus d'anticipation et d'analyse de tendances.</p>
         </div>
-
+ 
         <div class="sisr-block">
           <div class="sisr-block-header">
             <span class="sisr-block-icon">⚡</span>
@@ -866,15 +1029,15 @@
           </div>
           <p>Les accélérateurs IA comme le H100 consomment entre 300 W et 700 W par unité. Un technicien SISR doit anticiper la capacité électrique des baies, le refroidissement et le PUE du datacenter. Le choix entre un NPU basse consommation et un GPU haute performance devient un critère d'administration à part entière, notamment sous l'angle Green IT.</p>
         </div>
-
+ 
       </div>
     </section>
-
-    <!-- 9 ENJEUX ÉTHIQUES -->
+ 
+    <!-- 11 ENJEUX ÉTHIQUES -->
     <section class="section-card" id="enjeux">
       <h2 class="section-title"><span class="accent-bar"></span>Enjeux Éthiques & Sociétaux</h2>
       <p class="section-sub">Les questions que soulève cette révolution technologique</p>
-
+ 
       <div class="cards-grid">
         <div class="info-card">
           <div class="card-icon">👷</div>
@@ -908,8 +1071,8 @@
         </div>
       </div>
     </section>
-
-    <!-- 10 SOURCES -->
+ 
+    <!-- 12 SOURCES -->
     <section class="section-card" id="sources">
       <h2 class="section-title"><span class="accent-bar"></span>Sources</h2>
       <p class="section-sub">Références utilisées pour cette veille</p>
@@ -938,15 +1101,26 @@
           <div class="src-label">📰 Plan France 2030 – Gouvernement</div>
           <a href="https://www.gouvernement.fr/france-2030" target="_blank">gouvernement.fr/france-2030</a>
         </div>
+        <div class="source-item">
+          <div class="src-label">📰 NVIDIA Newsroom – GTC Taipei 2026</div>
+          <a href="https://nvidianews.nvidia.com/news/nvidia-and-tsmc-bring-ai-into-fabs-to-advance-semiconductor-design-and-manufacturing" target="_blank">nvidianews.nvidia.com – NVIDIA & TSMC AI in Fabs</a>
+        </div>
+        <div class="source-item">
+          <div class="src-label">📰 Futura Sciences – RTX Spark</div>
+          <a href="https://www.futura-sciences.com/tech/actualites/pc-nvidia-reinvente-pc-windows-rtx-spark-monstre-puissance-ia-134950/" target="_blank">futura-sciences.com – NVIDIA RTX Spark</a>
+        </div>
+        <div class="source-item">
+          <div class="src-label">📰 Dataconomy – RTX Spark analyse</div>
+          <a href="https://fr.dataconomy.com/2026/06/01/nvidia-devoile-la-superpuce-rtx-spark-pour-alimenter-les-pc-ia-de-nouvelle-generation/" target="_blank">dataconomy.com – RTX Spark superpuce IA</a>
+        </div>
       </div>
     </section>
-
+ 
   </div>
-
+ 
   <footer>
     © 2026 Cédric – Portfolio BTS SIO · Tous droits réservés
   </footer>
-
-
+ 
 </body>
 </html>
