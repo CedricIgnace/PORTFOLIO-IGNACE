@@ -228,14 +228,6 @@
     .tech-list li::before { content: '▸'; color: var(--accent-light); font-size: 0.75rem; flex-shrink: 0; }
 
     /* ── SCREENSHOTS ── */
-    .screenshots-placeholder {
-      border: 2px dashed rgba(59,130,196,0.3); border-radius: 16px;
-      padding: 48px 24px; text-align: center; background: rgba(219,234,254,0.15);
-    }
-    .screenshots-placeholder .ph-icon { font-size: 2.5rem; margin-bottom: 12px; }
-    .screenshots-placeholder p { color: var(--text-muted); font-size: 0.88rem; }
-    .screenshots-placeholder strong { color: var(--accent); }
-
     .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .screenshot-item {
       border-radius: 14px; overflow: hidden;
@@ -244,7 +236,10 @@
     }
     .screenshot-item:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
     .screenshot-item img { width: 100%; height: auto; display: block; }
-    .screenshot-item .sc-caption { padding: 10px 14px; background: #fff; color: var(--text-muted); font-size: 0.78rem; text-align: center; }
+    .screenshot-item .sc-caption {
+      padding: 10px 14px; background: #fff;
+      color: var(--text-muted); font-size: 0.78rem; text-align: center;
+    }
 
     /* ── COMPÉTENCES E4 ── */
     .context-block {
@@ -368,11 +363,11 @@
       <h2 class="section-title"><span class="accent-bar"></span>Contexte & Objectif</h2>
       <p class="section-sub">Pourquoi ce projet ?</p>
       <p class="context-text">
-        Le <strong>Groupe BOËT</strong> utilise l'ERP <strong>CLIPPER</strong>, une solution dédiée au suivi des temps de fabrication 
-        et au pilotage de la rentabilité des ateliers. Dans le cadre de mon alternance, j'ai été chargé, 
+        Le <strong>Groupe BOËT</strong> utilise l'ERP <strong>CLIPPER</strong>, une solution dédiée au suivi des temps de fabrication
+        et au pilotage de la rentabilité des ateliers. Dans le cadre de mon alternance, j'ai été chargé,
         sous la supervision de mon tuteur, d'intervenir sur deux volets complémentaires de cet ERP.<br><br>
-        D'une part, la <strong>gestion et le paramétrage</strong> de l'outil afin qu'il corresponde aux besoins 
-        réels de l'entreprise. D'autre part, la <strong>formation des utilisateurs</strong> pour garantir 
+        D'une part, la <strong>gestion et le paramétrage</strong> de l'outil afin qu'il corresponde aux besoins
+        réels de l'entreprise. D'autre part, la <strong>formation des utilisateurs</strong> pour garantir
         une bonne prise en main du logiciel au quotidien et maximiser son adoption par les équipes.
       </p>
       <div class="quick-facts">
@@ -398,6 +393,7 @@
         </div>
       </div>
     </section>
+
     <!-- COMPÉTENCES E4 -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Compétences E4 du référentiel</h2>
@@ -432,9 +428,7 @@
           <li>Mise à disposition des supports de formation auprès des équipes</li>
         </ul>
       </div>
-
     </section>
-
 
     <!-- MISSIONS -->
     <section class="section-card">
@@ -543,14 +537,14 @@
     <section class="section-card" id="screenshots">
       <h2 class="section-title"><span class="accent-bar"></span>Captures d'écran</h2>
       <p class="section-sub">Aperçu de l'ERP CLIPPER</p>
-       <div class="screenshot-item" onclick="openLightbox(this)">
-          <img src="ClipperScreen.png" alt="Liste des niveaux employés">
+      <div class="screenshots-grid">
+        <div class="screenshot-item" onclick="openLightbox(this)">
+          <img src="ClipperScreen.png" alt="Liste des niveaux de sensibilisation par employé">
           <div class="sc-caption">Liste des niveaux de sensibilisation par employé</div>
-        </div>bloc par un <code>screenshots-grid</code> une fois tes images prêtes.</p>
+        </div>
       </div>
     </section>
 
-    
     <!-- BILAN -->
     <section class="section-card">
       <h2 class="section-title"><span class="accent-bar"></span>Bilan du projet</h2>
