@@ -186,6 +186,8 @@
     .section-card:nth-child(4){animation-delay:.32s}
     .section-card:nth-child(5){animation-delay:.40s}
     .section-card:nth-child(6){animation-delay:.48s}
+    .section-card:nth-child(7){animation-delay:.56s}
+    .section-card:nth-child(8){animation-delay:.64s}
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
     .section-title {
@@ -227,6 +229,13 @@
     }
     .stat-box.warn-box:hover { border-color: var(--warn); box-shadow: 0 12px 40px rgba(217,119,6,0.15); }
     .stat-box.warn-box .number { color: var(--warn); }
+
+    .stat-box.purple-box {
+      background: linear-gradient(145deg, #fff, var(--purple-soft));
+      border: 1px solid rgba(124,58,237,0.15);
+    }
+    .stat-box.purple-box:hover { border-color: var(--purple); box-shadow: 0 12px 40px rgba(124,58,237,0.15); }
+    .stat-box.purple-box .number { color: var(--purple); }
 
     .timeline { position: relative; padding-left: 28px; }
     .timeline::before {
@@ -316,6 +325,10 @@
     .tendance-item.warn-item:hover { border-color: rgba(217,119,6,0.25); box-shadow: 0 12px 40px rgba(217,119,6,0.15); }
     .tendance-item.warn-item strong { color: var(--warn); }
 
+    .tendance-item.purple-item::before { background: linear-gradient(180deg, var(--purple), #a855f7); }
+    .tendance-item.purple-item:hover { border-color: rgba(124,58,237,0.25); box-shadow: 0 12px 40px rgba(124,58,237,0.15); }
+    .tendance-item.purple-item strong { color: var(--purple); }
+
     .danger-box {
       background: linear-gradient(145deg, var(--danger-soft), rgba(254,226,226,0.4));
       border: 1px solid rgba(220,38,38,0.2);
@@ -351,6 +364,104 @@
     .purple-box h3 { color: var(--purple); font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
     .purple-box p { color: var(--text-secondary); font-size: 0.87rem; line-height: 1.7; }
     .purple-box strong { color: var(--purple); }
+
+    /* Portrait duo banner */
+    .duo-banner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 700px) { .duo-banner { grid-template-columns: 1fr; } }
+
+    .portrait-card {
+      border-radius: 18px;
+      padding: 28px 24px;
+      position: relative; overflow: hidden;
+    }
+    .portrait-card.qilin {
+      background: linear-gradient(135deg, #1a0505 0%, #3b0f0f 100%);
+      box-shadow: 0 12px 40px rgba(220,38,38,0.25);
+    }
+    .portrait-card.gentleman {
+      background: linear-gradient(135deg, #0a0a1a 0%, #0f0a2e 100%);
+      box-shadow: 0 12px 40px rgba(124,58,237,0.25);
+    }
+    .portrait-card::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+    }
+    .portrait-card.qilin::before {
+      background: radial-gradient(ellipse 300px 200px at 80% 20%, rgba(220,38,38,0.18), transparent);
+    }
+    .portrait-card.gentleman::before {
+      background: radial-gradient(ellipse 300px 200px at 80% 20%, rgba(124,58,237,0.2), transparent);
+    }
+    .portrait-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .portrait-emoji { font-size: 2.4rem; }
+    .portrait-name { font-family: var(--font-head); font-size: 1.3rem; color: #fff; }
+    .portrait-aka { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .portrait-body { position: relative; z-index: 1; }
+    .portrait-body p { font-size: 0.83rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+    .portrait-tag {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: .4px;
+      padding: 3px 10px; border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .portrait-card.qilin .portrait-tag {
+      background: rgba(220,38,38,0.25); border: 1px solid rgba(220,38,38,0.4);
+      color: #fca5a5;
+    }
+    .portrait-card.gentleman .portrait-tag {
+      background: rgba(124,58,237,0.25); border: 1px solid rgba(124,58,237,0.4);
+      color: #c4b5fd;
+    }
+
+    /* AI usage blocks */
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (max-width: 700px) { .ai-grid { grid-template-columns: 1fr; } }
+
+    .ai-block {
+      border-radius: 16px; padding: 22px 20px;
+      position: relative; overflow: hidden;
+    }
+    .ai-block.qilin-ai {
+      background: linear-gradient(145deg, #fff5f5, rgba(254,226,226,0.6));
+      border: 1px solid rgba(220,38,38,0.2);
+    }
+    .ai-block.gentleman-ai {
+      background: linear-gradient(145deg, #faf5ff, rgba(237,233,254,0.6));
+      border: 1px solid rgba(124,58,237,0.2);
+    }
+    .ai-block-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .ai-block-icon { font-size: 1.4rem; }
+    .ai-block-title { font-size: 0.95rem; font-weight: 700; }
+    .ai-block.qilin-ai .ai-block-title { color: var(--danger); }
+    .ai-block.gentleman-ai .ai-block-title { color: var(--purple); }
+    .ai-usage-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .ai-usage-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.83rem; color: var(--text-secondary); line-height: 1.5;
+    }
+    .ai-usage-list li .ai-pill {
+      flex-shrink: 0;
+      font-size: 0.68rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+      margin-top: 2px;
+    }
+    .ai-block.qilin-ai .ai-pill { background: var(--danger-soft); color: var(--danger); }
+    .ai-block.gentleman-ai .ai-pill { background: var(--purple-soft); color: var(--purple); }
 
     /* MYTHOS HERO BANNER */
     .mythos-banner {
@@ -461,6 +572,7 @@
       <div class="toc-list">
         <a href="#panorama">📊 Panorama & Historique</a>
         <a href="#acteurs">💀 Acteurs & Causes</a>
+        <a href="#portraits">🎭 Qilin & The Gentlemen</a>
         <a href="#tendances">🔮 Tendances 2026</a>
         <a href="#mythos">🤖 Claude Mythos & IA offensive</a>
         <a href="#cadre">⚖️ Cadre légal & Cyberdéfense</a>
@@ -594,7 +706,209 @@
       </div>
     </section>
 
-    <!-- SECTION 3 -->
+    <!-- SECTION 3 — QILIN & THE GENTLEMEN (NOUVELLE) -->
+    <section class="section-card" id="portraits">
+      <h2 class="section-title"><span class="accent-bar red"></span>Portraits : Qilin & The Gentlemen</h2>
+      <p class="section-sub">Les deux groupes les plus actifs de 2025–2026 — origines, méthodes et usage de l'IA</p>
+
+      <!-- DUO BANNER -->
+      <div class="duo-banner">
+        <div class="portrait-card qilin">
+          <div class="portrait-header">
+            <div class="portrait-emoji">🐉</div>
+            <div>
+              <div class="portrait-name">Qilin</div>
+              <div class="portrait-aka">alias "Agenda" · actif depuis 2022</div>
+            </div>
+          </div>
+          <div class="portrait-body">
+            <span class="portrait-tag">🇷🇺 Russophone · RaaS · #1 mondial 2025</span>
+            <p>Né en 2022 sous le nom Agenda, Qilin est devenu en 2025 le groupe ransomware le plus prolifique au monde avec <strong style="color:#fca5a5">1 022 attaques revendiquées</strong>. Sa montée en puissance s'est accélérée après le démantèlement de RansomHub (avril 2025), dont il a absorbé les affiliés. Le groupe est présumé russophone et évite systématiquement de cibler la Russie et la CEI.</p>
+          </div>
+        </div>
+        <div class="portrait-card gentleman">
+          <div class="portrait-header">
+            <div class="portrait-emoji">🎩</div>
+            <div>
+              <div class="portrait-name">The Gentlemen</div>
+              <div class="portrait-aka">alias "ArmCorp" · actif depuis juillet 2025</div>
+            </div>
+          </div>
+          <div class="portrait-body">
+            <span class="portrait-tag">🇷🇺 Russophone · RaaS · +352 attaques en 2026</span>
+            <p>The Gentlemen est né d'une <strong style="color:#c4b5fd">dispute financière avec Qilin</strong> : l'acteur "hastalamuerte" a quitté l'écosystème Qilin en juillet 2025 après un litige de 48 000$ de commission impayée. En moins d'un an, le groupe a revendiqué des attaques dans <strong style="color:#c4b5fd">plus de 66 pays</strong> et 20 secteurs d'activité, devenant le 2ème groupe le plus actif début 2026.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS QILIN -->
+      <div class="stats-grid" style="margin-bottom: 24px;">
+        <div class="stat-box">
+          <div class="number">1 022</div>
+          <div class="label">attaques revendiquées par Qilin en 2025 — record mondial</div>
+          <div class="source-tag">Source : NCC Group 2026</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">352+</div>
+          <div class="label">attaques revendiquées par The Gentlemen sur le seul 1er semestre 2026</div>
+          <div class="source-tag">Source : Halcyon / Cybereason</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">66+</div>
+          <div class="label">pays ciblés par The Gentlemen depuis sa création</div>
+          <div class="source-tag">Source : Halcyon 2026</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">90%</div>
+          <div class="label">de la rançon reversée aux affiliés de The Gentlemen — très au-dessus du marché</div>
+          <div class="source-tag">Source : Halcyon 2026</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- QILIN DETAIL -->
+      <div class="danger-box">
+        <h3>🐉 Qilin — Fonctionnement & Méthodes</h3>
+        <p>
+          Qilin opère un modèle <strong>RaaS mature</strong> où les affiliés reçoivent 80 à 85% des rançons. Le groupe cible en priorité les secteurs manufacturier (23% des victimes), les services professionnels (18%) et la santé (7–14%). Ses cibles partagent souvent des faiblesses communes : <strong>grands réseaux distribués</strong>, systèmes legacy, et services d'accès distant mal configurés.<br><br>
+          Sa technique signature inclut la manipulation des <strong>objets de stratégie de groupe (GPO)</strong> pour déployer son ransomware simultanément sur toutes les machines du domaine. En 2024–2025, il a développé une variante baptisée <strong>Qilin.B</strong> (chiffrement AES-256-CTR + Curve25519), et a ajouté une innovation inédite : une <strong>assistance juridique interne</strong> pour menacer ses victimes de poursuites réglementaires si elles ne paient pas.
+        </p>
+      </div>
+
+      <div class="cards-grid" style="margin-bottom: 24px;">
+        <div class="info-card danger">
+          <div class="card-icon">💀</div>
+          <h3>Attaques marquantes de Qilin</h3>
+          <ul>
+            <li>NHS Synnovis (UK, 2024) — données de 300 M patients exposées</li>
+            <li>Asahi Breweries (Japon, oct. 2025) — 27 Go volés</li>
+            <li>Nissan & Volkswagen — revendications 2025</li>
+            <li>Académie d'Amiens (France, oct. 2025) — 1 To de données scolaires</li>
+            <li>Marks & Spencer, Harrods, Co-op (UK, 2025)</li>
+          </ul>
+        </div>
+        <div class="info-card danger">
+          <div class="card-icon">🛠️</div>
+          <h3>Arsenal technique de Qilin</h3>
+          <ul>
+            <li>Chiffrement AES-256-CTR + Curve25519 (Qilin.B)</li>
+            <li>Vol de credentials Chrome via GPO</li>
+            <li>Double extorsion : chiffrement + fuite</li>
+            <li>Capacités DDoS intégrées (2025)</li>
+            <li>Évasion EDR avancée, MFA bombing, SIM swapping</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- GENTLEMAN DETAIL -->
+      <div class="purple-box">
+        <h3>🎩 The Gentlemen — Fonctionnement & Méthodes</h3>
+        <p>
+          The Gentlemen est tracké par Microsoft sous le nom <strong>Storm-2697</strong>. Son ransomware, écrit en <strong>Go</strong>, utilise un chiffrement par clé éphémère par fichier (Curve25519 + XChaCha20) et embarque un <strong>module d'auto-propagation</strong> qui lui permet de se répandre seul sur tout le réseau interne une fois l'accès initial obtenu — une capacité rare qui amplifie considérablement l'impact de chaque intrusion.<br><br>
+          Le groupe est également partenaire officiel de <strong>BreachForums</strong> pour recruter des affiliés (testeurs d'intrusion, courtiers en accès initiaux). Il cible Windows, Linux, NAS, BSD et VMware ESXi, et se spécialise dans la destruction des systèmes de sauvegarde pour empêcher toute récupération sans paiement de la rançon.
+        </p>
+      </div>
+
+      <div class="cards-grid" style="margin-bottom: 28px;">
+        <div class="info-card purple">
+          <div class="card-icon">🌍</div>
+          <h3>Secteurs ciblés par The Gentlemen</h3>
+          <ul>
+            <li>Industrie & fabrication (Proplastics Ltd, Grupo Halcón…)</li>
+            <li>Services professionnels et conseil</li>
+            <li>Santé et éducation</li>
+            <li>Gouvernements et administrations</li>
+            <li>Distribution et retail</li>
+          </ul>
+        </div>
+        <div class="info-card purple">
+          <div class="card-icon">⚙️</div>
+          <h3>Arsenal technique de The Gentlemen</h3>
+          <ul>
+            <li>Ransomware Go auto-propagant (Curve25519 + XChaCha20)</li>
+            <li>Antivirus killers & désactivation EDR</li>
+            <li>Exploitation CVE-2025-33073 (NTLM relay)</li>
+            <li>Destruction ciblée des NAS, Exchange et sauvegardes</li>
+            <li>Techniques "living-off-the-land" pour rester discret</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- IA USAGE -->
+      <h3 style="font-family:var(--font-head);font-size:1.15rem;color:var(--text-primary);margin-bottom:6px;">🤖 Comment ces groupes utilisent l'IA</h3>
+      <p style="font-size:0.84rem;color:var(--text-muted);margin-bottom:16px;">L'intelligence artificielle est devenue un outil central dans les arsenaux de Qilin et The Gentlemen.</p>
+
+      <div class="ai-grid">
+        <div class="ai-block qilin-ai">
+          <div class="ai-block-header">
+            <div class="ai-block-icon">🐉</div>
+            <div class="ai-block-title">Qilin — IA offensive</div>
+          </div>
+          <ul class="ai-usage-list">
+            <li>
+              <span class="ai-pill">Phishing</span>
+              Génération de campagnes de phishing ultra-personnalisées via IA générative — e-mails indiscernables d'un message légitime, adaptés à chaque cible
+            </li>
+            <li>
+              <span class="ai-pill">Évasion</span>
+              Contournement des EDR et antivirus grâce à des variantes polymorphes générées automatiquement pour chaque victime
+            </li>
+            <li>
+              <span class="ai-pill">Recon</span>
+              Collecte et analyse automatisée des informations sur les cibles (OSINT) pour identifier les failles et les interlocuteurs clés
+            </li>
+            <li>
+              <span class="ai-pill">Pression</span>
+              Utilisation de l'IA pour rédiger des communications d'extorsion personnalisées, augmentant le taux de paiement des rançons
+            </li>
+            <li>
+              <span class="ai-pill">Juridique</span>
+              Service interne d'assistance juridique IA pour menacer les victimes de poursuites RGPD et NIS2 si elles refusent de payer
+            </li>
+          </ul>
+        </div>
+        <div class="ai-block gentleman-ai">
+          <div class="ai-block-header">
+            <div class="ai-block-icon">🎩</div>
+            <div class="ai-block-title">The Gentlemen — IA offensive</div>
+          </div>
+          <ul class="ai-usage-list">
+            <li>
+              <span class="ai-pill">Auto-prop</span>
+              Module d'auto-propagation intelligent : le malware analyse le réseau interne en temps réel et adapte sa stratégie de déplacement latéral
+            </li>
+            <li>
+              <span class="ai-pill">Évasion</span>
+              Techniques d'évasion adaptatives : identification et désactivation des outils de sécurité détectés, configuration de variantes sur mesure
+            </li>
+            <li>
+              <span class="ai-pill">Recon</span>
+              Cartographie automatisée d'Active Directory pour identifier les comptes à hauts privilèges et les systèmes de sauvegarde à neutraliser
+            </li>
+            <li>
+              <span class="ai-pill">Ingénierie</span>
+              Ingénierie sociale assistée par IA pour convaincre les employés ciblés de fournir des accès ou de cliquer sur des liens malveillants
+            </li>
+            <li>
+              <span class="ai-pill">Recrutement</span>
+              Automatisation du recrutement d'affiliés sur les forums criminels et analyse des profils pour sélectionner les partenaires les plus compétents
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="warn-box" style="margin-top: 20px;">
+        <h3>⚠️ Le lien Qilin → The Gentlemen : une filiation inquiétante</h3>
+        <p>The Gentlemen n'est pas un groupe ennemi de Qilin — c'est un <strong>spin-off direct</strong>. L'acteur "hastalamuerte" a été affilié Qilin avant de créer son propre groupe suite à un conflit financier. Il a emporté avec lui une connaissance intime des méthodes Qilin, ses contacts dans l'écosystème criminel, et une base de code partiellement dérivée. Cette filiation montre comment <strong>l'écosystème RaaS se fragmente et se multiplie</strong> : chaque démantèlement ou dispute génère de nouveaux groupes, souvent encore plus agressifs.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
     <section class="section-card" id="tendances">
       <h2 class="section-title"><span class="accent-bar red"></span>Tendances Fin 2025 / 2026</h2>
       <p class="section-sub">Ce qui attend les entreprises dans les prochains mois</p>
@@ -631,7 +945,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4 — MYTHOS (NOUVELLE) -->
+    <!-- SECTION 5 — MYTHOS -->
     <section class="section-card" id="mythos">
       <h2 class="section-title"><span class="accent-bar warn"></span>Claude Mythos d'Anthropic : Une IA qui redéfinit la cybersécurité</h2>
       <p class="section-sub">Le modèle d'IA le plus puissant en matière de cybersécurité — et ses risques majeurs (avril 2026)</p>
@@ -750,7 +1064,7 @@
       </div>
     </section>
 
-    <!-- SECTION 5 -->
+    <!-- SECTION 6 -->
     <section class="section-card" id="cadre">
       <h2 class="section-title"><span class="accent-bar purple"></span>Cadre Légal & Cyberdéfense</h2>
       <p class="section-sub">Réglementation européenne, réponse militaire française et enjeux géopolitiques</p>
@@ -810,7 +1124,7 @@
       </div>
     </section>
 
-    <!-- SECTION 6 -->
+    <!-- SECTION 7 -->
     <section class="section-card" id="sources">
       <h2 class="section-title"><span class="accent-bar"></span>Sources</h2>
       <p class="section-sub">Rapports et études récents (2024–2026)</p>
@@ -823,13 +1137,19 @@
         <div class="source-item"><span>🏛️</span><a href="https://www.cybermalveillance.gouv.fr" target="_blank">cybermalveillance.gouv.fr</a></div>
         <div class="source-item"><span>🎖️</span><a href="https://www.defense.gouv.fr/comcyber/actualites/2024-annee-au-coeur-cyberdefense-militaire" target="_blank">Ministère des Armées – Bilan COMCYBER 2024</a></div>
         <div class="source-item"><span>📄</span><a href="https://www.cyber-securite.fr/check-point-ransomware-evolution-2024/" target="_blank">Check Point – Rapport annuel 2024</a></div>
+        <div class="source-item"><span>🐉</span><a href="https://cyberflorida.org/qilin-ransomware-a-double-extortion-campaign/" target="_blank">Cyber Florida – Qilin Double Extortion</a></div>
+        <div class="source-item"><span>🐉</span><a href="https://www.halcyon.ai/threat-group/qilin" target="_blank">Halcyon – Profil Qilin</a></div>
+        <div class="source-item"><span>🎩</span><a href="https://www.halcyon.ai/ransomware-research-reports/threat-assessment-the-gentlemen-ransomware-group" target="_blank">Halcyon – Threat Assessment The Gentlemen</a></div>
+        <div class="source-item"><span>🎩</span><a href="https://www.microsoft.com/en-us/security/blog/2026/05/28/the-gentlemen-ransomware-dissecting-a-self-propagating-go-encryptor/" target="_blank">Microsoft Security – The Gentlemen Go Encryptor</a></div>
+        <div class="source-item"><span>🎩</span><a href="https://www.cybereason.com/blog/the-gentlemen-ransomware" target="_blank">Cybereason – License to Encrypt</a></div>
+        <div class="source-item"><span>📰</span><a href="https://cybernews.com/cybercrime/qilin-ransomware-record-year/" target="_blank">Cybernews – Qilin record 2025</a></div>
         <div class="source-item"><span>🤖</span><a href="https://www.anthropic.com/glasswing" target="_blank">Anthropic – Project Glasswing</a></div>
         <div class="source-item"><span>🤖</span><a href="https://red.anthropic.com/2026/mythos-preview/" target="_blank">Anthropic Red Team – Mythos Preview</a></div>
         <div class="source-item"><span>📰</span><a href="https://www.cbsnews.com/news/anthropic-investigates-mythos-ai-breach/" target="_blank">CBS News – Enquête brèche Mythos</a></div>
         <div class="source-item"><span>📰</span><a href="https://fortune.com/2026/04/23/anthropic-mythos-ai-cybersecurity-critical-infrastructure-kemba-walden/" target="_blank">Fortune – Mythos & infrastructures critiques</a></div>
         <div class="source-item"><span>📰</span><a href="https://www.scientificamerican.com/article/what-is-mythos-and-why-are-experts-worried-about-anthropics-ai-model/" target="_blank">Scientific American – Pourquoi Mythos inquiète</a></div>
         <div class="source-item"><span>📰</span><a href="https://www.bloomberg.com/news/articles/2026-04-21/anthropic-s-mythos-model-is-being-accessed-by-unauthorized-users" target="_blank">Bloomberg – Accès non autorisé à Mythos</a></div>
-        <div class="source-item"><span>📰</span><a href="https://www.lemonde.fr/pixels/article/2026/04/23/cybersecurite-face-aux-bouleversements-de-l-ia-un-appel-a-ne-pas-ceder-a-la-panique_6682802_4408996.html" target="_blank">Le Monde – Face au boulversement de l'IA</a></div>
+        <div class="source-item"><span>📰</span><a href="https://www.lemonde.fr/pixels/article/2026/04/23/cybersecurite-face-aux-bouleversements-de-l-ia-un-appel-a-ne-pas-ceder-a-la-panique_6682802_4408996.html" target="_blank">Le Monde – Face au bouleversement de l'IA</a></div>
       </div>
     </section>
 
